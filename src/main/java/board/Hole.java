@@ -17,7 +17,12 @@ public class Hole {
     }
 
     public void setPieces(int pieces) {
-        this.pieces = pieces;
+        if (pieces >= 0) {
+            this.pieces = pieces;
+        } else {
+            throw new IllegalArgumentException("Number of pieces cannot be negative");
+        }
     }
+
 
 }
