@@ -1,19 +1,22 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class LeaderBoard {
 
-    public List<User> players;
+    private List<User> players = new ArrayList<>();
 
-    public LeaderBoard() {
-        players = new ArrayList<>();
-    }
+    public void updateLeaderBoard(Player player) {
 
-    private void updateLeaderBoard(Player player) {
-        boolean playerExists = findThePlayer(player);
+        boolean playerExists;        
+        boolean foundThePlayer = findThePlayer(player);
     
-        if (playerExists != true) {
+        if (foundThePlayer == true) {
+            playerExists = true;
+        } else {
+            playerExists = false;
+        }
+    
+        if (playerExists == false) {
             addPlayerToTheLeaderBoard(player);
         }
     
@@ -21,6 +24,7 @@ public class LeaderBoard {
         // Choose the appropriate sorting method, e.g., sort by wins or win percentage.
         sortLeaderBoardWinPercent();
     }
+    
     
     private boolean findThePlayer(Player player) {
         for (int i = 0; i < players.size(); i++) {
@@ -35,14 +39,36 @@ public class LeaderBoard {
         players.add(new User(player));
     }
     
-
+    public void updatePlayersInLeaderBoard(List<Player> playersToUpdate) {
+        for (Player player : playersToUpdate) {
+            updateLeaderBoard(player);
+        }
+    }
+    
     private void sortLeaderBoardWinPercent() {
-        players.sort(Comparator.comparingDouble(User::getWinPercentage).reversed());
+        for (int i = 0; i < players.size() - 1; i++) {
+            for (int j = 0; j < players.size() - 1 - i; j++) {
+                if (players.get(j).getWinPercentage() < players.get(j + 1).getWinPercentage()) {
+                    User temp = players.get(j);
+                    players.set(j, players.get(j + 1));
+                    players.set(j + 1, temp);
+                }
+            }
+        }
     }
-
+    
     private void sortLeaderBoardWins() {
-        players.sort(Comparator.comparingInt(User::getWins).reversed());
+        for (int i = 0; i < players.size() - 1; i++) {
+            for (int j = 0; j < players.size() - 1 - i; j++) {
+                if (players.get(j).getWins() < players.get(j + 1).getWins()) {
+                    User temp = players.get(j);
+                    players.set(j, players.get(j + 1));
+                    players.set(j + 1, temp);
+                }
+            }
+        }
     }
+    
 
     public void displayLeaderBoard(User user) {
         // Your logic for displaying the leaderboard for the input user.
