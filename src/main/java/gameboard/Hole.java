@@ -1,15 +1,15 @@
-package board;
+package gameboard;
 
 public class Hole {
 
-    int pieces;
+    private int pieces;
 
     public Hole(int pieces) {
         this.pieces = pieces;
     }
 
     public Hole() {
-        pieces = 0;
+        this.pieces = 0;
     }
 
     public int getPieces() {
@@ -22,6 +22,16 @@ public class Hole {
         } else {
             throw new IllegalArgumentException("Number of pieces cannot be negative");
         }
+    }
+
+    public int takePieces() {
+        int pieces = this.pieces;
+        this.pieces = 0;
+        return pieces;
+    }
+
+    public void addPiece() {
+        this.pieces++;
     }
 
 

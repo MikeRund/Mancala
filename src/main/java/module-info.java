@@ -1,8 +1,8 @@
-module com.example.mancala {
+module gameboard {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.mancala to javafx.fxml;
-    exports com.example.mancala;
+    opens gameboard to javafx.fxml;
+    exports gameboard;
 }
