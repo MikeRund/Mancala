@@ -29,6 +29,18 @@ public class Game {
         return currentPlayer;
     }
 
+    public void setPlayer1(int player1) {
+        this.player1 = player1;
+    }
+
+    public void setPlayer2(int player2) {
+        this.player2 = player2;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     public int nextHole(int holeIndex) {
 
         holeIndex++;
