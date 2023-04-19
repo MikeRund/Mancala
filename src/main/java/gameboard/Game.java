@@ -7,10 +7,26 @@ public class Game {
     private Board board;
     private int player1;
     private int player2;
-    public int currentPlayer;
+    private int currentPlayer;
 
     public Game() {
         this.board = new Board();
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public int getPlayer1() {
+        return player1;
+    }
+
+    public int getPlayer2() {
+        return player2;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public int nextHole(int holeIndex) {
@@ -93,7 +109,7 @@ public class Game {
         }
     }
 
-    public static void startGame() {
+    public void startGame() {
 
         //Set-up
         Scanner in = new Scanner(System.in);
@@ -117,7 +133,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        startGame();
+        // startGame();
 //        Game game = new Game();
 //        game.player1 = 1;
 //        game.player2 = 2;
