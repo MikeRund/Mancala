@@ -98,7 +98,7 @@ public class LeaderBoard {
                 favString = "    ";
             }
     
-            if (showWinPercentage) {
+            if (showWinPercentage == true) {
                 // Use the format method to create a formatted string for win percentage
                 System.out.format("%-5d %-18s %-5.1f%% %-4s%n", (i + 1), username, winPercentage, favString);
             } else {
