@@ -84,8 +84,11 @@ public class LeaderBoard {
     
     public void displayLeaderBoard(User user) {
         System.out.println("------ LEADERBOARD ------");
-        System.out.println("Rank  Username          Wins Win %  Fav");
-    
+
+        // Use format method for headings
+        System.out.format("%-5s %-18s %-5s %-7s %-5s%n"
+        , "Rank", "Username", "Wins", "Win  %", "Fav");
+
         for (int i = 0; i < leaderBoard.size(); i++) {
             Player player = leaderBoard.get(i);
             String username = player.getUsername();
@@ -101,7 +104,7 @@ public class LeaderBoard {
                 favString = "    ";
             }
 
-            // Use the format method to create a formatted string
+            // Use format method for columns
             System.out.format("%-5d %-18s %-5d %-5.1f%% %-4s%n"
             , (i + 1), username, wins, winPercentage, favString);
         }
