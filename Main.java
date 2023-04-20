@@ -3,8 +3,8 @@ public class Main {
         // Create some sample players
         Player alice = new Player("Alice");
         Player bob = new Player("Bob");
-        Player cat = new Player("Charlie");
-        Player dog = new Player("David");
+        Player cat = new Player("Cat");
+        Player dog = new Player("Dog");
 
         // Create a leaderboard
         LeaderBoard leaderBoard = new LeaderBoard();
@@ -32,7 +32,7 @@ public class Main {
         leaderBoard.updateLeaderBoard(alice, true);
         leaderBoard.updateLeaderBoard(alice, true);
 
-        // Create a sample user who is viewing the leaderboard
+        // Create a sample user to view the leaderboard
         User sampleAlice = new User(alice);
   
         // Mark some users as the player1's favourite
