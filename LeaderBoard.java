@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Displays the leaderboard, including rank, username, wins, win percentage, and favorite status.
+ */
 public class LeaderBoard {
 
     private List<Player> leaderBoard = new ArrayList<>();
@@ -89,22 +92,18 @@ public class LeaderBoard {
             int wins = player.getWins();
             double winPercentage = player.getWinPercentage();
     
-            System.out.print((i + 1) + "     ");
-            System.out.print(username);
-            for (int j = 0; j < (18 - username.length()); j++) {
-                System.out.print(" ");
-            }
-            System.out.print(wins + "    ");
-            System.out.printf("%.1f", winPercentage); // To display win percentage with 1 decimal point
-            System.out.print("% ");    
-
             // Check if the player is a favorite of the input user
             boolean isFavourite = isPlayerFavourite(user, username);
+            String favString;
             if (isFavourite) {
-                System.out.println(" fav");
+                favString = " fav";
             } else {
-                System.out.println("    ");
+                favString = "    ";
             }
+
+            // Use the format method to create a formatted string
+            System.out.format("%-5d %-18s %-5d %-5.1f%% %-4s%n"
+            , (i + 1), username, wins, winPercentage, favString);
         }
     }
     
