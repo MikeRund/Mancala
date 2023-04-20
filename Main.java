@@ -10,27 +10,10 @@ public class Main {
         LeaderBoard leaderBoard = new LeaderBoard();
 
         // Update the leaderboard with the sample players
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(bob, false);
-        leaderBoard.updateLeaderBoard(cat, true);
-        leaderBoard.updateLeaderBoard(dog, false);
-
-        // Add more wins and games to players
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, false);
-        leaderBoard.updateLeaderBoard(bob, true);
-        leaderBoard.updateLeaderBoard(bob, true);
-        leaderBoard.updateLeaderBoard(cat, false);
-        leaderBoard.updateLeaderBoard(cat, false);
-        leaderBoard.updateLeaderBoard(dog, true);
-        leaderBoard.updateLeaderBoard(dog, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
-        leaderBoard.updateLeaderBoard(alice, true);
+        leaderBoard.updateLeaderBoard(alice, 90, 60);
+        leaderBoard.updateLeaderBoard(bob, 3, 0);
+        leaderBoard.updateLeaderBoard(cat, 1, 2);
+        leaderBoard.updateLeaderBoard(dog, 2, 2);
 
         // Create a sample user to view the leaderboard
         User sampleAlice = new User(alice);

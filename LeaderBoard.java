@@ -8,23 +8,14 @@ public class LeaderBoard {
 
     private ArrayList<Player> leaderBoard = new ArrayList<>();
 
-    public void updateLeaderBoard(Player player, boolean hasWon) {
-
-        Player playerExists;        
+    public void updateLeaderBoard(Player player, int wins, int losses) {
         Player foundThePlayer = findThePlayer(player);
     
         if (foundThePlayer != null) {
-            playerExists = foundThePlayer;
-            if (hasWon) {
-                playerExists.incrementWins();
-            }
-            playerExists.incrementTotalGames();
+            setPlayerStatistic(wins, losses, foundThePlayer);
         } else {
             Player newPlayer = new Player(player);
-            if (hasWon) {
-                newPlayer.incrementWins();
-            }
-            newPlayer.incrementTotalGames();
+            setPlayerStatistic(wins, losses, newPlayer);
             addNewPlayerToLeaderBoard(newPlayer);
         }
     }
@@ -36,6 +27,12 @@ public class LeaderBoard {
             }
         }
         return null;
+    }
+
+    public void setPlayerStatistic(int wins, int losses, Player player) {
+        player.setWins(wins);
+        player.setLosses(losses);
+        player.setTotalGames(wins + losses);   
     }
     
     public void addNewPlayerToLeaderBoard(Player newPlayer) {
@@ -82,9 +79,9 @@ public class LeaderBoard {
         }
     }
     
-    private void displayLeaderBoard(User user, ArrayList<Player> sortedLeaderBoard, boolean showWinPercentage) {
-        for (int i = 0; i < sortedLeaderBoard.size(); i++) {
-            Player player = sortedLeaderBoard.get(i);
+    private void displayLeaderBoard(User user, ArrayList<Player> leaderBoard, boolean showWinPercentage) {
+        for (int i = 0; i < leaderBoard.size(); i++) {
+            Player player = leaderBoard.get(i);
             String username = player.getUsername();
             int wins = player.getWins();
             double winPercentage = player.getWinPercentage();
