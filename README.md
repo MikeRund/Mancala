@@ -1,3 +1,3 @@
 # LeaderBoard Class
 
-pull request this branch to test the LeaderBoard class ( •_•)
+pull this branch to test the LeaderBoard class ( •_•)
