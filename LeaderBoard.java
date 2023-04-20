@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  * Displays the leaderboard, including rank, username, wins, win percentage, and favorite status.
+ * Put a new player to the leaderboard.
  */
 public class LeaderBoard {
 
