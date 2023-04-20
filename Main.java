@@ -35,7 +35,7 @@ public class Main {
         // Create a sample user to view the leaderboard
         User sampleAlice = new User(alice);
   
-        // Mark some users as the player1's favourite
+        // Mark some users as Alice's favourite
         User favUser2 = new User(bob);
         User favUser3 = new User(cat);
         leaderBoard.markFavouriteUser(sampleAlice, favUser2);
