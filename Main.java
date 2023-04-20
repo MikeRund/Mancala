@@ -42,11 +42,9 @@ public class Main {
         leaderBoard.markFavouriteUser(sampleAlice, favUser3);
         
         // Display the leaderboard sorted by win percentage
-        leaderBoard.sortLeaderBoardWinPercent();
         leaderBoard.displayLeaderBoardByWinPercentage(sampleAlice);
 
         // Display the leaderboard sorted by wins
-        leaderBoard.sortLeaderBoardWins();
         leaderBoard.displayLeaderBoardByWins(sampleAlice);
     }
 }
