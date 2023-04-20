@@ -45,41 +45,41 @@ public class LeaderBoard {
             
     public void sortLeaderBoardWinPercent() {
         // Process of comparing and swapping players
-        for (int i = 0; i < leaderBoard.size() - 1; i++) {
+        for (int index = 0; index < leaderBoard.size() - 1; index++) {
             // Compare adjacent players and swap them if needed
-            for (int j = 0; j < leaderBoard.size() - 1 - i; j++) {
-                Player player1 = leaderBoard.get(j);
-                Player player2 = leaderBoard.get(j + 1);
-                comparePlayersWinPercent(j, player1, player2);
+            for (int playerIndex = 0; playerIndex < leaderBoard.size() - 1 - index; playerIndex++) {
+                Player player1 = leaderBoard.get(playerIndex);
+                Player player2 = leaderBoard.get(playerIndex + 1);
+                comparePlayersWinPercent(playerIndex, player1, player2);
             }
         }
     }
     
-    private void comparePlayersWinPercent(int j, Player player1, Player player2) {
+    private void comparePlayersWinPercent(int playerIndex, Player player1, Player player2) {
         if (player1.getWinPercentage() < player2.getWinPercentage()) {
             // Swap the players if the player1 has a lower win percentage.
-            leaderBoard.set(j, player2);
-            leaderBoard.set(j + 1, player1);
+            leaderBoard.set(playerIndex, player2);
+            leaderBoard.set(playerIndex + 1, player1);
         }
     }
     
     public void sortLeaderBoardWins() {
         // Process of comparing and swapping players
-        for (int i = 0; i < leaderBoard.size() - 1; i++) {
+        for (int index = 0; index < leaderBoard.size() - 1; index++) {
             // Compare adjacent players and swap them if needed
-            for (int j = 0; j < leaderBoard.size() - 1 - i; j++) {
-                Player player1 = leaderBoard.get(j);
-                Player player2 = leaderBoard.get(j + 1);
-                comparePlayersWins(j, player1, player2);
+            for (int playerIndex = 0; playerIndex < leaderBoard.size() - 1 - index; playerIndex++) {
+                Player player1 = leaderBoard.get(playerIndex);
+                Player player2 = leaderBoard.get(playerIndex + 1);
+                comparePlayersWins(playerIndex, player1, player2);
             }
         }
     }
 
-    private void comparePlayersWins(int index, Player player1, Player player2) {
+    private void comparePlayersWins(int playerIndex, Player player1, Player player2) {
         if (player1.getWins() < player2.getWins()) {
             // Swap the players if the player1 has lower wins.
-            leaderBoard.set(index, player2);
-            leaderBoard.set(index + 1, player1);
+            leaderBoard.set(playerIndex, player2);
+            leaderBoard.set(playerIndex + 1, player1);
         }
     }
     
