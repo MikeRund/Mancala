@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Displays the leaderboard, including rank, username, wins, win percentage, and favorite status.
@@ -7,7 +6,7 @@ import java.util.List;
  */
 public class LeaderBoard {
 
-    private List<Player> leaderBoard = new ArrayList<>();
+    private ArrayList<Player> leaderBoard = new ArrayList<>();
 
     public void updateLeaderBoard(Player player, boolean hasWon) {
 
@@ -83,15 +82,9 @@ public class LeaderBoard {
         }
     }
     
-    public void displayLeaderBoard(User user) {
-        System.out.println("------ LEADERBOARD ------");
-
-        // Use format method for headings
-        System.out.format("%-5s %-18s %-5s %-7s %-5s%n"
-        , "Rank", "Username", "Wins", "Win  %", "Fav");
-
-        for (int i = 0; i < leaderBoard.size(); i++) {
-            Player player = leaderBoard.get(i);
+    private void displayLeaderBoard(User user, ArrayList<Player> sortedLeaderBoard, boolean showWinPercentage) {
+        for (int i = 0; i < sortedLeaderBoard.size(); i++) {
+            Player player = sortedLeaderBoard.get(i);
             String username = player.getUsername();
             int wins = player.getWins();
             double winPercentage = player.getWinPercentage();
@@ -104,10 +97,14 @@ public class LeaderBoard {
             } else {
                 favString = "    ";
             }
-
-            // Use format method for columns
-            System.out.format("%-5d %-18s %-5d %-5.1f%% %-4s%n"
-            , (i + 1), username, wins, winPercentage, favString);
+    
+            if (showWinPercentage) {
+                // Use the format method to create a formatted string for win percentage
+                System.out.format("%-5d %-18s %-5.1f%% %-4s%n", (i + 1), username, winPercentage, favString);
+            } else {
+                // Use the format method to create a formatted string for wins
+                System.out.format("%-5d %-18s %-5d %-4s%n", (i + 1), username, wins, favString);
+            }
         }
     }
     
@@ -121,6 +118,32 @@ public class LeaderBoard {
             }
         }
         return false;
+    }
+
+        public void displayLeaderBoardByWins(User user) {
+        System.out.println("Leaderboard sorted by wins:");
+        System.out.println("------ LEADERBOARD ------");
+    
+        // Use format method for header line
+        System.out.format("%-5s %-18s %-6s %-4s%n", "Rank", "Username", "Wins", "Fav");
+    
+        // Create a new list from leaderBoard and sort it based on wins
+        sortLeaderBoardWins();
+    
+        displayLeaderBoard(user, leaderBoard, false);
+    }
+    
+    public void displayLeaderBoardByWinPercentage(User user) {
+        System.out.println("Leaderboard sorted by win percentage:");
+        System.out.println("------ LEADERBOARD ------");
+    
+        // Use format method for header line
+        System.out.format("%-5s %-18s %-7s %-4s%n", "Rank", "Username", "Win  %", "Fav");
+    
+        // Sort the leaderBoard based on win percentage
+        sortLeaderBoardWinPercent();
+    
+        displayLeaderBoard(user, leaderBoard, true);
     }
     
     public void markFavouriteUser(User user, User favouriteUser) {

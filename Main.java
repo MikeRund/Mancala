@@ -41,14 +41,12 @@ public class Main {
         leaderBoard.markFavouriteUser(sampleAlice, favUser2);
         leaderBoard.markFavouriteUser(sampleAlice, favUser3);
         
-        System.out.println("Leaderboard sorted by win percentage:");
         // Display the leaderboard sorted by win percentage
         leaderBoard.sortLeaderBoardWinPercent();
-        leaderBoard.displayLeaderBoard(sampleAlice);
+        leaderBoard.displayLeaderBoardByWinPercentage(sampleAlice);
 
-        System.out.println("\nLeaderboard sorted by wins:");
         // Display the leaderboard sorted by wins
         leaderBoard.sortLeaderBoardWins();
-        leaderBoard.displayLeaderBoard(sampleAlice);
+        leaderBoard.displayLeaderBoardByWins(sampleAlice);
     }
 }
