@@ -1,3 +1,3 @@
 # LeaderBoard Class
 
-clone this branch to test the LeaderBoard class ( •_•)
+pull request this branch to test the LeaderBoard class ( •_•)
