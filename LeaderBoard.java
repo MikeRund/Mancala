@@ -127,7 +127,7 @@ public class LeaderBoard {
         // Use format method for header line
         System.out.format("%-5s %-18s %-6s %-4s%n", "Rank", "Username", "Wins", "Fav");
     
-        // Create a new list from leaderBoard and sort it based on wins
+        // Sort the board based on wins
         sortLeaderBoardWins();
     
         displayLeaderBoard(user, leaderBoard, false);
