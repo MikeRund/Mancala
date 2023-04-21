@@ -40,21 +40,21 @@
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#893a02" height="169.0" stroke="BLACK" strokeType="INSIDE" width="381.0" />
                 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="170.0" prefWidth="378.0">
                     <children>
-                        <Button fx:id="store1" alignment="CENTER" mnemonicParsing="false" onAction="#store1Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
+                        <Button fx:id="store1" alignment="CENTER" mnemonicParsing="false" onAction="#store1Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
                         <VBox prefHeight="170.0" prefWidth="274.0">
                             <children>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                     <children>
-                                        <Button fx:id="hole6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button6Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE">
+                                        <Button fx:id="hole6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button6Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
                                             <HBox.margin>
                                                 <Insets />
                                             </HBox.margin>
                                         </Button>
-                                        <Button fx:id="hole5" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button5Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole4" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button4Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole3" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button3Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole2" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button2Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole1" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button1Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
+                                        <Button fx:id="hole5" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button5Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole4" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button4Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole3" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button3Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole2" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button2Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole1" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button1Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
                                     </children>
                                     <VBox.margin>
                                         <Insets />
@@ -62,12 +62,12 @@
                                 </HBox>
                                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                     <children>
-                                        <Button fx:id="hole7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button7Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole8" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button8Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole9" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button9Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole10" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button10Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole11" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button11Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
-                                        <Button fx:id="hole12" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button12Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
+                                        <Button fx:id="hole7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button7Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole8" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button8Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole9" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button9Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole10" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button10Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole11" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button11Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
+                                        <Button fx:id="hole12" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button12Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
                                     </children>
                                     <VBox.margin>
                                         <Insets />
@@ -75,7 +75,7 @@
                                 </HBox>
                             </children>
                         </VBox>
-                        <Button fx:id="store2" alignment="CENTER" mnemonicParsing="false" onAction="#store2Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" text="Button" textFill="WHITE" />
+                        <Button fx:id="store2" alignment="CENTER" mnemonicParsing="false" onAction="#store2Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE" />
                     </children>
                 </HBox>
             <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClicked" text="Start" StackPane.alignment="BOTTOM_CENTER">

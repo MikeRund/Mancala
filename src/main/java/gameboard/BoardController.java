@@ -42,6 +42,7 @@ public class BoardController {
     @FXML
     private Button startButton;
 
+
     public int button1Clicked() {
         System.out.println("Button 1 clicked");
         return 0;
@@ -99,16 +100,55 @@ public class BoardController {
         return 13;
     }
 
-    public void updateUI() {
-
+    public void updateHoleUI(Game game) {
+        Hole[] holes = game.getBoard().getAllHoles();
+        hole1.setText(Integer.toString(holes[0].getPieces()));
+        hole2.setText(Integer.toString(holes[1].getPieces()));
+        hole3.setText(Integer.toString(holes[2].getPieces()));
+        hole4.setText(Integer.toString(holes[3].getPieces()));
+        hole5.setText(Integer.toString(holes[4].getPieces()));
+        hole6.setText(Integer.toString(holes[5].getPieces()));
+        store1.setText(Integer.toString(holes[6].getPieces()));
+        hole7.setText(Integer.toString(holes[7].getPieces()));
+        hole8.setText(Integer.toString(holes[8].getPieces()));
+        hole9.setText(Integer.toString(holes[9].getPieces()));
+        hole10.setText(Integer.toString(holes[10].getPieces()));
+        hole11.setText(Integer.toString(holes[11].getPieces()));
+        hole12.setText(Integer.toString(holes[12].getPieces()));
+        store2.setText(Integer.toString(holes[13].getPieces()));
     }
 
     public void startButtonClicked() {
         startButton.setDisable(true);
         System.out.println("Start button clicked!");
-//        Game game = new Game();
+        Game game = new Game();
 //        game.startGame();
+        updateHoleUI(game);
         System.out.println("Game initialized!");
+    }
+
+    public void startGameUI(Game game) {
+
+        game.setPlayer1(1);
+        game.setPlayer2(2);
+        game.currentPlayer = game.getStartingPlayer();
+
+        //Game logic
+        while(!game.isGameOver()){
+
+        }
+
+
+        //Game logic
+        //Will exist the while loop when all the pieces are out of a row
+//        while(!game.isGameOver()) {
+//            game.board.displayBoardCommandLine();
+//            System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
+//            int holeIndex = in.nextInt();
+//            game.makeMove(holeIndex);
+//            game.switchPlayer();
+//        }
+//        game.getWinner();
     }
 
 
