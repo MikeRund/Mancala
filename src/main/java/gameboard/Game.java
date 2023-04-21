@@ -144,8 +144,8 @@ public class Game {
     }
 
     public static void main(String[] args) {
-       // startGame();
-//        Game game = new Game();
+        Game game = new Game();
+        game.startGame();
 //        game.player1 = 1;
 //        game.player2 = 2;
 //        game.currentPlayer = 1;

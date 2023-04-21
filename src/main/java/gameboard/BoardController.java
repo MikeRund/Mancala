@@ -1,5 +1,6 @@
 package gameboard;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class BoardController {
 
@@ -41,6 +43,7 @@ public class BoardController {
     private Button hole12;
     @FXML
     private Button startButton;
+    private int holeIndex;
 
 
     public int button1Clicked() {
@@ -125,6 +128,7 @@ public class BoardController {
 //        game.startGame();
         updateHoleUI(game);
         System.out.println("Game initialized!");
+        startGameUI(game);
     }
 
     public void startGameUI(Game game) {
@@ -132,12 +136,30 @@ public class BoardController {
         game.setPlayer1(1);
         game.setPlayer2(2);
         game.currentPlayer = game.getStartingPlayer();
+        int currentPlayer = game.currentPlayer;
+        Scanner in = new Scanner(System.in);
 
-        //Game logic
-        while(!game.isGameOver()){
+        // Create a new thread to run the game logic
+        Thread gameThread = new Thread(() -> {
+            //Game logic
+            while(!game.isGameOver()){
+                System.out.println("Player + " + currentPlayer +"'s turn");
+                game.getBoard().displayBoardCommandLine();
+                System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
+                int holeIndex = in.nextInt();
 
-        }
+                //Update board and GUI with move
+                game.makeMove(holeIndex);
+                Platform.runLater(() ->  updateHoleUI(game));
 
+                game.switchPlayer();
+            }
+
+            Platform.runLater(game::getWinner);
+            startButton.setDisable(false);
+        });
+
+        gameThread.start();
 
         //Game logic
         //Will exist the while loop when all the pieces are out of a row
