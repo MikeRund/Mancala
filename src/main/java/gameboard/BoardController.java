@@ -39,6 +39,8 @@ public class BoardController {
     private Button hole11;
     @FXML
     private Button hole12;
+    @FXML
+    private Button startButton;
 
     public int button1Clicked() {
         System.out.println("Button 1 clicked");
@@ -95,6 +97,18 @@ public class BoardController {
     public int store2Clicked() {
         System.out.println("Store 2 clicked");
         return 13;
+    }
+
+    public void updateUI() {
+
+    }
+
+    public void startButtonClicked() {
+        startButton.setDisable(true);
+        System.out.println("Start button clicked!");
+//        Game game = new Game();
+//        game.startGame();
+        System.out.println("Game initialized!");
     }
 
 

@@ -109,7 +109,7 @@ public class Game {
         }
     }
 
-    public static void startGame() {
+    public void startGame() {
 
         //Set-up
         Scanner in = new Scanner(System.in);
@@ -118,7 +118,6 @@ public class Game {
         game.player2 = 2;
         game.currentPlayer = game.getStartingPlayer();
 
-        //Renaming fie
 
         //Game logic
         //Will exist the while loop when all the pieces are out of a row
@@ -133,7 +132,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        startGame();
+       // startGame();
 //        Game game = new Game();
 //        game.player1 = 1;
 //        game.player2 = 2;
