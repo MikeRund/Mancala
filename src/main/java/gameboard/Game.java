@@ -13,6 +13,22 @@ public class Game {
         this.board = new Board();
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
+    public int getPlayer1() {
+        return player1;
+    }
+
+    public int getPlayer2() {
+        return player2;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public int nextHole(int holeIndex) {
 
         holeIndex++;
