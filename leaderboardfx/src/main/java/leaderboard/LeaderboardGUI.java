@@ -87,7 +87,7 @@ public class LeaderboardGUI extends Application {
         leaderboardTable.setStyle(
             "-fx-base: #E9CDA2;" +
             "-fx-focus-color: transparent;" +
-            "-fx-faint-focus-color: transparent;"
+            "-fx-faint-focus-color: transparent;" 
         );
         
         // Set alternating row colors
@@ -113,6 +113,7 @@ public class LeaderboardGUI extends Application {
                     setText(null);
                 } else {
                     setText(item.toString());
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });
@@ -126,6 +127,7 @@ public class LeaderboardGUI extends Application {
                     setText(null);
                 } else {
                     setText(item);
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });
@@ -139,6 +141,7 @@ public class LeaderboardGUI extends Application {
                     setText(null);
                 } else {
                     setText(item.toString());
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });
@@ -152,6 +155,7 @@ public class LeaderboardGUI extends Application {
                     setText(null);
                 } else {
                     setText(String.format("%.2f%%", item));
+                    setStyle("-fx-alignment: CENTER;");
                 }
             }
         });
@@ -167,6 +171,7 @@ public class LeaderboardGUI extends Application {
                     Player currentPlayer = getTableView().getItems().get(getIndex());
                     if (leaderBoard.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
                         setText("favourite");
+                        setStyle("-fx-alignment: CENTER;");
                     } else {
                         setText(null);
                     }

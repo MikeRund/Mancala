@@ -129,7 +129,7 @@ public class LeaderBoard {
         System.out.println("------ LEADERBOARD ------");
     
         // Use format method for header line
-        System.out.format("%-5s %-18s %-6s %-4s%n", "Rank", "Username", "Wins", "Fav");
+        System.out.format("%-5s %-18s %-6s %-4s%n", "Rank", "Username", "Wins", "Favourite");
     
         // Sort the board based on wins
         sortLeaderBoardWins();
@@ -142,7 +142,7 @@ public class LeaderBoard {
         System.out.println("------ LEADERBOARD ------");
     
         // Use format method for header line
-        System.out.format("%-5s %-18s %-7s %-4s%n", "Rank", "Username", "Win  %", "Fav");
+        System.out.format("%-5s %-18s %-7s %-4s%n", "Rank", "Username", "Win  %", "Favourite");
     
         // Sort the leaderBoard based on win percentage
         sortLeaderBoardWinPercent();
