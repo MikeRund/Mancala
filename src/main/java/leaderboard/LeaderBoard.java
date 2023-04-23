@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * The LeaderBoard class responsible for managing the leaderboard of players.
- * It provide functionalities to update, sort, and display the leaderboard based
+ * It provide functionalities to update and sort the leaderboard based
  * on different criterias, and handles the logic 
  * for marking and unmarking favorite players for a given user.
  */
@@ -85,33 +85,7 @@ public class LeaderBoard {
             leaderBoard.set(playerIndex + 1, player1);
         }
     }
-    
-    private void displayLeaderBoard(User user, ArrayList<Player> leaderBoard, boolean showWinPercentage) {
-        for (int i = 0; i < leaderBoard.size(); i++) {
-            Player player = leaderBoard.get(i);
-            String username = player.getUsername();
-            int wins = player.getWins();
-            double winPercentage = player.getWinPercentage();
-    
-            // Check if the player is a favorite of the input user
-            boolean isFavourite = isPlayerFavourite(user, username);
-            String favString;
-            if (isFavourite) {
-                favString = " fav";
-            } else {
-                favString = "    ";
-            }
-    
-            if (showWinPercentage == true) {
-                // Use the format method to create a formatted string for win percentage
-                System.out.format("%-5d %-18s %-5.1f%% %-4s%n", (i + 1), username, winPercentage, favString);
-            } else {
-                // Use the format method to create a formatted string for wins
-                System.out.format("%-5d %-18s %-5d %-4s%n", (i + 1), username, wins, favString);
-            }
-        }
-    }
-    
+
     public boolean isPlayerFavourite(User user, String username) {
         ArrayList<User> favouritePlayers = user.getFavouritePlayer();
         
@@ -122,32 +96,6 @@ public class LeaderBoard {
             }
         }
         return false;
-    }
-
-        public void displayLeaderBoardByWins(User user) {
-        System.out.println("Leaderboard sorted by wins:");
-        System.out.println("------ LEADERBOARD ------");
-    
-        // Use format method for header line
-        System.out.format("%-5s %-18s %-6s %-4s%n", "Rank", "Username", "Wins", "Favourite");
-    
-        // Sort the board based on wins
-        sortLeaderBoardWins();
-    
-        displayLeaderBoard(user, leaderBoard, false);
-    }
-    
-    public void displayLeaderBoardByWinPercentage(User user) {
-        System.out.println("Leaderboard sorted by win percentage:");
-        System.out.println("------ LEADERBOARD ------");
-    
-        // Use format method for header line
-        System.out.format("%-5s %-18s %-7s %-4s%n", "Rank", "Username", "Win  %", "Favourite");
-    
-        // Sort the leaderBoard based on win percentage
-        sortLeaderBoardWinPercent();
-    
-        displayLeaderBoard(user, leaderBoard, true);
     }
     
     public void markFavouriteUser(User user, User favouriteUser) {
