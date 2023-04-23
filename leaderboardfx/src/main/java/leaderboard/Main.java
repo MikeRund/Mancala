@@ -1,5 +1,11 @@
-public class Main {
-    public static void main(String[] args) {
+package leaderboard;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
         // Create some sample players
         Player alice = new Player("Alice");
         Player bob = new Player("Bob");
@@ -17,17 +23,19 @@ public class Main {
 
         // Create a sample user to view the leaderboard
         User sampleAlice = new User(alice);
-  
+
         // Mark some users as Alice's favourite
         User favUser2 = new User(bob);
         User favUser3 = new User(cat);
         leaderBoard.markFavouriteUser(sampleAlice, favUser2);
         leaderBoard.markFavouriteUser(sampleAlice, favUser3);
-        
-        // Display the leaderboard sorted by win percentage
-        leaderBoard.displayLeaderBoardByWinPercentage(sampleAlice);
 
-        // Display the leaderboard sorted by wins
-        leaderBoard.displayLeaderBoardByWins(sampleAlice);
+        // Create an instance of LeaderboardGUI and launch the application
+        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice);
+        leaderboardGUI.start(primaryStage);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

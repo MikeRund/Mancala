@@ -12,3 +12,66 @@ C:\Users\Sakan\Desktop\CSCM94CW2\CW2\Board.java
 
 Hole.java
 C:\Users\Sakan\Desktop\CSCM94CW2\CW2\Hole.java
+
+.vscode
+C:\Users\Sakan\Desktop\CSCM94CW2\CW2\.vscode
+
+# Compiled class files
+*.class
+
+# Build artifacts
+target/
+out/
+build/
+dist/
+
+# Dependency folders
+lib/
+libs/
+
+# IDE-specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.vscode/
+
+# Logs and databases
+*.log
+*.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.gradle/
+
+# Eclipse
+bin/
+.metadata/
+*.tmp
+*.bak
+RemoteSystemsTempFiles/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Intellij IDEA
+*.iml
+*.iws
+*.ipr
+.idea/

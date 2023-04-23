@@ -1,3 +1,5 @@
+package leaderboard;
+
 import java.util.ArrayList;
 
 /**
@@ -105,7 +107,7 @@ public class LeaderBoard {
         }
     }
     
-    private boolean isPlayerFavourite(User user, String username) {
+    public boolean isPlayerFavourite(User user, String username) {
         ArrayList<User> favouritePlayers = user.getFavouritePlayer();
         
         for (int i = 0; i < favouritePlayers.size(); i++) {
@@ -149,5 +151,9 @@ public class LeaderBoard {
 
     public void unmarkFavouriteUser(User user, User favouriteUser) {
         user.removeFavourite(favouriteUser);
+    }
+
+    public ArrayList<Player> getLeaderBoard() {
+        return leaderBoard;
     }
 }

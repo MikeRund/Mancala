@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+    </padding>
+    <children>
+        <Button fx:id="updateButton" text="Update Leaderboard" onAction="#handleUpdateButton" />
+        <Button fx:id="sortByWinsButton" text="Sort by Wins" onAction="#handleSortByWinsButton" />
+        <Button fx:id="sortByWinPercentageButton" text="Sort by Win Percentage" onAction="#handleSortByWinPercentageButton" />
+        <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="rankColumn" text="Rank" />
+                <TableColumn fx:id="usernameColumn" text="Username" />
+                <TableColumn fx:id="winsColumn" text="Wins" />
+                <TableColumn fx:id="winPercentageColumn" text="Win %" />
+                <TableColumn fx:id="favColumn" text="Fav" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>

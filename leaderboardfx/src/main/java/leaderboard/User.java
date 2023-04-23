@@ -1,3 +1,5 @@
+package leaderboard;
+
 import java.util.ArrayList;
 
 public class User {

@@ -1,3 +1,5 @@
+package leaderboard;
+
 public class Player {
     private String username;
     private int totalGames;
