@@ -72,6 +72,8 @@ public class LeaderboardGUI extends Application {
         winPercentageColumn.setCellValueFactory(new PropertyValueFactory<>("winPercentage"));
         favColumn.setCellValueFactory(cellData -> isPlayerFavoriteProperty(cellData.getValue()));
 
+        leaderboardTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         favColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
 
             @Override
@@ -83,7 +85,7 @@ public class LeaderboardGUI extends Application {
                 } else {
                     Player currentPlayer = getTableView().getItems().get(getIndex());
                     if (leaderBoard.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
-                        setText("fav");
+                        setText("favourite");
                     } else {
                         setText(null);
                     }
