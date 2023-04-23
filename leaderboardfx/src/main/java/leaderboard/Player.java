@@ -5,6 +5,7 @@ public class Player {
     private int totalGames;
     private int wins;
     private int losses;
+    private int rank;
 
     public Player(String username) {
         this.username = username;
@@ -53,5 +54,13 @@ public class Player {
 
     public int getTotalGames() {
         return totalGames;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+    
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

@@ -9,13 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
+/**
+ * The LeaderboardGUI class displays and manages the leaderboard. 
+ * It allows users to view the leaderboard, sort it by wins or win percentage,
+ * and see their favourite players. 
+ */
 public class LeaderboardGUI extends Application {
 
     @FXML
@@ -64,7 +71,9 @@ public class LeaderboardGUI extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("leaderboard.fxml"));
         loader.setController(this);
         VBox root = loader.load();
-
+        String backgroundImageUrl = "file:src/main/resources/leaderboard/WoodenPattern.jpg";
+        root.setStyle("-fx-background-image: url(" + backgroundImageUrl + "); -fx-background-size: cover;");
+        
         // Set up the columns in the leaderboardTable
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -74,12 +83,84 @@ public class LeaderboardGUI extends Application {
 
         leaderboardTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        favColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
+        // Set color for the table
+        leaderboardTable.setStyle(
+            "-fx-base: #E9CDA2;" +
+            "-fx-focus-color: transparent;" +
+            "-fx-faint-focus-color: transparent;"
+        );
+        
+        // Set alternating row colors
+        leaderboardTable.setRowFactory(tv -> {
+            TableRow<Player> row = new TableRow<>();
+            row.styleProperty().bind(
+                Bindings.when(Bindings.createIntegerBinding(
+                    () -> row.getIndex() % 2, row.indexProperty()
+                ).isEqualTo(0))
+                .then("-fx-background-color: #F5DEB3;") // Color for even rows
+                .otherwise("-fx-background-color: #E9CDA2;") // Color for odd rows
+            );
+            return row;
+        });
+        
+        // Set the cell factory for each column to apply the background color to every cell
+        rankColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
 
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                }
+            }
+        });
+
+        usernameColumn.setCellFactory(column -> new TableCell<Player, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item);
+                }
+            }
+        });
+
+        winsColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                }
+            }
+        });
+
+        winPercentageColumn.setCellFactory(column -> new TableCell<Player, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f%%", item));
+                }
+            }
+        });
+
+        favColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
             @Override
             protected void updateItem(Boolean item, boolean empty) {
                 super.updateItem(item, empty);
-                
+
                 if (empty || item == null) {
                     setText(null);
                 } else {
@@ -93,24 +174,14 @@ public class LeaderboardGUI extends Application {
             }
         });
 
-        winPercentageColumn.setCellFactory(column -> new TableCell<Player, Double>() {
-            @Override
-            protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-        
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f%%", item));
-                }
-            }
-        });
-               
+        // Set the data for the leaderboardTable
+        leaderboardTable.setItems(observableList);
+                
         // Set the data for the leaderboardTable
         leaderboardTable.setItems(observableList);
 
-        // Set the scene and show the stage
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root, 512, 600);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

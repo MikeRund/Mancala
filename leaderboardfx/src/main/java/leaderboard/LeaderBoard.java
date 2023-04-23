@@ -3,8 +3,10 @@ package leaderboard;
 import java.util.ArrayList;
 
 /**
- * Displays the leaderboard, including rank, username, wins, win percentage, and favorite status.
- * Put a new player to the leaderboard.
+ * The LeaderBoard class responsible for managing the leaderboard of players.
+ * It provide functionalities to update, sort, and display the leaderboard based
+ * on different criterias, and handles the logic 
+ * for marking and unmarking favorite players for a given user.
  */
 public class LeaderBoard {
 
@@ -19,6 +21,7 @@ public class LeaderBoard {
             Player newPlayer = new Player(player);
             setPlayerStatistic(wins, losses, newPlayer);
             addNewPlayerToLeaderBoard(newPlayer);
+            updateRanks();
         }
     }
        
@@ -51,6 +54,7 @@ public class LeaderBoard {
                 comparePlayersWinPercent(playerIndex, player1, player2);
             }
         }
+        updateRanks();
     }
     
     private void comparePlayersWinPercent(int playerIndex, Player player1, Player player2) {
@@ -71,6 +75,7 @@ public class LeaderBoard {
                 comparePlayersWins(playerIndex, player1, player2);
             }
         }
+        updateRanks();
     }
 
     private void comparePlayersWins(int playerIndex, Player player1, Player player2) {
@@ -155,5 +160,12 @@ public class LeaderBoard {
 
     public ArrayList<Player> getLeaderBoard() {
         return leaderBoard;
+    }
+
+    public void updateRanks() {
+        for (int i = 0; i < leaderBoard.size(); i++) {
+            Player player = leaderBoard.get(i);
+            player.setRank(i + 1);
+        }
     }
 }
