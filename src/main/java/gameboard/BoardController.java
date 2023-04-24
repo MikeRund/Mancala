@@ -1,5 +1,6 @@
 package gameboard;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,8 +8,11 @@ import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class BoardController {
+    //Now working with button clicks
 
     //Load buttons
     @FXML
@@ -41,63 +45,79 @@ public class BoardController {
     private Button hole12;
     @FXML
     private Button startButton;
+    private int holeIndex;
+    private CountDownLatch latch;
 
 
-    public int button1Clicked() {
+    public void button1Clicked() {
         System.out.println("Button 1 clicked");
-        return 0;
+        holeIndex = 0;
     }
-    public int button2Clicked() {
+    public void button2Clicked() {
         System.out.println("Button 2 clicked");
-        return 1;
+        holeIndex = 1;
+        latch.countDown();
+    }
+    public void button3Clicked() {
+        System.out.println("Button 3 clicked");
+        holeIndex = 2;
+        latch.countDown();
 
     }
-    public int button3Clicked() {
-        System.out.println("Button 3 clicked");
-        return 2;
-    }
-    public int button4Clicked() {
+    public void button4Clicked() {
         System.out.println("Button 4 clicked");
-        return 3;
+        holeIndex = 3;
+        latch.countDown();
     }
-    public int button5Clicked() {
+    public void button5Clicked() {
         System.out.println("Button 5 clicked");
-        return 4;
+        holeIndex = 4;
+        latch.countDown();
     }
-    public int button6Clicked() {
+    public void button6Clicked() {
         System.out.println("Button 6 clicked");
-        return 5;
+        holeIndex = 5;
+        latch.countDown();
     }
-    public int store1Clicked() {
+    public void store1Clicked() {
         System.out.println("Store 1 clicked");
-        return 6;
+        holeIndex = 6;
+        latch.countDown();
     }
-    public int button7Clicked() {
+    public void button7Clicked() {
         System.out.println("Button 7 clicked");
-        return 7;
+        holeIndex = 7;
+        latch.countDown();
     }
-    public int button8Clicked() {
+    public void button8Clicked() {
         System.out.println("Button 8 clicked");
-        return 8;
-    }public int button9Clicked() {
+        holeIndex = 8;
+        latch.countDown();
+    }
+    public void button9Clicked() {
         System.out.println("Button 9 clicked");
-        return 9;
+        holeIndex = 9;
+        latch.countDown();
     }
-    public int button10Clicked() {
+    public void button10Clicked() {
         System.out.println("Button 10 clicked");
-        return 10;
+        holeIndex = 10;
+        latch.countDown();
     }
-    public int button11Clicked() {
+    public void button11Clicked() {
         System.out.println("Button 11 clicked");
-        return 11;
+        holeIndex = 11;
+        latch.countDown();
     }
-    public int button12Clicked() {
+    public void button12Clicked() {
         System.out.println("Button 12 clicked");
-        return 12;
+        holeIndex = 12;
+        latch.countDown();
     }
-    public int store2Clicked() {
+    public void store2Clicked() {
         System.out.println("Store 2 clicked");
-        return 13;
+        holeIndex = 13;
+        latch.countDown();
     }
 
     public void updateHoleUI(Game game) {
@@ -125,6 +145,7 @@ public class BoardController {
 //        game.startGame();
         updateHoleUI(game);
         System.out.println("Game initialized!");
+        startGameUI(game);
     }
 
     public void startGameUI(Game game) {
@@ -132,24 +153,42 @@ public class BoardController {
         game.setPlayer1(1);
         game.setPlayer2(2);
         game.currentPlayer = game.getStartingPlayer();
+        int currentPlayer = game.currentPlayer;
+        //Scanner in = new Scanner(System.in);
 
-        //Game logic
-        while(!game.isGameOver()){
+        // Create a new thread to run the game logic
+        Thread gameThread = new Thread(() -> {
+            //Game logic
+            while(!game.isGameOver()){
+                System.out.println("Player + " + currentPlayer +"'s turn");
+                game.getBoard().displayBoardCommandLine();
+                System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
+                //int holeIndex = in.nextInt();
 
-        }
+                //Update board and GUI with move
+                getHoleIndex();
+                game.makeMove(holeIndex);
+                Platform.runLater(() ->  updateHoleUI(game));
 
+                game.switchPlayer();
+            }
 
-        //Game logic
-        //Will exist the while loop when all the pieces are out of a row
-//        while(!game.isGameOver()) {
-//            game.board.displayBoardCommandLine();
-//            System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
-//            int holeIndex = in.nextInt();
-//            game.makeMove(holeIndex);
-//            game.switchPlayer();
-//        }
-//        game.getWinner();
+            Platform.runLater(game::getWinner);
+            startButton.setDisable(false);
+        });
+
+        gameThread.start();
     }
 
+    public void getHoleIndex() {
+        //Uses a countdown latch with a 1 count to act as a simple on/off latch
+        latch = new CountDownLatch(1);
+        try {
+            latch.await();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+// Push
 
 }
