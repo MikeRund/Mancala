@@ -3,8 +3,10 @@ package gameboard;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +17,8 @@ public class BoardController {
     //Now working with button clicks
 
     //Load buttons
+    @FXML
+    Node root;
     @FXML
     private Button store1;
     @FXML
@@ -52,6 +56,7 @@ public class BoardController {
     public void button1Clicked() {
         System.out.println("Button 1 clicked");
         holeIndex = 0;
+        latch.countDown();
     }
     public void button2Clicked() {
         System.out.println("Button 2 clicked");
@@ -81,8 +86,8 @@ public class BoardController {
     }
     public void store1Clicked() {
         System.out.println("Store 1 clicked");
-        holeIndex = 6;
-        latch.countDown();
+//        holeIndex = 6;
+//        latch.countDown();
     }
     public void button7Clicked() {
         System.out.println("Button 7 clicked");
@@ -116,8 +121,8 @@ public class BoardController {
     }
     public void store2Clicked() {
         System.out.println("Store 2 clicked");
-        holeIndex = 13;
-        latch.countDown();
+//        holeIndex = 13;
+//        latch.countDown();
     }
 
     public void updateHoleUI(Game game) {
@@ -166,6 +171,7 @@ public class BoardController {
                 //int holeIndex = in.nextInt();
 
                 //Update board and GUI with move
+                disableOpponentsButtons(game);
                 getHoleIndex();
                 game.makeMove(holeIndex);
                 Platform.runLater(() ->  updateHoleUI(game));
@@ -190,8 +196,46 @@ public class BoardController {
         }
     }
 
-    public void disableOpponentsButtons(Game game) {
+    public void disableButton(Button button, boolean disable) {
+        Platform.runLater(() -> button.setDisable(disable));
+    }
 
+    //Method to ensure:
+    //Player 1 chooses from holes 1 - 6
+    //Player 2 chooses from holes 7 - 12
+    public void disableOpponentsButtons(Game game) {
+        int currentPLayer = game.getCurrentPlayer();
+        if(currentPLayer == 1) {
+            for(int i = 1; i <= 6; i++){
+                Button button = (Button)root.lookup("#hole" + i);
+                if(button.isDisabled()){
+                    disableButton(button, false);
+                    //button.setDisabled(false);
+                }
+            }
+            for(int i = 7; i <= 12; i++){
+                Button button = (Button)root.lookup("#hole" + i);
+                if(!button.isDisabled()){
+                    disableButton(button, true);
+                    //button.setDisabled(true);
+                }
+            }
+        } else if(currentPLayer == 2) {
+            for(int i = 1; i <= 6; i++){
+                Button button = (Button)root.lookup("#hole" + i);
+                if(!button.isDisabled()){
+                    disableButton(button, true);
+                    //button.setDisabled(true);
+                }
+            }
+            for(int i = 7; i <= 12; i++){
+            Button button = (Button)root.lookup("#hole" + i);
+                if(button.isDisabled()){
+                    disableButton(button, false);
+                    //button.setDisabled(false);
+                }
+            }
+        }
     }
 
 

@@ -16,15 +16,15 @@
 <?import javafx.scene.shape.Rectangle?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameboard.BoardController">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameboard.BoardController">
    <children>
       <StackPane>
          <children>
-            <ImageView fitHeight="399.0" fitWidth="603.0" opacity="0.92" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/SarvannaBackground.jpg" />
-               </image>
-            </ImageView>
+             <ImageView fitHeight="399.0" fitWidth="603.0" opacity="0.92" pickOnBounds="true">
+                 <image>
+                     <Image url="@../images/SarvannaBackground.jpg" />
+                 </image>
+             </ImageView>
             <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
                 <top>
                     <MenuBar BorderPane.alignment="CENTER">
