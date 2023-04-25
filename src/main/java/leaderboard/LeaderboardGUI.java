@@ -196,8 +196,13 @@ public class LeaderboardGUI extends Application {
         Player player = new Player("NewPlayer");
         int wins = 5;
         int losses = 3;
+
+        Player player2 = new Player("NewPlayer2");
+        int wins2 = 70;
+        int losses2 = 3;
         
         updateLeaderboardData(player, wins, losses);
+        updateLeaderboardData(player2, wins2, losses2);
     }
     
     @FXML
