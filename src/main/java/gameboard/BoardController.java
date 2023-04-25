@@ -189,6 +189,10 @@ public class BoardController {
             e.printStackTrace();
         }
     }
-// Push
+
+    public void disableOpponentsButtons(Game game) {
+
+    }
+
 
 }
