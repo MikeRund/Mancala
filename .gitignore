@@ -1,19 +1,10 @@
 *.class
 
 target/
-out/
-build/
-dist/
 
 .vscode/
 
 *.log
-*.db
 
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.gradle/
+
 
