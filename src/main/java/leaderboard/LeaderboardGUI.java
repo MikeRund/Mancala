@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
@@ -26,16 +25,13 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class LeaderboardGUI extends Application {
 
     @FXML
-    private Button updateButton;
-
-    @FXML
     private Button sortByWinsButton;
 
     @FXML
     private Button sortByWinPercentageButton;
 
     @FXML
-    private TableView<Player> leaderboardTable;
+    public TableView<Player> leaderboardTable;
 
     @FXML
     private TableColumn<Player, Integer> rankColumn;
@@ -65,22 +61,35 @@ public class LeaderboardGUI extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Set up the window
         primaryStage.setTitle("Leaderboard");
 
-        // Load the FXML file
+        // Load the FXML file and set the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("leaderboard.fxml"));
         loader.setController(this);
         VBox root = loader.load();
+
+        // Set background image
         String backgroundImageUrl = "file:src/main/resources/leaderboard/WoodenPattern.jpg";
         root.setStyle("-fx-background-image: url(" + backgroundImageUrl + "); -fx-background-size: cover;");
-        
+ 
         // Set up the columns in the leaderboardTable
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         winPercentageColumn.setCellValueFactory(new PropertyValueFactory<>("winPercentage"));
-        favColumn.setCellValueFactory(cellData -> isPlayerFavoriteProperty(cellData.getValue()));
+        favColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue(); 
 
+            // Check if the player is a favorite for the sample user
+            boolean isPlayerFavourite = leaderBoard.isPlayerFavourite(sampleUser, player.getUsername());
+
+            // Return the result as a SimpleBooleanProperty
+            return new SimpleBooleanProperty(isPlayerFavourite);
+        });
+        
+        // Set the table column resize policy
         leaderboardTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Set color for the table
@@ -103,7 +112,7 @@ public class LeaderboardGUI extends Application {
             return row;
         });
         
-        // Set the cell factory for each column to apply the background color to every cell
+        // Set up cell factories for columns to display data correctly
         rankColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
             @Override
             protected void updateItem(Integer item, boolean empty) {
@@ -170,7 +179,7 @@ public class LeaderboardGUI extends Application {
                 } else {
                     Player currentPlayer = getTableView().getItems().get(getIndex());
                     if (leaderBoard.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
-                        setText("favourite");
+                        setText("★");
                         setStyle("-fx-alignment: CENTER;");
                     } else {
                         setText(null);
@@ -181,30 +190,14 @@ public class LeaderboardGUI extends Application {
 
         // Set the data for the leaderboardTable
         leaderboardTable.setItems(observableList);
-                
-        // Set the data for the leaderboardTable
-        leaderboardTable.setItems(observableList);
 
+        // Set scene
         Scene scene = new Scene(root, 512, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    @FXML
-    public void handleUpdateButton() {
-        // Update the leaderboard with new data 
-        Player player = new Player("NewPlayer");
-        int wins = 5;
-        int losses = 3;
-
-        Player player2 = new Player("NewPlayer2");
-        int wins2 = 70;
-        int losses2 = 3;
-        
-        updateLeaderboardData(player, wins, losses);
-        updateLeaderboardData(player2, wins2, losses2);
-    }
-    
+    // Sort leaderboard by wins when the "Sort by Wins" button is clicked
     @FXML
     public void handleSortByWinsButton() {
         leaderBoard.sortLeaderBoardWins();
@@ -212,17 +205,15 @@ public class LeaderboardGUI extends Application {
         leaderboardTable.setItems(observableList);
     }
     
+    // Sort leaderboard by win percentage when the "Sort by Win Percentage" button is clicked
     @FXML
     public void handleSortByWinPercentageButton() {
         leaderBoard.sortLeaderBoardWinPercent();
         observableList.setAll(leaderBoard.getLeaderBoard());
         leaderboardTable.setItems(observableList);
     }
-    
-    private BooleanProperty isPlayerFavoriteProperty(Player player) {
-        return new SimpleBooleanProperty(leaderBoard.isPlayerFavourite(sampleUser, player.getUsername()));
-    }    
 
+    // Update the leaderboard with new player data
     public void updateLeaderboardData(Player player, int wins, int losses) {
         leaderBoard.updateLeaderBoard(player, wins, losses);
         observableList.setAll(leaderBoard.getLeaderBoard());
