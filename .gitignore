@@ -37,23 +37,3 @@ Thumbs.db
 local.properties
 .gradle/
 
-# Eclipse
-bin/
-.metadata/
-*.tmp
-*.bak
-RemoteSystemsTempFiles/
-
-# NetBeans
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-# Intellij IDEA
-*.iml
-*.iws
-*.ipr
-.idea/
