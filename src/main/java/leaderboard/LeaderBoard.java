@@ -13,10 +13,10 @@ public class LeaderBoard {
     private ArrayList<Player> leaderBoard = new ArrayList<>();
 
     public void updateLeaderBoard(Player player, int wins, int losses) {
-        Player foundThePlayer = findThePlayer(player);
+        Player playerExist = findIfThePlayerExist(player);
     
-        if (foundThePlayer != null) {
-            setPlayerStatistic(wins, losses, foundThePlayer);
+        if (playerExist != null) {
+            setPlayerStatistic(wins, losses, playerExist);
         } else {
             Player newPlayer = new Player(player);
             setPlayerStatistic(wins, losses, newPlayer);
@@ -25,7 +25,7 @@ public class LeaderBoard {
         }
     }
        
-    public Player findThePlayer(Player player) {
+    public Player findIfThePlayerExist(Player player) {
         for (int i = 0; i < leaderBoard.size(); i++) {
             if (leaderBoard.get(i).getUsername().equals(player.getUsername())) {
                 return leaderBoard.get(i);
@@ -115,5 +115,21 @@ public class LeaderBoard {
             Player player = leaderBoard.get(i);
             player.setRank(i + 1);
         }
+    }
+
+    public ArrayList<String> getPlayerUsernameFromLeaderBoard() {
+        ArrayList<String> playerUsernames = new ArrayList<>();
+        for (Player player : leaderBoard) {
+            playerUsernames.add(player.getUsername());
+        }
+        return playerUsernames;
+    }
+
+    public ArrayList<Player> getPlayerFromLeaderBoard() {
+        ArrayList<Player> player = new ArrayList<>();
+        for (int i = 0; i < leaderBoard.size(); i++) {
+            player.get(i);
+        }
+        return player;
     }
 }

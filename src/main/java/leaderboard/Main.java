@@ -34,7 +34,7 @@ public class Main extends Application {
         LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice);
         leaderboardGUI.start(primaryStage);
         // Create an instance of AddPlayerGUI and launch the application
-        AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderboardGUI);
+        AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderboardGUI, leaderBoard, sampleAlice);
         addPlayerGUI.start(new Stage());
     }
 
