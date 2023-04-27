@@ -80,7 +80,7 @@ public class AddPlayerGUI extends Application {
             String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
             if (selectedUsername != null) {
                 User favouriteUser = new User(selectedUsername);
-                leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
+                leaderBoard.unmarkFavouriteUser(sampleUser, favouriteUser);
                 leaderboardGUI.updateLeaderboardTable();
             }
         });
