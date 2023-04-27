@@ -20,6 +20,10 @@ public class User {
         this.favouritePlayer = new ArrayList<>();
     }
 
+    public User(String selectedUsername) {
+        this.username = selectedUsername;
+    }
+
     public ArrayList<User> getFavouritePlayer() {
         return favouritePlayer;
     }

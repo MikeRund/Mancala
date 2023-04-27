@@ -124,12 +124,4 @@ public class LeaderBoard {
         }
         return playerUsernames;
     }
-
-    public ArrayList<Player> getPlayerFromLeaderBoard() {
-        ArrayList<Player> player = new ArrayList<>();
-        for (int i = 0; i < leaderBoard.size(); i++) {
-            player.get(i);
-        }
-        return player;
-    }
 }

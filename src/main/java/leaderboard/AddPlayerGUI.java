@@ -18,7 +18,6 @@ public class AddPlayerGUI extends Application {
 
     private LeaderboardGUI leaderboardGUI;
     private LeaderBoard leaderBoard;
-    private Player player;
     private User sampleUser;
 
     public AddPlayerGUI(LeaderboardGUI leaderboardGUI, LeaderBoard leaderBoard, User sampleUser) {
@@ -62,11 +61,31 @@ public class AddPlayerGUI extends Application {
             int losses = Integer.parseInt(lossesField.getText());
             Player newPlayer = new Player(username);
             leaderBoard.updateLeaderBoard(newPlayer, wins, losses);
-            leaderboardGUI.updateLeaderboardData(newPlayer, wins, losses);            
-            updatePlayerComboBox(playerComboBox); // Update the ComboBox with the new player
+            leaderboardGUI.updateLeaderboardTable();        
+            updatePlayerComboBox(playerComboBox); 
+        });
+
+        Button markFavouriteButton = new Button("Mark as Favourite");
+        markFavouriteButton.setOnAction(event -> {
+            String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
+            if (selectedUsername != null) {
+                User favouriteUser = new User(selectedUsername);
+                leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
+                leaderboardGUI.updateLeaderboardTable(); 
+            }
+        });
+
+        Button unmarkFavouriteButton = new Button("Unmark");
+        unmarkFavouriteButton.setOnAction(event -> {
+            String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
+            if (selectedUsername != null) {
+                User favouriteUser = new User(selectedUsername);
+                leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
+                leaderboardGUI.updateLeaderboardTable();
+            }
         });
         
-        root.getChildren().addAll(gridPane, addButton, playerComboBox);
+        root.getChildren().addAll(gridPane, addButton, playerComboBox, markFavouriteButton, unmarkFavouriteButton);
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);

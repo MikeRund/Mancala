@@ -214,9 +214,8 @@ public class LeaderboardGUI extends Application {
     }
 
     // Update the leaderboard with new player data
-    public void updateLeaderboardData(Player player, int wins, int losses) {
-        leaderBoard.updateLeaderBoard(player, wins, losses);
-        observableList.setAll(leaderBoard.getLeaderBoard());
-        leaderboardTable.setItems(observableList);
-    }    
+    public void updateLeaderboardTable() {
+        leaderboardTable.getItems().clear();
+        leaderboardTable.getItems().addAll(leaderBoard.getLeaderBoard());
+    }
 }
