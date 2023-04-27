@@ -24,7 +24,7 @@ public class User {
         this.username = selectedUsername;
     }
 
-    public ArrayList<User> getFavouritePlayer() {
+    public ArrayList<User> getFavouritePlayerList() {
         return favouritePlayer;
     }
 

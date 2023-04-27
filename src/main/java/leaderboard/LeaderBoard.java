@@ -87,11 +87,11 @@ public class LeaderBoard {
     }
 
     public boolean isPlayerFavourite(User user, String username) {
-        ArrayList<User> favouritePlayers = user.getFavouritePlayer();
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
         
         for (int i = 0; i < favouritePlayers.size(); i++) {
-            User favPlayer = favouritePlayers.get(i);
-            if (favPlayer.getUsername().equals(username)) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(username)) {
                 return true;
             }
         }
@@ -99,13 +99,13 @@ public class LeaderBoard {
     }
     
     public void markFavouriteUser(User user, User favouriteUser) {
-        ArrayList<User> favouritePlayers = user.getFavouritePlayer();
+        ArrayList<User> favouritePlayerList = user.getFavouritePlayerList();
         boolean alreadyMarked = false;
         int i;
     
-        for (i = 0; i < favouritePlayers.size() && !alreadyMarked; i++) {
-            User favPlayer = favouritePlayers.get(i);
-            if (favPlayer.getUsername().equals(favouriteUser.getUsername())) {
+        for (i = 0; i < favouritePlayerList.size() && !alreadyMarked; i++) {
+            User favouritePlayer = favouritePlayerList.get(i);
+            if (favouritePlayer.getUsername().equals(favouriteUser.getUsername())) {
                 alreadyMarked = true;
             }
         }
@@ -116,7 +116,7 @@ public class LeaderBoard {
     }
     
     public void unmarkFavouriteUser(User user, User favouriteUser) {
-        ArrayList<User> favouritePlayers = user.getFavouritePlayer();
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
         int favouritePlayerIndex = -1;
         boolean found = false;
         for (int i = 0; i < favouritePlayers.size() && !found; i++) {
