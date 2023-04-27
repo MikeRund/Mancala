@@ -28,11 +28,11 @@ public class User {
         return favouritePlayer;
     }
 
-    public void addFavourite(User user) {
-        favouritePlayer.add(user);
+    public void addFavourite(User favouriteUser) {
+        favouritePlayer.add(favouriteUser);
     }
 
-    public void removeFavourite(User user) {
-        favouritePlayer.remove(user);
+    public void removeFavourite(int favouritePlayerIndex) {
+        favouritePlayer.remove(favouritePlayerIndex);
     }
 }

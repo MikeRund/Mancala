@@ -99,13 +99,38 @@ public class LeaderBoard {
     }
     
     public void markFavouriteUser(User user, User favouriteUser) {
-        user.addFavourite(favouriteUser);
+        ArrayList<User> favouritePlayers = user.getFavouritePlayer();
+        boolean alreadyMarked = false;
+        int i;
+    
+        for (i = 0; i < favouritePlayers.size() && !alreadyMarked; i++) {
+            User favPlayer = favouritePlayers.get(i);
+            if (favPlayer.getUsername().equals(favouriteUser.getUsername())) {
+                alreadyMarked = true;
+            }
+        }
+    
+        if (!alreadyMarked) {
+            user.addFavourite(favouriteUser);
+        }
     }
-
+    
     public void unmarkFavouriteUser(User user, User favouriteUser) {
-        user.removeFavourite(favouriteUser);
+        ArrayList<User> favouritePlayers = user.getFavouritePlayer();
+        int favouritePlayerIndex = -1;
+        boolean found = false;
+        for (int i = 0; i < favouritePlayers.size() && !found; i++) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(favouriteUser.getUsername())) {
+                favouritePlayerIndex = i;
+                found = true;
+            }
+        }
+        if (favouritePlayerIndex != -1) {
+            user.removeFavourite(favouritePlayerIndex);
+        }
     }
-
+    
     public ArrayList<Player> getLeaderBoard() {
         return leaderBoard;
     }
