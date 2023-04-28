@@ -70,9 +70,8 @@ public class PlayerRecordGUI extends Application {
     }
 
     // Update the player record with new player data
-    public void updatePlayerRecordData(Player player, int wins, int losses) {
-        playerRecord.updatePlayerRecord(player, wins, losses);
-        observablePlayerList.setAll(playerRecord.getPlayerRecord());
-        playerRecordTable.setItems(observablePlayerList);
+    public void updatePlayerRecordData() {
+        playerRecordTable.getItems().clear();
+        playerRecordTable.getItems().addAll(playerRecord.getPlayerRecord());
     }
 }

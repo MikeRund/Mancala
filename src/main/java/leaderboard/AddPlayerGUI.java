@@ -68,7 +68,7 @@ public class AddPlayerGUI extends Application {
             leaderBoard.updateLeaderBoard(newPlayer, wins, losses);
             playerRecord.updatePlayerRecord(newPlayer, wins, losses);
             leaderboardGUI.updateLeaderboardTable(); 
-            playerRecordGUI.updatePlayerRecordData(newPlayer, wins, losses);       
+            playerRecordGUI.updatePlayerRecordData();       
             updatePlayerComboBox(playerComboBox); 
         });
 
