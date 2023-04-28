@@ -107,7 +107,7 @@ public class Board {
     public static void main(String[] args) {
         Board board = new Board();
         Hole[] holeList = board.getAllHoles();
-        holeList[13].setPieces(9);
+        holeList[6].setPieces(9);
         board.displayBoardCommandLine();
 
     }

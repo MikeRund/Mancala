@@ -8,6 +8,7 @@ public class Game {
     private int player1;
     private int player2;
     public int currentPlayer;
+    public int lastHoleIndex;
 
     public Game() {
         this.board = new Board();
@@ -47,6 +48,7 @@ public class Game {
         if(holeIndex > 13){
             holeIndex = 0;
         }
+        //this.holeIndex = holeIndex;
         return holeIndex;
     }
 
@@ -95,9 +97,17 @@ public class Game {
                 holeIndex = nextHole(holeIndex);
             }
         }
+        //Since the method is always looking to the next hole, we reduce the hole index by 1
+        int lastHole = holeIndex -1;
+        //Perform a fix for finishing on the 13th hole (next hole = 0, then 0 - 1 = -1)
+        if (lastHole == -1){
+            lastHole = 13;
+        }
+        this.lastHoleIndex = lastHole;
+        System.out.println("Last hole index: " + lastHoleIndex);
     }
 
-    public int getStartingPlayer() {
+    public int generateStartingPlayer() {
         Random rand = new Random();
         int playerNumber = rand.nextInt(2) + 1;
         System.out.println("Player " + playerNumber +" is first!");
@@ -128,7 +138,7 @@ public class Game {
         Game game = new Game();
         game.player1 = 1;
         game.player2 = 2;
-        game.currentPlayer = game.getStartingPlayer();
+        game.currentPlayer = game.generateStartingPlayer();
 
 
         //Game logic
@@ -144,8 +154,8 @@ public class Game {
     }
 
     public static void main(String[] args) {
-       // startGame();
-//        Game game = new Game();
+        Game game = new Game();
+        game.startGame();
 //        game.player1 = 1;
 //        game.player2 = 2;
 //        game.currentPlayer = 1;
