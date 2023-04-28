@@ -19,11 +19,16 @@ public class AddPlayerGUI extends Application {
     private LeaderboardGUI leaderboardGUI;
     private LeaderBoard leaderBoard;
     private User sampleUser;
+    private PlayerRecord playerRecord;
+    private PlayerRecordGUI playerRecordGUI;
 
-    public AddPlayerGUI(LeaderboardGUI leaderboardGUI, LeaderBoard leaderBoard, User sampleUser) {
+    public AddPlayerGUI(LeaderboardGUI leaderboardGUI, LeaderBoard leaderBoard, 
+    User sampleUser, PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
         this.leaderboardGUI = leaderboardGUI;
         this.leaderBoard = leaderBoard;
         this.sampleUser = sampleUser;
+        this.playerRecord = playerRecord;
+        this.playerRecordGUI = playerRecordGUI;
     }
 
     @Override
@@ -61,7 +66,9 @@ public class AddPlayerGUI extends Application {
             int losses = Integer.parseInt(lossesField.getText());
             Player newPlayer = new Player(username);
             leaderBoard.updateLeaderBoard(newPlayer, wins, losses);
-            leaderboardGUI.updateLeaderboardTable();        
+            playerRecord.updatePlayerRecord(newPlayer, wins, losses);
+            leaderboardGUI.updateLeaderboardTable(); 
+            playerRecordGUI.updatePlayerRecordData(newPlayer, wins, losses);       
             updatePlayerComboBox(playerComboBox); 
         });
 

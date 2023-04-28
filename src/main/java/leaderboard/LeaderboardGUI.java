@@ -1,8 +1,11 @@
 package leaderboard;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.beans.binding.Bindings;
@@ -109,6 +114,17 @@ public class LeaderboardGUI extends Application {
                 .then("-fx-background-color: #F5DEB3;") // Color for even rows
                 .otherwise("-fx-background-color: #E9CDA2;") // Color for odd rows
             );
+
+            // Add event handler for row clicks
+            row.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                        Player clickedPlayer = row.getItem();
+                        showPlayerRecord(clickedPlayer);
+                    }
+                }
+            });
             return row;
         });
         
@@ -217,5 +233,20 @@ public class LeaderboardGUI extends Application {
     public void updateLeaderboardTable() {
         leaderboardTable.getItems().clear();
         leaderboardTable.getItems().addAll(leaderBoard.getLeaderBoard());
+    }
+
+    private void showPlayerRecord(Player player) {
+        PlayerRecord playerRecord = new PlayerRecord(); 
+
+        // Update the record with the clicked player's information
+        playerRecord.updatePlayerRecord(player, player.getWins(), player.getLosses()); 
+    
+        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser);
+        Stage playerRecordStage = new Stage();
+        try {
+            playerRecordGUI.start(playerRecordStage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
