@@ -1,0 +1,152 @@
+package leaderboard;
+
+import java.util.ArrayList;
+
+/**
+ * The LeaderBoard class responsible for managing the leaderboard of players.
+ * It provide functionalities to update and sort the leaderboard based
+ * on different criterias, and handles the logic 
+ * for marking and unmarking favorite players for a given user.
+ */
+public class LeaderBoard {
+
+    private ArrayList<Player> leaderBoard = new ArrayList<>();
+
+    public void updateLeaderBoard(Player player, int wins, int losses) {
+        Player playerExist = findIfThePlayerExist(player);
+    
+        if (playerExist != null) {
+            setPlayerStatistic(wins, losses, playerExist);
+        } else {
+            Player newPlayer = new Player(player);
+            setPlayerStatistic(wins, losses, newPlayer);
+            addNewPlayerToLeaderBoard(newPlayer);
+            updateRanks();
+        }
+    }
+       
+    public Player findIfThePlayerExist(Player player) {
+        for (int i = 0; i < leaderBoard.size(); i++) {
+            if (leaderBoard.get(i).getUsername().equals(player.getUsername())) {
+                return leaderBoard.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void setPlayerStatistic(int wins, int losses, Player player) {
+        player.setWins(wins);
+        player.setLosses(losses);
+        player.setTotalGames(wins + losses);   
+    }
+    
+    public void addNewPlayerToLeaderBoard(Player newPlayer) {
+        leaderBoard.add(newPlayer);
+    }
+            
+    public void sortLeaderBoardWinPercent() {
+        // Process of comparing and swapping players
+        for (int index = 0; index < leaderBoard.size() - 1; index++) {
+            // Compare adjacent players and swap them if needed
+            for (int playerIndex = 0; playerIndex < leaderBoard.size() - 1 - index; playerIndex++) {
+                Player player1 = leaderBoard.get(playerIndex);
+                Player player2 = leaderBoard.get(playerIndex + 1);
+                comparePlayersWinPercent(playerIndex, player1, player2);
+            }
+        }
+        updateRanks();
+    }
+    
+    private void comparePlayersWinPercent(int playerIndex, Player player1, Player player2) {
+        if (player1.getWinPercentage() < player2.getWinPercentage()) {
+            // Swap the players if the player1 has a lower win percentage.
+            leaderBoard.set(playerIndex, player2);
+            leaderBoard.set(playerIndex + 1, player1);
+        }
+    }
+    
+    public void sortLeaderBoardWins() {
+        // Process of comparing and swapping players
+        for (int index = 0; index < leaderBoard.size() - 1; index++) {
+            // Compare adjacent players and swap them if needed
+            for (int playerIndex = 0; playerIndex < leaderBoard.size() - 1 - index; playerIndex++) {
+                Player player1 = leaderBoard.get(playerIndex);
+                Player player2 = leaderBoard.get(playerIndex + 1);
+                comparePlayersWins(playerIndex, player1, player2);
+            }
+        }
+        updateRanks();
+    }
+
+    private void comparePlayersWins(int playerIndex, Player player1, Player player2) {
+        if (player1.getWins() < player2.getWins()) {
+            // Swap the players if the player1 has lower wins.
+            leaderBoard.set(playerIndex, player2);
+            leaderBoard.set(playerIndex + 1, player1);
+        }
+    }
+
+    public boolean isPlayerFavourite(User user, String username) {
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
+        
+        for (int i = 0; i < favouritePlayers.size(); i++) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void markFavouriteUser(User user, User favouriteUser) {
+        ArrayList<User> favouritePlayerList = user.getFavouritePlayerList();
+        boolean alreadyMarked = false;
+        int i;
+    
+        for (i = 0; i < favouritePlayerList.size() && !alreadyMarked; i++) {
+            User favouritePlayer = favouritePlayerList.get(i);
+            if (favouritePlayer.getUsername().equals(favouriteUser.getUsername())) {
+                alreadyMarked = true;
+            }
+        }
+    
+        if (!alreadyMarked) {
+            user.addFavourite(favouriteUser);
+        }
+    }
+    
+    public void unmarkFavouriteUser(User user, User favouriteUser) {
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
+        int favouritePlayerIndex = -1;
+        boolean found = false;
+        for (int i = 0; i < favouritePlayers.size() && !found; i++) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(favouriteUser.getUsername())) {
+                favouritePlayerIndex = i;
+                found = true;
+            }
+        }
+        if (favouritePlayerIndex != -1) {
+            user.removeFavourite(favouritePlayerIndex);
+        }
+    }
+    
+    public ArrayList<Player> getLeaderBoard() {
+        return leaderBoard;
+    }
+
+    public void updateRanks() {
+        for (int i = 0; i < leaderBoard.size(); i++) {
+            Player player = leaderBoard.get(i);
+            player.setRank(i + 1);
+        }
+    }
+
+    public ArrayList<String> getPlayerUsernameFromLeaderBoard() {
+        ArrayList<String> playerUsernames = new ArrayList<>();
+        for (Player player : leaderBoard) {
+            playerUsernames.add(player.getUsername());
+        }
+        return playerUsernames;
+    }
+}
