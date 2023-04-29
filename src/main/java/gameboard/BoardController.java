@@ -1,17 +1,23 @@
 package gameboard;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BoardController {
     //Now working with button clicks
@@ -19,6 +25,10 @@ public class BoardController {
     //Load buttons
     @FXML
     Node root;
+    @FXML
+    private Label playerTurnLabel;
+    @FXML
+    private Label goAgainLabel;
     @FXML
     private Button store1;
     @FXML
@@ -126,6 +136,7 @@ public class BoardController {
     }
 
     public void updateHoleUI(Game game) {
+        int currentPlayer = game.getCurrentPlayer();
         Hole[] holes = game.getBoard().getAllHoles();
         hole1.setText(Integer.toString(holes[0].getPieces()));
         hole2.setText(Integer.toString(holes[1].getPieces()));
@@ -141,12 +152,19 @@ public class BoardController {
         hole11.setText(Integer.toString(holes[11].getPieces()));
         hole12.setText(Integer.toString(holes[12].getPieces()));
         store2.setText(Integer.toString(holes[13].getPieces()));
+        playerTurnLabel.setText("It's Player " + currentPlayer + "'s turn");
     }
 
     public void startButtonClicked() {
+        goAgainLabel.setText(null);
         startButton.setDisable(true);
         System.out.println("Start button clicked!");
         Game game = new Game();
+        game.setPlayer1(1);
+        game.setPlayer2(2);
+        game.currentPlayer = game.generateStartingPlayer();
+        int currentPlayer = game.currentPlayer;
+        playerTurnLabel.setText("It's Player " + currentPlayer +"'s turn");
 //        game.startGame();
         updateHoleUI(game);
         System.out.println("Game initialized!");
@@ -155,9 +173,9 @@ public class BoardController {
 
     public void startGameUI(Game game) {
 
-        game.setPlayer1(1);
-        game.setPlayer2(2);
-        game.currentPlayer = game.getStartingPlayer();
+//        game.setPlayer1(1);
+//        game.setPlayer2(2);
+//        game.currentPlayer = game.generateStartingPlayer();
         int currentPlayer = game.currentPlayer;
         //Scanner in = new Scanner(System.in);
 
@@ -170,19 +188,28 @@ public class BoardController {
                 System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
                 //int holeIndex = in.nextInt();
 
-                //Update board and GUI with move
-                disableOpponentsButtons(game);
-                getHoleIndex();
-                game.makeMove(holeIndex);
-                Platform.runLater(() ->  updateHoleUI(game));
+//                Update board and GUI with move
+//                disableOpponentsButtons(game);
+//                getHoleIndex();
+//                game.makeMove(holeIndex);
+//                Platform.runLater(() ->  updateHoleUI(game));
 
+                makeMoveUI(game);
+//                Thread moveThread = new Thread(() -> makeMoveUI(game));
+//                moveThread.start();
                 game.switchPlayer();
+                Platform.runLater(() -> updateHoleUI(game));
             }
 
             Platform.runLater(game::getWinner);
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Player " + game.getWinner() + " wins!" );
+                alert.showAndWait();
+                //alertClosed.set(true);
+            });
             startButton.setDisable(false);
         });
-
         gameThread.start();
     }
 
@@ -210,14 +237,12 @@ public class BoardController {
                 Button button = (Button)root.lookup("#hole" + i);
                 if(button.isDisabled()){
                     disableButton(button, false);
-                    //button.setDisabled(false);
                 }
             }
             for(int i = 7; i <= 12; i++){
                 Button button = (Button)root.lookup("#hole" + i);
                 if(!button.isDisabled()){
                     disableButton(button, true);
-                    //button.setDisabled(true);
                 }
             }
         } else if(currentPLayer == 2) {
@@ -225,18 +250,172 @@ public class BoardController {
                 Button button = (Button)root.lookup("#hole" + i);
                 if(!button.isDisabled()){
                     disableButton(button, true);
-                    //button.setDisabled(true);
                 }
             }
             for(int i = 7; i <= 12; i++){
             Button button = (Button)root.lookup("#hole" + i);
                 if(button.isDisabled()){
                     disableButton(button, false);
-                    //button.setDisabled(false);
                 }
             }
         }
     }
 
+    public void disableEmptyHoles(Game game){
+        Hole[] holes = game.getBoard().getAllHoles();
 
+        for(int i = 0; i <= 5; i++){
+            Hole hole = holes[i];
+            Button button = (Button)root.lookup("#hole" + i);
+
+            if(hole.getPieces() == 0){
+                button.setDisable(true);
+            } else {
+                button.setDisable(false);
+            } 
+        }
+
+        for(int i = 7; i <= 12; i++){
+            Hole hole = holes[i];
+            int holeIndex = i + 1;
+            Button button = (Button)root.lookup("#hole" + i);
+
+            if(hole.getPieces() == 0){
+                button.setDisable(true);
+            } else {
+                button.setDisable(false);
+            }
+        }
+    }
+
+    public void makeMoveUI(Game game) {
+        AtomicBoolean chooseAgain = new AtomicBoolean();
+        AtomicBoolean pickAndGo = new AtomicBoolean();
+        AtomicBoolean moveFinished = new AtomicBoolean(false);
+        AtomicBoolean alertClosed = new AtomicBoolean();
+        int currentplayer = game.getCurrentPlayer();
+
+//        Thread moveThread = new Thread(() -> {
+
+            while (!moveFinished.get()) {
+
+                //Update board and GUI with move
+                //disableEmptyHoles(game);
+                disableOpponentsButtons(game);
+                getHoleIndex();
+                game.makeMove(holeIndex);
+                Platform.runLater(() -> updateHoleUI(game));
+                System.out.println("Last hole is " + game.lastHoleIndex);
+
+//                Check go again conditions
+                chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
+                pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
+
+                while (chooseAgain.get() || pickAndGo.get()) {
+
+                    if (chooseAgain.get()) {
+                        System.out.println("Last hole is " + game.lastHoleIndex);
+                        System.out.println("Player chooses again!");
+
+                        Platform.runLater(() -> goAgainLabel.setText("Player " + currentplayer + " chooses again!"));
+                        getHoleIndex();
+                        game.makeMove(holeIndex);
+
+                        game.getBoard().displayBoardCommandLine();
+                        System.out.println("Now last hole is " + game.lastHoleIndex);
+                        Platform.runLater(() -> updateHoleUI(game));
+                        Platform.runLater(() -> goAgainLabel.setText(null));
+                        chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
+                        pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
+                    }
+
+                    if (pickAndGo.get()) {
+                        int lastHole = game.lastHoleIndex;
+                        System.out.println("Last hole is " + lastHole);
+                        System.out.println("Move continues with pick ");
+
+                        //Alert box pop out
+                        alertClosed.set(false);
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText("Continue from " + lastHole);
+                            alert.showAndWait();
+                            alertClosed.set(true);
+                        });
+
+                        while (!alertClosed.get()) {
+                            //Wait for the alert box to close
+                        }
+
+                        game.makeMove(game.lastHoleIndex);
+
+
+                        //This bit
+//                        Platform.runLater(() -> goAgainLabel.setText("Move continues from last hole!"));
+//                        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+//                        pause.setOnFinished(e -> game.makeMove(holeIndex));
+//                        pause.play();
+//                        Platform.runLater(() -> goAgainLabel.setText(null));
+
+                        Platform.runLater(() -> updateHoleUI(game));
+                        game.getBoard().displayBoardCommandLine();
+                        System.out.println("Now the last hole is " + game.lastHoleIndex);
+                        pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
+                        chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
+                    }
+
+                }
+                moveFinished.set(true);
+            }
+//        });
+//        moveThread.start();
+
+    }
+
+//    public void checkBothGoAgain(Game game, int holeIndex, boolean chooseAgain, boolean pickAndGo){
+//        int player1 = game.getPlayer1();
+//        int player2 = game.getPlayer2();
+//        int currentPlayer = game.getCurrentPlayer();
+//
+//        if(player1 == currentPlayer && holeIndex == 6) {
+//            chooseAgain = true;
+//        } else if(player2 == currentPlayer && holeIndex == 13) {
+//            chooseAgain = true;
+//        } else {
+//            chooseAgain = false;
+//        }
+//        if(game.getBoard().getAllHoles()[holeIndex].getPieces() != 0){
+//            pickAndGo = true;
+//        } else {
+//            pickAndGo = false;
+//        }
+//
+//    }
+
+    public boolean checkChooseAgain(Game game, int holeIndex) {
+        int player1 = game.getPlayer1();
+        int player2 = game.getPlayer2();
+        int currentPlayer = game.getCurrentPlayer();
+
+        if(!game.isGameOver()) {
+            if (player1 == currentPlayer && holeIndex == 6) {
+                return true;
+            } else if (player2 == currentPlayer && holeIndex == 13) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkPickAndGo(Game game, int holeIndex) {
+
+        if(holeIndex == 6 || holeIndex == 13){
+            return false;
+        } else if(game.getBoard().getAllHoles()[holeIndex].getPieces() != 1){
+            return true;
+        }
+        return false;
+    }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameboard.BoardController">
    <children>
@@ -96,15 +96,21 @@
                               <Insets bottom="40.0" />
                            </StackPane.margin>
                         </Button>
-                        <Label fx:id="playerLabel" StackPane.alignment="TOP_CENTER">
+                        <Label fx:id="goAgainLabel" text="Go again label" StackPane.alignment="TOP_CENTER">
                            <StackPane.margin>
                               <Insets top="50.0" />
                            </StackPane.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="30.0" />
+                           </font>
                         </Label>
-                        <Label StackPane.alignment="TOP_CENTER">
+                        <Label fx:id="playerTurnLabel" text="Player turn label" StackPane.alignment="TOP_CENTER">
                            <StackPane.margin>
-                              <Insets top="50.0" />
+                              <Insets top="20.0" />
                            </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
                         </Label>
                         </children>
                     </StackPane>
