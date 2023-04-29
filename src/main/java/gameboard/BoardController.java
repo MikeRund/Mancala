@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -196,9 +198,16 @@ public class BoardController {
 //                Thread moveThread = new Thread(() -> makeMoveUI(game));
 //                moveThread.start();
                 game.switchPlayer();
+                Platform.runLater(() -> updateHoleUI(game));
             }
 
             Platform.runLater(game::getWinner);
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Player " + game.getWinner() + " wins!" );
+                alert.showAndWait();
+                //alertClosed.set(true);
+            });
             startButton.setDisable(false);
         });
         gameThread.start();
@@ -252,6 +261,33 @@ public class BoardController {
         }
     }
 
+    public void disableEmptyHoles(Game game){
+        Hole[] holes = game.getBoard().getAllHoles();
+
+        for(int i = 0; i <= 5; i++){
+            Hole hole = holes[i];
+            Button button = (Button)root.lookup("#hole" + i);
+
+            if(hole.getPieces() == 0){
+                button.setDisable(true);
+            } else {
+                button.setDisable(false);
+            } 
+        }
+
+        for(int i = 7; i <= 12; i++){
+            Hole hole = holes[i];
+            int holeIndex = i + 1;
+            Button button = (Button)root.lookup("#hole" + i);
+
+            if(hole.getPieces() == 0){
+                button.setDisable(true);
+            } else {
+                button.setDisable(false);
+            }
+        }
+    }
+
     public void makeMoveUI(Game game) {
         AtomicBoolean chooseAgain = new AtomicBoolean();
         AtomicBoolean pickAndGo = new AtomicBoolean();
@@ -264,6 +300,7 @@ public class BoardController {
             while (!moveFinished.get()) {
 
                 //Update board and GUI with move
+                //disableEmptyHoles(game);
                 disableOpponentsButtons(game);
                 getHoleIndex();
                 game.makeMove(holeIndex);
@@ -289,6 +326,7 @@ public class BoardController {
                         Platform.runLater(() -> updateHoleUI(game));
                         Platform.runLater(() -> goAgainLabel.setText(null));
                         chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
+                        pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
                     }
 
                     if (pickAndGo.get()) {
@@ -323,6 +361,7 @@ public class BoardController {
                         game.getBoard().displayBoardCommandLine();
                         System.out.println("Now the last hole is " + game.lastHoleIndex);
                         pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
+                        chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
                     }
 
                 }
@@ -358,13 +397,16 @@ public class BoardController {
         int player2 = game.getPlayer2();
         int currentPlayer = game.getCurrentPlayer();
 
-        if(player1 == currentPlayer && holeIndex == 6) {
-            return true;
-        } else if(player2 == currentPlayer && holeIndex == 13) {
-            return true;
-        } else {
-            return false;
+        if(!game.isGameOver()) {
+            if (player1 == currentPlayer && holeIndex == 6) {
+                return true;
+            } else if (player2 == currentPlayer && holeIndex == 13) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
     public boolean checkPickAndGo(Game game, int holeIndex) {
@@ -376,9 +418,4 @@ public class BoardController {
         }
         return false;
     }
-
-
-
-
-
 }

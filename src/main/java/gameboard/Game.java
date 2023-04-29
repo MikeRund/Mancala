@@ -118,15 +118,17 @@ public class Game {
         return board.isRowEmpty(board.getRow1()) || board.isRowEmpty(board.getRow2());
     }
 
-    public void getWinner() {
+    public int getWinner() {
         int player1Score = board.getStore1().getPieces();
         int player2Score = board.getStore2().getPieces();
 
         if (player1Score > player2Score) {
             System.out.println("Player 1 wins!");
+            return 1;
             //getPlayer1.increaseWins(1);
         } else {
             System.out.println("Player 2 wins!");
+            return 2;
             //getPlayer2.increaseWins(1);
         }
     }
