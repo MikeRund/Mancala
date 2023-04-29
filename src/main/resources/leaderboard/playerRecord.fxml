@@ -4,9 +4,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-
-    <TableView fx:id="playerRecordTable">
+<VBox fx:id="grid" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <TableView fx:id="playerRecordTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn text="Username" prefWidth="200" fx:id="usernameColumn"/>
             <TableColumn text="Wins" prefWidth="100" fx:id="winsColumn"/>
@@ -14,5 +13,4 @@
             <TableColumn text="Favourite" prefWidth="100" fx:id="favouriteColumn"/>
         </columns>
     </TableView>
-
 </VBox>

@@ -2,6 +2,7 @@ package leaderboard;
 
 import java.io.IOException;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -49,10 +51,10 @@ public class PlayerRecordGUI {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("playerRecord.fxml"));
         loader.setController(this);
         VBox root = loader.load();
-        
+ 
         observablePlayerList = FXCollections.observableArrayList(playerRecord.getPlayers());
         playerRecordTable.setItems(observablePlayerList);
-        
+
         // Initialize the table columns
         usernameColumn.setCellValueFactory(cellData -> {
             // Get the Player object from the cell data
@@ -150,6 +152,26 @@ public class PlayerRecordGUI {
             }
         });
 
+        // Set color for the table
+        playerRecordTable.setStyle(
+            "-fx-base: #E9CDA2;" +
+            "-fx-focus-color: transparent;" +
+            "-fx-faint-focus-color: transparent;" 
+        );
+
+        // Set alternating row colors
+        playerRecordTable.setRowFactory(tv -> {
+            TableRow<Player> row = new TableRow<>();
+            row.styleProperty().bind(
+                Bindings.when(Bindings.createIntegerBinding(
+                    () -> row.getIndex() % 2, row.indexProperty()
+                ).isEqualTo(0))
+                .then("-fx-background-color: #F5DEB3;") // Color for even rows
+                .otherwise("-fx-background-color: #E9CDA2;") // Color for odd rows
+            );
+            return row;
+        });
+
         // Set the table column resize policy
         playerRecordTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -158,9 +180,10 @@ public class PlayerRecordGUI {
         playerRecordTable.setItems(observablePlayerList);
 
         // Create a scene and set it on the stage
-        Scene scene = new Scene(root, 400, 200);
+        Scene scene = new Scene(root, 300, 70);
         stage.setScene(scene);
         stage.setTitle("Player Records");
+
     }
 
     // Update the player record with new player data
