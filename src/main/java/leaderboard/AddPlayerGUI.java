@@ -79,6 +79,7 @@ public class AddPlayerGUI extends Application {
                 User favouriteUser = new User(selectedUsername);
                 leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
                 leaderboardGUI.updateLeaderboardTable(); 
+                playerRecordGUI.updatePlayerRecordData();
             }
         });
 
@@ -89,6 +90,7 @@ public class AddPlayerGUI extends Application {
                 User favouriteUser = new User(selectedUsername);
                 leaderBoard.unmarkFavouriteUser(sampleUser, favouriteUser);
                 leaderboardGUI.updateLeaderboardTable();
+                playerRecordGUI.updatePlayerRecordData();
             }
         });
         

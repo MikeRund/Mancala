@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,13 +15,15 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * The LeaderboardGUI class displays and manages the leaderboard. 
@@ -51,17 +54,22 @@ public class LeaderboardGUI extends Application {
     private TableColumn<Player, Double> winPercentageColumn;
 
     @FXML
-    private TableColumn<Player, Boolean> favColumn;
+    private TableColumn<Player, Boolean> favouriteColumn;
 
     private LeaderBoard leaderBoard;
     private User sampleUser;
+    private PlayerRecord playerRecord;
+    private PlayerRecordGUI playerRecordGUI;
 
-    ObservableList<Player> observableList;
+    ObservableList<Player> observablePlayerList;
 
-    public LeaderboardGUI(LeaderBoard leaderBoard, User sampleUser) {
+    public LeaderboardGUI(LeaderBoard leaderBoard, User sampleUser, 
+    PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
         this.leaderBoard = leaderBoard;
         this.sampleUser = sampleUser;
-        observableList = FXCollections.observableArrayList(leaderBoard.getLeaderBoard());
+        this.playerRecord = playerRecord;
+        this.playerRecordGUI = playerRecordGUI;
+        observablePlayerList = FXCollections.observableArrayList(leaderBoard.getLeaderBoard());
     }
     
     @Override
@@ -79,11 +87,39 @@ public class LeaderboardGUI extends Application {
         root.setStyle("-fx-background-image: url(" + backgroundImageUrl + "); -fx-background-size: cover;");
  
         // Set up the columns in the leaderboardTable
-        rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
-        winPercentageColumn.setCellValueFactory(new PropertyValueFactory<>("winPercentage"));
-        favColumn.setCellValueFactory(cellData -> {
+        rankColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's rank as a SimpleIntegerProperty
+            return new SimpleIntegerProperty(player.getRank()).asObject();
+        });
+
+        usernameColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's username as a SimpleStringProperty
+            return new SimpleStringProperty(player.getUsername());
+        });
+        
+        winsColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's wins as a SimpleIntegerProperty
+            return new SimpleIntegerProperty(player.getWins()).asObject();
+        });
+        
+        winPercentageColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's win percentage as a SimpleDoubleProperty
+            return new SimpleDoubleProperty(player.getWinPercentage()).asObject();
+        });
+        
+        favouriteColumn.setCellValueFactory(cellData -> {
             // Get the Player object from the cell data
             Player player = cellData.getValue(); 
 
@@ -185,7 +221,7 @@ public class LeaderboardGUI extends Application {
             }
         });
 
-        favColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
+        favouriteColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
             @Override
             protected void updateItem(Boolean item, boolean empty) {
                 super.updateItem(item, empty);
@@ -205,7 +241,17 @@ public class LeaderboardGUI extends Application {
         });
 
         // Set the data for the leaderboardTable
-        leaderboardTable.setItems(observableList);
+        leaderboardTable.setItems(observablePlayerList);
+
+        // Add a ListChangeListener to the observableList to update the PlayerRecordGUI in real-time
+        observablePlayerList.addListener(new ListChangeListener<Player>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Player> change) {
+                if (playerRecordGUI != null) {
+                    playerRecordGUI.updatePlayerRecordData();
+                }
+            }
+        });
 
         // Set scene
         Scene scene = new Scene(root, 512, 600);
@@ -217,16 +263,16 @@ public class LeaderboardGUI extends Application {
     @FXML
     public void handleSortByWinsButton() {
         leaderBoard.sortLeaderBoardWins();
-        observableList.setAll(leaderBoard.getLeaderBoard());
-        leaderboardTable.setItems(observableList);
+        observablePlayerList.setAll(leaderBoard.getLeaderBoard());
+        leaderboardTable.setItems(observablePlayerList);
     }
     
     // Sort leaderboard by win percentage when the "Sort by Win Percentage" button is clicked
     @FXML
     public void handleSortByWinPercentageButton() {
         leaderBoard.sortLeaderBoardWinPercent();
-        observableList.setAll(leaderBoard.getLeaderBoard());
-        leaderboardTable.setItems(observableList);
+        observablePlayerList.setAll(leaderBoard.getLeaderBoard());
+        leaderboardTable.setItems(observablePlayerList);
     }
 
     // Update the leaderboard with new player data
@@ -236,15 +282,17 @@ public class LeaderboardGUI extends Application {
     }
 
     private void showPlayerRecord(Player player) {
-        PlayerRecord playerRecord = new PlayerRecord(); 
+        playerRecord = new PlayerRecord(); 
+
+        playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser);
 
         // Update the record with the clicked player's information
-        playerRecord.updatePlayerRecord(player, player.getWins(), player.getLosses()); 
-    
-        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser);
+        playerRecord.updatePlayerRecord(player, player.getWins(), player.getLosses());
+ 
         Stage playerRecordStage = new Stage();
         try {
             playerRecordGUI.start(playerRecordStage);
+            playerRecordGUI.show(playerRecordStage);
         } catch (IOException e) {
             e.printStackTrace();
         }

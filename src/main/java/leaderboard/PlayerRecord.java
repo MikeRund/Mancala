@@ -79,4 +79,16 @@ public class PlayerRecord {
     public ArrayList<Player> getPlayerRecord() {
         return playerRecord;
     }
+
+    public boolean isPlayerFavourite(User user, String username) {
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
+        
+        for (int i = 0; i < favouritePlayers.size(); i++) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -51,7 +51,7 @@
                 <TableColumn fx:id="usernameColumn" text="Username" />
                 <TableColumn fx:id="winsColumn" text="Wins" />
                 <TableColumn fx:id="winPercentageColumn" text="Win %" />
-                <TableColumn fx:id="favColumn" text="Favourite Player" />
+                <TableColumn fx:id="favouriteColumn" text="Favourite Player" />
             </columns>
         </TableView>
     </children>

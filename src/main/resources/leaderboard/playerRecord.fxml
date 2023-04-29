@@ -8,9 +8,10 @@
 
     <TableView fx:id="playerRecordTable">
         <columns>
-            <TableColumn text="Username" prefWidth="200" fx:id="nameColumn"/>
+            <TableColumn text="Username" prefWidth="200" fx:id="usernameColumn"/>
             <TableColumn text="Wins" prefWidth="100" fx:id="winsColumn"/>
             <TableColumn text="Losses" prefWidth="100" fx:id="lossesColumn"/>
+            <TableColumn text="Favourite" prefWidth="100" fx:id="favouriteColumn"/>
         </columns>
     </TableView>
 

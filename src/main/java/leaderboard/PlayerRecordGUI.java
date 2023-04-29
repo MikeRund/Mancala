@@ -2,44 +2,48 @@ package leaderboard;
 
 import java.io.IOException;
 
-import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PlayerRecordGUI extends Application {
+public class PlayerRecordGUI {
 
     @FXML
     public TableView<Player> playerRecordTable;
 
     @FXML
-    private TableColumn<Player, String> nameColumn;
+    private TableColumn<Player, String> usernameColumn;
 
     @FXML
     private TableColumn<Player, Integer> winsColumn;
 
     @FXML
     private TableColumn<Player, Integer> lossesColumn;
+
+    @FXML
+    private TableColumn<Player, Boolean> favouriteColumn;
     
-    private ObservableList<Player> observablePlayerList;
     private PlayerRecord playerRecord;
     private User sampleUser;
 
-    private ObservableList<Player> observableList;
+    private ObservableList<Player> observablePlayerList;
 
     public PlayerRecordGUI(PlayerRecord playerRecord, User sampleUser) {
         this.playerRecord = playerRecord;
         this.sampleUser = sampleUser;
     }
 
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage stage) throws IOException {
 
         // Load the FXML file and set the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("playerRecord.fxml"));
@@ -47,13 +51,104 @@ public class PlayerRecordGUI extends Application {
         VBox root = loader.load();
         
         observablePlayerList = FXCollections.observableArrayList(playerRecord.getPlayers());
-        observableList = FXCollections.observableArrayList(observablePlayerList);
-        playerRecordTable.setItems(observableList);
+        playerRecordTable.setItems(observablePlayerList);
         
         // Initialize the table columns
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
-        lossesColumn.setCellValueFactory(new PropertyValueFactory<>("losses"));
+        usernameColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's username as a SimpleStringProperty
+            return new SimpleStringProperty(player.getUsername());
+        });
+
+        winsColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's wins as a SimpleIntegerProperty
+            return new SimpleIntegerProperty(player.getWins()).asObject();
+        });
+        
+        lossesColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue();
+        
+            // Return the player's wins as a SimpleIntegerProperty
+            return new SimpleIntegerProperty(player.getLosses()).asObject();
+        });
+
+        favouriteColumn.setCellValueFactory(cellData -> {
+            // Get the Player object from the cell data
+            Player player = cellData.getValue(); 
+
+            // Check if the player is a favorite for the sample user
+            boolean isPlayerFavourite = playerRecord.isPlayerFavourite(sampleUser, player.getUsername());
+
+            // Return the result as a SimpleBooleanProperty
+            return new SimpleBooleanProperty(isPlayerFavourite);
+        });
+
+        // Set up cell factories for columns to display data correctly
+        usernameColumn.setCellFactory(column -> new TableCell<Player, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item);
+                    setStyle("-fx-alignment: CENTER;");
+                }
+            }
+        });
+
+        winsColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                    setStyle("-fx-alignment: CENTER;");
+                }
+            }
+        });
+
+        lossesColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                    setStyle("-fx-alignment: CENTER;");
+                }
+            }
+        });
+
+        favouriteColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
+            @Override
+            protected void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    if (item) {
+                        setText("★");
+                        setStyle("-fx-alignment: CENTER;");
+                    } else {
+                        setText(null);
+                    }
+                }
+            }
+        });
 
         // Set the table column resize policy
         playerRecordTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -64,9 +159,8 @@ public class PlayerRecordGUI extends Application {
 
         // Create a scene and set it on the stage
         Scene scene = new Scene(root, 400, 200);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Player Records");
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.setTitle("Player Records");
     }
 
     // Update the player record with new player data
@@ -74,4 +168,8 @@ public class PlayerRecordGUI extends Application {
         playerRecordTable.getItems().clear();
         playerRecordTable.getItems().addAll(playerRecord.getPlayerRecord());
     }
+
+    public void show(Stage stage) throws IOException {
+        stage.show();
+    }   
 }

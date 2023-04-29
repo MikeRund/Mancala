@@ -39,19 +39,17 @@ public class Main extends Application {
         leaderBoard.markFavouriteUser(sampleAlice, favUser2);
         leaderBoard.markFavouriteUser(sampleAlice, favUser3);
 
+        // Create an instance of playerRecordGUI
+        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleAlice);
+        playerRecordGUI.start(primaryStage);
+
         // Create an instance of LeaderboardGUI and launch the application
-        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice);
+        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice, playerRecord, playerRecordGUI);
         leaderboardGUI.start(primaryStage);
 
-        // Create an instance of playerRecordGUI and launch the application
-        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleAlice);
-        playerRecordGUI.start(new Stage());
-        
         // Create an instance of AddPlayerGUI and launch the application
         AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderboardGUI, leaderBoard, sampleAlice, playerRecord, playerRecordGUI);
         addPlayerGUI.start(new Stage());
-
-
     }
 
     public static void main(String[] args) {
