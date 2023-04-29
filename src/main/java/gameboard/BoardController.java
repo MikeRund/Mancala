@@ -7,13 +7,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
@@ -58,6 +63,34 @@ public class BoardController {
     @FXML
     private Button hole12;
     @FXML
+    private ImageView image1 = new ImageView();
+    @FXML
+    private ImageView image2 = new ImageView();
+    @FXML
+    private ImageView image3 = new ImageView();
+    @FXML
+    private ImageView image4 = new ImageView();
+    @FXML
+    private ImageView image5 = new ImageView();
+    @FXML
+    private ImageView image6 = new ImageView();
+    @FXML
+    private ImageView image7 = new ImageView();
+    @FXML
+    private ImageView image8 = new ImageView();
+    @FXML
+    private ImageView image9 = new ImageView();
+    @FXML
+    private ImageView image10 = new ImageView();
+    @FXML
+    private ImageView image11 = new ImageView();
+    @FXML
+    private ImageView image12 = new ImageView();
+    @FXML
+    private ImageView store1Image = new ImageView();
+    @FXML
+    private ImageView store2Image = new ImageView();
+    @FXML
     private Button startButton;
     private int holeIndex;
     private CountDownLatch latch;
@@ -96,8 +129,6 @@ public class BoardController {
     }
     public void store1Clicked() {
         System.out.println("Store 1 clicked");
-//        holeIndex = 6;
-//        latch.countDown();
     }
     public void button7Clicked() {
         System.out.println("Button 7 clicked");
@@ -131,27 +162,108 @@ public class BoardController {
     }
     public void store2Clicked() {
         System.out.println("Store 2 clicked");
-//        holeIndex = 13;
-//        latch.countDown();
     }
 
-    public void updateHoleUI(Game game) {
-        int currentPlayer = game.getCurrentPlayer();
+    public Image updateStoneImage(int pieces) {
+        System.out.println("Before switch");
+        System.out.println(System.getProperty("user.dir"));
+        String imageName;
+        switch (pieces) {
+            case 0:
+                return null;
+            case 1:
+                imageName = "./src/main/resources/images/1Stone.png";
+                break;
+            case 2:
+                imageName = "./src/main/resources/images/2Stones.png";
+                break;
+            case 3:
+                imageName = "./src/main/resources/images/3Stones.png";
+                break;
+            case 4:
+                imageName = "./src/main/resources/images/4Stones.png";
+                break;
+            case 5:
+                imageName = "./src/main/resources/images/5Stones.png";
+                break;
+            case 6:
+                imageName = "./src/main/resources/images/6Stones.png";
+                break;
+            default:
+                return null;
+        }
+        System.out.println("Image name: " + imageName);
+        try {
+            FileInputStream inputStream = new FileInputStream(imageName);
+//            Image stoneImage = new Image((getClass().getResourceAsStream(imageName)));
+            Image stoneImage = new Image(inputStream);
+//            if(pieces == 1) {
+//                double scaleFactor = 0.5;
+//                stoneImage = new Image(inputStream, 15, 15, false, false);
+//            }
+            return stoneImage;
+
+        } catch (Exception e){
+            System.out.println(e);
+        } return null;
+    }
+
+    public void updateHoleUI(Game game)  {
+
         Hole[] holes = game.getBoard().getAllHoles();
+        for(int i = 1; i <= 6; i++){
+            int holeIndex = i + 1;
+            Button button = (Button)root.lookup("#hole" + holeIndex);
+            button.setContentDisplay(ContentDisplay.CENTER);
+        }
+        for(int i = 7; i <= 12; i++){
+            Button button = (Button)root.lookup("#hole" + i);
+            button.setContentDisplay(ContentDisplay.CENTER);
+        }
+        int currentPlayer = game.getCurrentPlayer();
         hole1.setText(Integer.toString(holes[0].getPieces()));
+        image1.setImage(updateStoneImage(holes[0].getPieces()));
+//        this.image1 = new ImageView(updateStoneImage(holes[0].getPieces()));
+
+
         hole2.setText(Integer.toString(holes[1].getPieces()));
+        image2.setImage(updateStoneImage(holes[1].getPieces()));
+
         hole3.setText(Integer.toString(holes[2].getPieces()));
+        image3.setImage(updateStoneImage(holes[2].getPieces()));
+
         hole4.setText(Integer.toString(holes[3].getPieces()));
+        image4.setImage(updateStoneImage(holes[3].getPieces()));
+
         hole5.setText(Integer.toString(holes[4].getPieces()));
+        image5.setImage(updateStoneImage(holes[4].getPieces()));
+
         hole6.setText(Integer.toString(holes[5].getPieces()));
+        image6.setImage(updateStoneImage(holes[5].getPieces()));
+
         store1.setText(Integer.toString(holes[6].getPieces()));
+        store1Image.setImage(updateStoneImage(holes[6].getPieces()));
+
         hole7.setText(Integer.toString(holes[7].getPieces()));
+        image7.setImage(updateStoneImage(holes[7].getPieces()));
+
         hole8.setText(Integer.toString(holes[8].getPieces()));
+        image8.setImage(updateStoneImage(holes[8].getPieces()));
+
         hole9.setText(Integer.toString(holes[9].getPieces()));
+        image9.setImage(updateStoneImage(holes[9].getPieces()));
+
         hole10.setText(Integer.toString(holes[10].getPieces()));
+        image10.setImage(updateStoneImage(holes[10].getPieces()));
+
         hole11.setText(Integer.toString(holes[11].getPieces()));
+        image11.setImage(updateStoneImage(holes[11].getPieces()));
+
         hole12.setText(Integer.toString(holes[12].getPieces()));
+        image12.setImage(updateStoneImage(holes[12].getPieces()));
+
         store2.setText(Integer.toString(holes[13].getPieces()));
+        store2Image.setImage(updateStoneImage(holes[13].getPieces()));
         playerTurnLabel.setText("It's Player " + currentPlayer + "'s turn");
     }
 
@@ -165,7 +277,6 @@ public class BoardController {
         game.currentPlayer = game.generateStartingPlayer();
         int currentPlayer = game.currentPlayer;
         playerTurnLabel.setText("It's Player " + currentPlayer +"'s turn");
-//        game.startGame();
         updateHoleUI(game);
         System.out.println("Game initialized!");
         startGameUI(game);
@@ -186,17 +297,8 @@ public class BoardController {
                 System.out.println("Player + " + currentPlayer +"'s turn");
                 game.getBoard().displayBoardCommandLine();
                 System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
-                //int holeIndex = in.nextInt();
-
-//                Update board and GUI with move
-//                disableOpponentsButtons(game);
-//                getHoleIndex();
-//                game.makeMove(holeIndex);
-//                Platform.runLater(() ->  updateHoleUI(game));
 
                 makeMoveUI(game);
-//                Thread moveThread = new Thread(() -> makeMoveUI(game));
-//                moveThread.start();
                 game.switchPlayer();
                 Platform.runLater(() -> updateHoleUI(game));
             }
@@ -234,7 +336,8 @@ public class BoardController {
         int currentPLayer = game.getCurrentPlayer();
         if(currentPLayer == 1) {
             for(int i = 1; i <= 6; i++){
-                Button button = (Button)root.lookup("#hole" + i);
+                int holeIndex = i + 1;
+                Button button = (Button)root.lookup("#hole" + holeIndex);
                 if(button.isDisabled()){
                     disableButton(button, false);
                 }
@@ -264,7 +367,7 @@ public class BoardController {
     public void disableEmptyHoles(Game game){
         Hole[] holes = game.getBoard().getAllHoles();
 
-        for(int i = 0; i <= 5; i++){
+        for(int i = 1; i <= 6; i++){
             Hole hole = holes[i];
             Button button = (Button)root.lookup("#hole" + i);
 
@@ -295,19 +398,17 @@ public class BoardController {
         AtomicBoolean alertClosed = new AtomicBoolean();
         int currentplayer = game.getCurrentPlayer();
 
-//        Thread moveThread = new Thread(() -> {
-
             while (!moveFinished.get()) {
 
                 //Update board and GUI with move
-                //disableEmptyHoles(game);
+                disableEmptyHoles(game);
                 disableOpponentsButtons(game);
                 getHoleIndex();
                 game.makeMove(holeIndex);
                 Platform.runLater(() -> updateHoleUI(game));
                 System.out.println("Last hole is " + game.lastHoleIndex);
 
-//                Check go again conditions
+                //Check go again conditions
                 chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
                 pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
 
@@ -348,15 +449,6 @@ public class BoardController {
                         }
 
                         game.makeMove(game.lastHoleIndex);
-
-
-                        //This bit
-//                        Platform.runLater(() -> goAgainLabel.setText("Move continues from last hole!"));
-//                        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-//                        pause.setOnFinished(e -> game.makeMove(holeIndex));
-//                        pause.play();
-//                        Platform.runLater(() -> goAgainLabel.setText(null));
-
                         Platform.runLater(() -> updateHoleUI(game));
                         game.getBoard().displayBoardCommandLine();
                         System.out.println("Now the last hole is " + game.lastHoleIndex);
@@ -371,26 +463,6 @@ public class BoardController {
 //        moveThread.start();
 
     }
-
-//    public void checkBothGoAgain(Game game, int holeIndex, boolean chooseAgain, boolean pickAndGo){
-//        int player1 = game.getPlayer1();
-//        int player2 = game.getPlayer2();
-//        int currentPlayer = game.getCurrentPlayer();
-//
-//        if(player1 == currentPlayer && holeIndex == 6) {
-//            chooseAgain = true;
-//        } else if(player2 == currentPlayer && holeIndex == 13) {
-//            chooseAgain = true;
-//        } else {
-//            chooseAgain = false;
-//        }
-//        if(game.getBoard().getAllHoles()[holeIndex].getPieces() != 0){
-//            pickAndGo = true;
-//        } else {
-//            pickAndGo = false;
-//        }
-//
-//    }
 
     public boolean checkChooseAgain(Game game, int holeIndex) {
         int player1 = game.getPlayer1();
