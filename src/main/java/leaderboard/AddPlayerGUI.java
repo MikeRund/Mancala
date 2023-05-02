@@ -18,7 +18,6 @@ public class AddPlayerGUI extends Application {
 
     private LeaderboardGUI leaderboardGUI;
     private LeaderBoard leaderBoard;
-    private User sampleUser;
     private PlayerRecord playerRecord;
     private PlayerRecordGUI playerRecordGUI;
 
@@ -26,7 +25,6 @@ public class AddPlayerGUI extends Application {
     User sampleUser, PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
         this.leaderboardGUI = leaderboardGUI;
         this.leaderBoard = leaderBoard;
-        this.sampleUser = sampleUser;
         this.playerRecord = playerRecord;
         this.playerRecordGUI = playerRecordGUI;
     }
