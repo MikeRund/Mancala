@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -34,6 +35,9 @@ public class PlayerRecordGUI {
 
     @FXML
     private TableColumn<Player, Boolean> favouriteColumn;
+
+    @FXML
+    private Button markUnmarkFavouriteButton;
     
     private PlayerRecord playerRecord;
     private User sampleUser;
@@ -51,9 +55,17 @@ public class PlayerRecordGUI {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("playerRecord.fxml"));
         loader.setController(this);
         VBox root = loader.load();
+
+        // Set background image
+        String backgroundImageUrl = "file:src/main/resources/leaderboard/WoodenPattern.jpg";
+        root.setStyle("-fx-background-image: url(" + backgroundImageUrl + "); -fx-background-size: cover;");
  
+        // Load the players into the table
         observablePlayerList = FXCollections.observableArrayList(playerRecord.getPlayers());
         playerRecordTable.setItems(observablePlayerList);
+
+        // Automatically select the first row in the table
+        playerRecordTable.getSelectionModel().selectFirst();
 
         // Initialize the table columns
         usernameColumn.setCellValueFactory(cellData -> {
@@ -180,10 +192,9 @@ public class PlayerRecordGUI {
         playerRecordTable.setItems(observablePlayerList);
 
         // Create a scene and set it on the stage
-        Scene scene = new Scene(root, 300, 70);
+        Scene scene = new Scene(root, 300, 140);
         stage.setScene(scene);
         stage.setTitle("Player Records");
-
     }
 
     // Update the player record with new player data
@@ -191,7 +202,23 @@ public class PlayerRecordGUI {
         playerRecordTable.getItems().clear();
         playerRecordTable.getItems().addAll(playerRecord.getPlayerRecord());
     }
-
+    
+    @FXML
+    private void handleMarkUnmarkFavourite() {
+        Player selectedPlayer = playerRecordTable.getSelectionModel().getSelectedItem();
+        if (selectedPlayer != null) {
+            boolean isPlayerFavourite = playerRecord.isPlayerFavourite(sampleUser, selectedPlayer.getUsername());
+            if (isPlayerFavourite) {
+                User user = new User(selectedPlayer.getUsername());
+                playerRecord.unmarkFavouriteUser(sampleUser, user);
+            } else {
+                User user = new User(selectedPlayer.getUsername());
+                playerRecord.markFavouriteUser(sampleUser, user);
+            }
+            playerRecordTable.refresh();
+        }
+    }
+    
     public void show(Stage stage) throws IOException {
         stage.show();
     }   

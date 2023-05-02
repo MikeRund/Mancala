@@ -3,8 +3,12 @@ package leaderboard;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,11 +23,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 
 /**
  * The LeaderboardGUI class displays and manages the leaderboard. 
@@ -243,20 +247,12 @@ public class LeaderboardGUI extends Application {
         // Set the data for the leaderboardTable
         leaderboardTable.setItems(observablePlayerList);
 
-        // Add a ListChangeListener to the observableList to update the PlayerRecordGUI in real-time
-        observablePlayerList.addListener(new ListChangeListener<Player>() {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends Player> change) {
-                if (playerRecordGUI != null) {
-                    playerRecordGUI.updatePlayerRecordData();
-                }
-            }
-        });
-
         // Set scene
         Scene scene = new Scene(root, 512, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        startAutoUpdate();
     }
 
     // Sort leaderboard by wins when the "Sort by Wins" button is clicked
@@ -297,4 +293,11 @@ public class LeaderboardGUI extends Application {
             e.printStackTrace();
         }
     }
+
+    private void startAutoUpdate() {
+        Timeline autoUpdateTimeline = new Timeline(new KeyFrame(Duration.seconds(1), 
+        event -> updateLeaderboardTable()));
+        autoUpdateTimeline.setCycleCount(Timeline.INDEFINITE);
+        autoUpdateTimeline.play();
+    }    
 }

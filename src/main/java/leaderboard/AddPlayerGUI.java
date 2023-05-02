@@ -72,29 +72,29 @@ public class AddPlayerGUI extends Application {
             updatePlayerComboBox(playerComboBox); 
         });
 
-        Button markFavouriteButton = new Button("Mark as Favourite");
-        markFavouriteButton.setOnAction(event -> {
-            String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
-            if (selectedUsername != null) {
-                User favouriteUser = new User(selectedUsername);
-                leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
-                leaderboardGUI.updateLeaderboardTable(); 
-                playerRecordGUI.updatePlayerRecordData();
-            }
-        });
+        // Button markFavouriteButton = new Button("Mark as Favourite");
+        // markFavouriteButton.setOnAction(event -> {
+        //     String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
+        //     if (selectedUsername != null) {
+        //         User favouriteUser = new User(selectedUsername);
+        //         leaderBoard.markFavouriteUser(sampleUser, favouriteUser);
+        //         leaderboardGUI.updateLeaderboardTable(); 
+        //         playerRecordGUI.updatePlayerRecordData();
+        //     }
+        // });
 
-        Button unmarkFavouriteButton = new Button("Unmark");
-        unmarkFavouriteButton.setOnAction(event -> {
-            String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
-            if (selectedUsername != null) {
-                User favouriteUser = new User(selectedUsername);
-                leaderBoard.unmarkFavouriteUser(sampleUser, favouriteUser);
-                leaderboardGUI.updateLeaderboardTable();
-                playerRecordGUI.updatePlayerRecordData();
-            }
-        });
+        // Button unmarkFavouriteButton = new Button("Unmark");
+        // unmarkFavouriteButton.setOnAction(event -> {
+        //     String selectedUsername = playerComboBox.getSelectionModel().getSelectedItem();
+        //     if (selectedUsername != null) {
+        //         User favouriteUser = new User(selectedUsername);
+        //         leaderBoard.unmarkFavouriteUser(sampleUser, favouriteUser);
+        //         leaderboardGUI.updateLeaderboardTable();
+        //         playerRecordGUI.updatePlayerRecordData();
+        //     }
+        // });
         
-        root.getChildren().addAll(gridPane, addButton, playerComboBox, markFavouriteButton, unmarkFavouriteButton);
+        root.getChildren().addAll(gridPane, addButton, playerComboBox);
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);

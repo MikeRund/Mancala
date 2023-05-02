@@ -35,4 +35,14 @@ public class User {
     public void removeFavourite(int favouritePlayerIndex) {
         favouritePlayer.remove(favouritePlayerIndex);
     }
+
+    public int getFavouritePlayerIndex(Player player) {
+        User user = new User(player);
+        for (int i = 0; i < favouritePlayer.size(); i++) {
+            if (favouritePlayer.get(i).equals(user)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
