@@ -19,6 +19,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+* The PlayerRecordGUI class displays and manages the player record. 
+* It has functionalities to update the player record data,
+* and mark and unmark favourite players.
+*/
 public class PlayerRecordGUI {
 
     @FXML
@@ -41,12 +46,14 @@ public class PlayerRecordGUI {
     
     private PlayerRecord playerRecord;
     private User sampleUser;
+    private UltilityFunction ultilityFunction;
 
     private ObservableList<Player> observablePlayerList;
 
-    public PlayerRecordGUI(PlayerRecord playerRecord, User sampleUser) {
+    public PlayerRecordGUI(PlayerRecord playerRecord, User sampleUser, UltilityFunction ultilityFunction) {
         this.playerRecord = playerRecord;
         this.sampleUser = sampleUser;
+        this.ultilityFunction = ultilityFunction;
     }
 
     public void start(Stage stage) throws IOException {
@@ -210,10 +217,10 @@ public class PlayerRecordGUI {
             boolean isPlayerFavourite = playerRecord.isPlayerFavourite(sampleUser, selectedPlayer.getUsername());
             if (isPlayerFavourite) {
                 User user = new User(selectedPlayer.getUsername());
-                playerRecord.unmarkFavouriteUser(sampleUser, user);
+                ultilityFunction.unmarkFavouriteUser(sampleUser, user);
             } else {
                 User user = new User(selectedPlayer.getUsername());
-                playerRecord.markFavouriteUser(sampleUser, user);
+                ultilityFunction.markFavouriteUser(sampleUser, user);
             }
             playerRecordTable.refresh();
         }

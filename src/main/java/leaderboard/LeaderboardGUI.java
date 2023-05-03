@@ -63,15 +63,17 @@ public class LeaderboardGUI extends Application {
     private User sampleUser;
     private PlayerRecord playerRecord;
     private PlayerRecordGUI playerRecordGUI;
+    private UltilityFunction ultilityFunction;
 
     ObservableList<Player> observablePlayerList;
 
-    public LeaderboardGUI(LeaderBoard leaderBoard, User sampleUser, 
-    PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
+    public LeaderboardGUI(LeaderBoard leaderBoard, User sampleUser, PlayerRecord playerRecord, 
+    PlayerRecordGUI playerRecordGUI, UltilityFunction ultilityFunction) {
         this.leaderBoard = leaderBoard;
         this.sampleUser = sampleUser;
         this.playerRecord = playerRecord;
         this.playerRecordGUI = playerRecordGUI;
+        this.ultilityFunction = ultilityFunction;
         observablePlayerList = FXCollections.observableArrayList(leaderBoard.getLeaderBoard());
     }
     
@@ -279,7 +281,7 @@ public class LeaderboardGUI extends Application {
     private void showPlayerRecord(Player player) {
         playerRecord = new PlayerRecord(); 
 
-        playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser);
+        playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser, ultilityFunction);
 
         // Update the record with the clicked player's information
         playerRecord.updatePlayerRecord(player, player.getWins(), player.getLosses());

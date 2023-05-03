@@ -2,6 +2,12 @@ package leaderboard;
 
 import java.util.ArrayList;
 
+/**
+* The User class represents a user in the system, with a username. 
+* The User has a list to contain their favorite players.
+* It provides methods to set and retrieve the username of the user, 
+* and adding and removing favorite players from their list.
+*/
 public class User {
 
     private String username;

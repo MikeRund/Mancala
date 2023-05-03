@@ -1,5 +1,9 @@
 package leaderboard;
-
+/**
+* The Player class represents a player in the system, with a username. 
+* The Player has their wins, losses, total games, and ranks.
+* It provides functionalities to get the username and other statistic of the player
+*/
 public class Player {
     private String username;
     private int totalGames;

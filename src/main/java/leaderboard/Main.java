@@ -18,6 +18,8 @@ public class Main extends Application {
         // Create a player record
         PlayerRecord playerRecord = new PlayerRecord();
 
+        UltilityFunction utility = new UltilityFunction();
+
         // Update the leaderboard with the sample players
         leaderBoard.updateLeaderBoard(alice, 90, 60);
         leaderBoard.updateLeaderBoard(bob, 3, 0);
@@ -36,15 +38,15 @@ public class Main extends Application {
         // Mark some users as Alice's favourite
         User favUser2 = new User(bob);
         User favUser3 = new User(cat);
-        leaderBoard.markFavouriteUser(sampleAlice, favUser2);
-        leaderBoard.markFavouriteUser(sampleAlice, favUser3);
+        utility.markFavouriteUser(sampleAlice, favUser2);
+        utility.markFavouriteUser(sampleAlice, favUser3);
 
         // Create an instance of playerRecordGUI
-        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleAlice);
+        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleAlice, utility);
         playerRecordGUI.start(primaryStage);
 
         // Create an instance of LeaderboardGUI and launch the application
-        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice, playerRecord, playerRecordGUI);
+        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoard, sampleAlice, playerRecord, playerRecordGUI, utility);
         leaderboardGUI.start(primaryStage);
 
         // Create an instance of AddPlayerGUI and launch the application
