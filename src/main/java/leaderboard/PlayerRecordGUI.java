@@ -201,7 +201,7 @@ public class PlayerRecordGUI {
         // Create a scene and set it on the stage
         Scene scene = new Scene(root, 300, 140);
         stage.setScene(scene);
-        stage.setTitle("Player Records");
+        stage.setTitle("Player Record");
     }
 
     // Update the player record with new player data
