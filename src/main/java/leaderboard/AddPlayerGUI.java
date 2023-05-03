@@ -1,13 +1,9 @@
 package leaderboard;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -54,9 +50,6 @@ public class AddPlayerGUI extends Application {
         gridPane.add(lossesLabel, 0, 2);
         gridPane.add(lossesField, 1, 2);
 
-        ComboBox<String> playerComboBox = new ComboBox<>();
-        updatePlayerComboBox(playerComboBox);
-
         Button addButton = new Button("Add Player");
         addButton.setOnAction(event -> {
             String username = usernameField.getText();
@@ -67,29 +60,12 @@ public class AddPlayerGUI extends Application {
             playerRecord.updatePlayerRecord(newPlayer, wins, losses);
             leaderboardGUI.updateLeaderboardTable(); 
             playerRecordGUI.updatePlayerRecordData();       
-            updatePlayerComboBox(playerComboBox); 
         });
                 
-        root.getChildren().addAll(gridPane, addButton, playerComboBox);
+        root.getChildren().addAll(gridPane, addButton);
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    private void updatePlayerComboBox(ComboBox<String> playerComboBox) {
-        playerComboBox.getItems().clear();
-        ArrayList<String> playerUsernames = (ArrayList<String>) convertToPlayerList(leaderBoard.getPlayerUsernameFromLeaderBoard()).stream()
-                .map(player -> player.getUsername())
-                .collect(Collectors.toList());
-        playerComboBox.getItems().addAll(playerUsernames);
-    }
-    
-    private ArrayList<Player> convertToPlayerList(ArrayList<String> playerStrings) {
-        ArrayList<Player> players = new ArrayList<>();
-        for (String playerString : playerStrings) {
-            players.add(new Player(playerString));
-        }
-        return players;
     }
 }

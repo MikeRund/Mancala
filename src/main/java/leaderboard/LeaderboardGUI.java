@@ -279,7 +279,7 @@ public class LeaderboardGUI extends Application {
     }
 
     private void showPlayerRecord(Player player) {
-        playerRecord = new PlayerRecord(); 
+        playerRecord = new PlayerRecord(ultilityFunction); 
 
         playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser, ultilityFunction);
 

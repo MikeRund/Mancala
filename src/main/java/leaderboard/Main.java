@@ -12,11 +12,13 @@ public class Main extends Application {
         Player cat = new Player("Cat");
         Player dog = new Player("Dog");
 
+        UltilityFunction ultilityFunction = new UltilityFunction();
+
         // Create a leaderboard
-        LeaderBoard leaderBoard = new LeaderBoard();
+        LeaderBoard leaderBoard = new LeaderBoard(ultilityFunction);
 
         // Create a player record
-        PlayerRecord playerRecord = new PlayerRecord();
+        PlayerRecord playerRecord = new PlayerRecord(ultilityFunction);
 
         UltilityFunction utility = new UltilityFunction();
 

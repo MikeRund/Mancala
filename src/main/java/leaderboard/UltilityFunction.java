@@ -52,4 +52,10 @@ public class UltilityFunction {
         }
         return false;
     }  
+
+    public void setPlayerStatistic(int wins, int losses, Player player) {
+        player.setWins(wins);
+        player.setLosses(losses);
+        player.setTotalGames(wins + losses);   
+    }
 }

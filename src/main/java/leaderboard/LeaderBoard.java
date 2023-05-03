@@ -5,21 +5,26 @@ import java.util.ArrayList;
 /**
  * The LeaderBoard class responsible for managing the leaderboard of players.
  * It provide functionalities to update and sort the leaderboard based
- * on different criterias, and handles the logic 
- * for marking and unmarking favorite players for a given user.
+ * on different criterias.
  */
 public class LeaderBoard {
 
     private ArrayList<Player> leaderBoard = new ArrayList<>();
 
+    private UltilityFunction ultilityFunction;
+
+    public LeaderBoard(UltilityFunction ultilityFunction) {
+        this.ultilityFunction = ultilityFunction;
+    }
+
     public void updateLeaderBoard(Player player, int wins, int losses) {
         Player playerExist = findIfThePlayerExist(player);
     
         if (playerExist != null) {
-            setPlayerStatistic(wins, losses, playerExist);
+            ultilityFunction.setPlayerStatistic(wins, losses, playerExist);
         } else {
             Player newPlayer = new Player(player);
-            setPlayerStatistic(wins, losses, newPlayer);
+            ultilityFunction.setPlayerStatistic(wins, losses, newPlayer);
             addNewPlayerToLeaderBoard(newPlayer);
             updateRanks();
         }
@@ -32,12 +37,6 @@ public class LeaderBoard {
             }
         }
         return null;
-    }
-
-    public void setPlayerStatistic(int wins, int losses, Player player) {
-        player.setWins(wins);
-        player.setLosses(losses);
-        player.setTotalGames(wins + losses);   
     }
     
     public void addNewPlayerToLeaderBoard(Player newPlayer) {

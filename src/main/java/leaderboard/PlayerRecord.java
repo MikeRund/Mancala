@@ -18,7 +18,10 @@ public class PlayerRecord {
     private SimpleIntegerProperty wins;
     private SimpleIntegerProperty losses;
 
-    public PlayerRecord() {
+    private UltilityFunction ultilityFunction;
+
+    public PlayerRecord(UltilityFunction ultilityFunction) {
+        this.ultilityFunction = ultilityFunction;
     }
 
     public String getPlayerName() {
@@ -49,10 +52,10 @@ public class PlayerRecord {
         Player foundThePlayer = findThePlayer(player);
     
         if (foundThePlayer != null) {
-            setPlayerStatistic(wins, losses, foundThePlayer);
+            ultilityFunction.setPlayerStatistic(wins, losses, foundThePlayer);
         } else {
             Player newPlayer = new Player(player);
-            setPlayerStatistic(wins, losses, newPlayer);
+            ultilityFunction.setPlayerStatistic(wins, losses, newPlayer);
             addNewPlayerToPlayerRecord(newPlayer);
         }
     }
@@ -64,12 +67,6 @@ public class PlayerRecord {
             }
         }
         return null;
-    }
-
-    public void setPlayerStatistic(int wins, int losses, Player player) {
-        player.setWins(wins);
-        player.setLosses(losses);
-        player.setTotalGames(wins + losses);   
     }
 
     public void addNewPlayerToPlayerRecord(Player newPlayer) {
