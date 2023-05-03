@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gameboard.BoardController">
+   <children>
+      <StackPane>
+         <children>
+             <ImageView fitHeight="399.0" fitWidth="603.0" opacity="0.92" pickOnBounds="true">
+                 <image>
+                     <Image url="@../images/SarvannaBackground.jpg" />
+                 </image>
+             </ImageView>
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+                <top>
+                    <MenuBar BorderPane.alignment="CENTER">
+                        <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="Close" />
+                                </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="Delete" />
+                                </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="About" />
+                                </items>
+                            </Menu>
+                        </menus>
+                    </MenuBar>
+                </top>
+                <center>
+                    <StackPane prefHeight="342.0" prefWidth="546.0" BorderPane.alignment="CENTER">
+                        <children>
+                            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#815435" height="169.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 100; -fx-arc-width: 100;" width="381.0" />
+                            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="170.0" prefWidth="378.0">
+                                <children>
+                                    <Button fx:id="store1" alignment="CENTER" mnemonicParsing="false" onAction="#store1Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fx:id="store1Image" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></Button>
+                                    <VBox prefHeight="170.0" prefWidth="274.0">
+                                        <children>
+                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                                <children>
+                                                    <Button fx:id="hole6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button6Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                                        <HBox.margin>
+                                                            <Insets />
+                                                        </HBox.margin>
+                                             <graphic>
+                                                <ImageView fx:id="image6" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic>
+                                                    </Button>
+                                                    <Button fx:id="hole5" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button5Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image5" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole4" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button4Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image4" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole3" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button3Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image3" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole2" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button2Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image2" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole1" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button1Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image1" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                </children>
+                                                <VBox.margin>
+                                                    <Insets top="10.0" />
+                                                </VBox.margin>
+                                            </HBox>
+                                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                                <children>
+                                                    <Button fx:id="hole7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button7Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image7" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole8" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button8Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image8" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole9" layoutX="149.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button9Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image9" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole10" layoutX="172.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button10Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image10" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole11" layoutX="194.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button11Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image11" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                    <Button fx:id="hole12" layoutX="217.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button12Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fx:id="image12" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                                </children>
+                                                <VBox.margin>
+                                                    <Insets bottom="10.0" />
+                                                </VBox.margin>
+                                            </HBox>
+                                        </children>
+                                    </VBox>
+                                    <Button fx:id="store2" alignment="CENTER" mnemonicParsing="false" onAction="#store2Clicked" prefHeight="80.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fx:id="store2Image" fitHeight="30.0" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></Button>
+                                </children>
+                            </HBox>
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#startButtonClicked" text="Start" StackPane.alignment="BOTTOM_CENTER">
+                           <StackPane.margin>
+                              <Insets bottom="40.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <Label fx:id="goAgainLabel" text="Go again label" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="50.0" />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="playerTurnLabel" text="Player turn label" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="20.0" />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        </children>
+                    </StackPane>
+                </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

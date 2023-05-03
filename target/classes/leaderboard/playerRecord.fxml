@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="grid" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Mark/Unmark Favourite" 
+                onAction="#handleMarkUnmarkFavourite" 
+                style="-fx-background-color: #8B4513;
+                            -fx-text-fill: white;
+                            -fx-font-size: 12px;
+                            -fx-font-weight: bold;
+                            -fx-border-radius: 20px;
+                            -fx-padding: 8px 20px;
+                            -fx-pref-width: 190px;"
+                fx:id="markUnmarkFavouriteButton"/>
+    </HBox>
+    <TableView fx:id="playerRecordTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="Username" prefWidth="200" fx:id="usernameColumn"/>
+            <TableColumn text="Wins" prefWidth="100" fx:id="winsColumn"/>
+            <TableColumn text="Losses" prefWidth="100" fx:id="lossesColumn"/>
+            <TableColumn text="Favourite" prefWidth="100" fx:id="favouriteColumn"/>
+        </columns>
+    </TableView>
+</VBox>
