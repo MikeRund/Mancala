@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 /**
 * The UltilityFunction class contains methods
-* that both LeaderBoard and PlayerRecord need to access.
-* It provides functionalities to mark and unmark favourite players.
+* that various classes need to access.
 */
 public class UltilityFunction {
 
@@ -41,4 +40,16 @@ public class UltilityFunction {
             user.removeFavourite(favouritePlayerIndex);
         }
     }
+
+    public boolean isPlayerFavourite(User user, String username) {
+        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
+        
+        for (int i = 0; i < favouritePlayers.size(); i++) {
+            User favouritePlayer = favouritePlayers.get(i);
+            if (favouritePlayer.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }  
 }

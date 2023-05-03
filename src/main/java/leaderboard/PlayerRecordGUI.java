@@ -103,8 +103,8 @@ public class PlayerRecordGUI {
             // Get the Player object from the cell data
             Player player = cellData.getValue(); 
 
-            // Check if the player is a favorite for the sample user
-            boolean isPlayerFavourite = playerRecord.isPlayerFavourite(sampleUser, player.getUsername());
+            // Check if the player is a favorite for the user
+            boolean isPlayerFavourite = ultilityFunction.isPlayerFavourite(sampleUser, player.getUsername());
 
             // Return the result as a SimpleBooleanProperty
             return new SimpleBooleanProperty(isPlayerFavourite);
@@ -214,7 +214,7 @@ public class PlayerRecordGUI {
     private void handleMarkUnmarkFavourite() {
         Player selectedPlayer = playerRecordTable.getSelectionModel().getSelectedItem();
         if (selectedPlayer != null) {
-            boolean isPlayerFavourite = playerRecord.isPlayerFavourite(sampleUser, selectedPlayer.getUsername());
+            boolean isPlayerFavourite = ultilityFunction.isPlayerFavourite(sampleUser, selectedPlayer.getUsername());
             if (isPlayerFavourite) {
                 User user = new User(selectedPlayer.getUsername());
                 ultilityFunction.unmarkFavouriteUser(sampleUser, user);

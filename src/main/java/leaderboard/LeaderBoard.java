@@ -85,18 +85,6 @@ public class LeaderBoard {
             leaderBoard.set(playerIndex + 1, player1);
         }
     }
-
-    public boolean isPlayerFavourite(User user, String username) {
-        ArrayList<User> favouritePlayers = user.getFavouritePlayerList();
-        
-        for (int i = 0; i < favouritePlayers.size(); i++) {
-            User favouritePlayer = favouritePlayers.get(i);
-            if (favouritePlayer.getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
         
     public ArrayList<Player> getLeaderBoard() {
         return leaderBoard;

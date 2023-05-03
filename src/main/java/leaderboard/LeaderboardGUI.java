@@ -128,8 +128,8 @@ public class LeaderboardGUI extends Application {
             // Get the Player object from the cell data
             Player player = cellData.getValue(); 
 
-            // Check if the player is a favorite for the sample user
-            boolean isPlayerFavourite = leaderBoard.isPlayerFavourite(sampleUser, player.getUsername());
+            // Check if the player is a favorite for the user
+            boolean isPlayerFavourite = ultilityFunction.isPlayerFavourite(sampleUser, player.getUsername());
 
             // Return the result as a SimpleBooleanProperty
             return new SimpleBooleanProperty(isPlayerFavourite);
@@ -235,7 +235,7 @@ public class LeaderboardGUI extends Application {
                     setText(null);
                 } else {
                     Player currentPlayer = getTableView().getItems().get(getIndex());
-                    if (leaderBoard.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
+                    if (ultilityFunction.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
                         setText("★");
                         setStyle("-fx-alignment: CENTER;");
                     } else {
