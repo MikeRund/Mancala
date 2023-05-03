@@ -3,7 +3,7 @@ package leaderboard;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class LeaderBoardMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Create some sample players

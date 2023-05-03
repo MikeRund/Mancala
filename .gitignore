@@ -1,3 +1,55 @@
+# Compiled class files
+*.class
 
-### Mac OS ###
+# Build artifacts
+target/
+out/
+build/
+
+# Dependency directories
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# IDE configuration files
+.idea/
+*.iml
+*.ipr
+*.iws
+*.swp
+.classpath
+.project
+.settings/
+.metadata/
+.vscode/
+eclipse-bin/
+*.launch
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+*.cache
+
+# OS-specific files
 .DS_Store
+Thumbs.db
+
+# Other files
+*.asc
+*.asc.md5
+*.asc.sha1
+*.asc.sha256
+*.asc.sha512
+*.md5
+*.sha1
+*.sha256
+*.sha512
