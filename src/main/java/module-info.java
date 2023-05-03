@@ -1,8 +1,9 @@
-module gameboard {
+module logIn {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
-    opens gameboard to javafx.fxml;
-    exports gameboard;
+    opens logIn to javafx.fxml;
+    exports logIn;
 }

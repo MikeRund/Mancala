@@ -186,13 +186,13 @@ public class BoardController {
             case 5:
                 imageName = "./src/main/resources/images/5Stones.png";
                 break;
-            case 6:
+            default:
                 imageName = "./src/main/resources/images/6Stones.png";
                 break;
-            default:
-                return null;
+//            default:
+//                return null;
         }
-        System.out.println("Image name: " + imageName);
+        //System.out.println("Image name: " + imageName);
         try {
             FileInputStream inputStream = new FileInputStream(imageName);
 //            Image stoneImage = new Image((getClass().getResourceAsStream(imageName)));
@@ -211,56 +211,63 @@ public class BoardController {
     public void updateHoleUI(Game game)  {
 
         Hole[] holes = game.getBoard().getAllHoles();
-        for(int i = 1; i <= 6; i++){
+        for(int i = 0; i < 6; i++){
             int holeIndex = i + 1;
             Button button = (Button)root.lookup("#hole" + holeIndex);
             button.setContentDisplay(ContentDisplay.CENTER);
+            button.setText((Integer.toString(holes[i].getPieces())));
+            ImageView image = (ImageView)root.lookup("#image" + holeIndex);
+            image.setImage(updateStoneImage(holes[i].getPieces()));
         }
         for(int i = 7; i <= 12; i++){
             Button button = (Button)root.lookup("#hole" + i);
             button.setContentDisplay(ContentDisplay.CENTER);
+            button.setText((Integer.toString(holes[i].getPieces())));
+            ImageView image = (ImageView)root.lookup("#image" + i);
+            image.setImage(updateStoneImage(holes[i].getPieces()));
         }
         int currentPlayer = game.getCurrentPlayer();
-        hole1.setText(Integer.toString(holes[0].getPieces()));
-        image1.setImage(updateStoneImage(holes[0].getPieces()));
+
+//        hole1.setText(Integer.toString(holes[0].getPieces()));
+//        image1.setImage(updateStoneImage(holes[0].getPieces()));
 //        this.image1 = new ImageView(updateStoneImage(holes[0].getPieces()));
 
 
-        hole2.setText(Integer.toString(holes[1].getPieces()));
-        image2.setImage(updateStoneImage(holes[1].getPieces()));
-
-        hole3.setText(Integer.toString(holes[2].getPieces()));
-        image3.setImage(updateStoneImage(holes[2].getPieces()));
-
-        hole4.setText(Integer.toString(holes[3].getPieces()));
-        image4.setImage(updateStoneImage(holes[3].getPieces()));
-
-        hole5.setText(Integer.toString(holes[4].getPieces()));
-        image5.setImage(updateStoneImage(holes[4].getPieces()));
-
-        hole6.setText(Integer.toString(holes[5].getPieces()));
-        image6.setImage(updateStoneImage(holes[5].getPieces()));
+//        hole2.setText(Integer.toString(holes[1].getPieces()));
+//        image2.setImage(updateStoneImage(holes[1].getPieces()));
+//
+//        hole3.setText(Integer.toString(holes[2].getPieces()));
+//        image3.setImage(updateStoneImage(holes[2].getPieces()));
+//
+//        hole4.setText(Integer.toString(holes[3].getPieces()));
+//        image4.setImage(updateStoneImage(holes[3].getPieces()));
+//
+//        hole5.setText(Integer.toString(holes[4].getPieces()));
+//        image5.setImage(updateStoneImage(holes[4].getPieces()));
+//
+//        hole6.setText(Integer.toString(holes[5].getPieces()));
+//        image6.setImage(updateStoneImage(holes[5].getPieces()));
 
         store1.setText(Integer.toString(holes[6].getPieces()));
         store1Image.setImage(updateStoneImage(holes[6].getPieces()));
 
-        hole7.setText(Integer.toString(holes[7].getPieces()));
-        image7.setImage(updateStoneImage(holes[7].getPieces()));
-
-        hole8.setText(Integer.toString(holes[8].getPieces()));
-        image8.setImage(updateStoneImage(holes[8].getPieces()));
-
-        hole9.setText(Integer.toString(holes[9].getPieces()));
-        image9.setImage(updateStoneImage(holes[9].getPieces()));
-
-        hole10.setText(Integer.toString(holes[10].getPieces()));
-        image10.setImage(updateStoneImage(holes[10].getPieces()));
-
-        hole11.setText(Integer.toString(holes[11].getPieces()));
-        image11.setImage(updateStoneImage(holes[11].getPieces()));
-
-        hole12.setText(Integer.toString(holes[12].getPieces()));
-        image12.setImage(updateStoneImage(holes[12].getPieces()));
+//        hole7.setText(Integer.toString(holes[7].getPieces()));
+//        image7.setImage(updateStoneImage(holes[7].getPieces()));
+//
+//        hole8.setText(Integer.toString(holes[8].getPieces()));
+//        image8.setImage(updateStoneImage(holes[8].getPieces()));
+//
+//        hole9.setText(Integer.toString(holes[9].getPieces()));
+//        image9.setImage(updateStoneImage(holes[9].getPieces()));
+//
+//        hole10.setText(Integer.toString(holes[10].getPieces()));
+//        image10.setImage(updateStoneImage(holes[10].getPieces()));
+//
+//        hole11.setText(Integer.toString(holes[11].getPieces()));
+//        image11.setImage(updateStoneImage(holes[11].getPieces()));
+//
+//        hole12.setText(Integer.toString(holes[12].getPieces()));
+//        image12.setImage(updateStoneImage(holes[12].getPieces()));
 
         store2.setText(Integer.toString(holes[13].getPieces()));
         store2Image.setImage(updateStoneImage(holes[13].getPieces()));

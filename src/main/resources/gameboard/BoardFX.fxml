@@ -66,7 +66,7 @@
                                                             <Insets />
                                                         </HBox.margin>
                                              <graphic>
-                                                <ImageView fx:id="image6" fitHeight="10.0" fitWidth="10.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
+                                                <ImageView fx:id="image6" fitWidth="30.0" opacity="0.75" pickOnBounds="true" preserveRatio="true" />
                                              </graphic>
                                                     </Button>
                                                     <Button fx:id="hole5" layoutX="128.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#button5Clicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100; -fx-background-color: #5e2802;" textFill="WHITE">
