@@ -17,17 +17,33 @@ public class LeaderBoard {
         this.ultilityFunction = ultilityFunction;
     }
 
-    public void updateLeaderBoard(Player player, int wins, int losses) {
-        Player playerExist = findIfThePlayerExist(player);
-    
-        if (playerExist != null) {
-            ultilityFunction.setPlayerStatistic(wins, losses, playerExist);
-        } else {
-            Player newPlayer = new Player(player);
-            ultilityFunction.setPlayerStatistic(wins, losses, newPlayer);
-            addNewPlayerToLeaderBoard(newPlayer);
-            updateRanks();
-        }
+//    public void updateLeaderBoard(Player player, int wins, int losses) {
+//        Player playerExist = findIfThePlayerExist(player);
+//
+//        if (playerExist != null) {
+//            ultilityFunction.setPlayerStatistic(wins, losses, playerExist);
+//        } else {
+//            Player newPlayer = new Player(player);
+//            ultilityFunction.setPlayerStatistic(wins, losses, newPlayer);
+//            addNewPlayerToLeaderBoard(newPlayer);
+//            updateRanks();
+//        }
+//    }
+
+    public void updateLeaderBoard(Player player) {
+        //Player playerExist = findIfThePlayerExist(player);
+        int wins = player.getWins();
+        int losses = player.getLosses();
+        ultilityFunction.setPlayerStatistic(wins, losses, player);
+        addNewPlayerToLeaderBoard(player);
+
+//        if (playerExist != null) {
+//            int wins = player.getWins();
+//            int losses = player.getLosses();
+//            ultilityFunction.setPlayerStatistic(wins, losses, playerExist);
+//        } else {
+//           System.out.println("Player does not exist");
+//        }
     }
        
     public Player findIfThePlayerExist(Player player) {
