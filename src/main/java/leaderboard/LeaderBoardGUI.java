@@ -38,6 +38,7 @@ public class LeaderBoardGUI extends Application {
 
     private LeaderBoardController leaderBoardController;
 
+
     public LeaderBoardGUI(LeaderBoardController leaderBoardController) {
         this.leaderBoardController = leaderBoardController;
     }

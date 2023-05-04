@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import leaderboard.User;
 
 import java.sql.*;
 
@@ -118,7 +119,7 @@ public class DBUtils {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
-                        changeScene(event, "logged-in.fxml", "Welcome!", username);
+                       changeScene(event, "logged-in.fxml", "Welcome!", username);
                     } else {
                         System.out.println("Passwords did not match!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -154,4 +155,6 @@ public class DBUtils {
             }
         }
     }
+
+
 }
