@@ -55,143 +55,130 @@ public class LeaderBoardController {
     private PlayerRecord playerRecord;
     private PlayerRecordGUI playerRecordGUI;
     private UltilityFunction ultilityFunction;
+    private PlayerRecordController playerRecordController;
 
     ObservableList<Player> observablePlayerList;
 
     public LeaderBoardController(LeaderBoard leaderBoard, User sampleUser, PlayerRecord playerRecord, 
-    PlayerRecordGUI playerRecordGUI, UltilityFunction ultilityFunction) {
+    PlayerRecordGUI playerRecordGUI, UltilityFunction ultilityFunction, 
+    PlayerRecordController playerRecordController) {
         this.leaderBoard = leaderBoard;
         this.sampleUser = sampleUser;
         this.playerRecord = playerRecord;
         this.playerRecordGUI = playerRecordGUI;
         this.ultilityFunction = ultilityFunction;
+        this.playerRecordController = playerRecordController;
         observablePlayerList = FXCollections.observableArrayList(leaderBoard.getLeaderBoard());
     }
     
     public void setUpRankColumn() {
+        setUpRankColumnCellValue();
+        setUpRankColumnCell();
+    }
+
+    private void setUpRankColumnCellValue() {
         rankColumn.setCellValueFactory(cellData -> {
-            // Get the Player object from the cell data
             Player player = cellData.getValue();
-        
-            // Return the player's rank as a SimpleIntegerProperty
             return new SimpleIntegerProperty(player.getRank()).asObject();
         });
+    }
 
+    private void setUpRankColumnCell() {
         rankColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
             @Override
             protected void updateItem(Integer item, boolean empty) {
                 super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.toString());
-                    setStyle("-fx-alignment: CENTER;");
-                }
+                ultilityFunction.updateIntegerCell(item, empty, this);
             }
         });
     }
 
     public void setUpUsernameColumn() {
+        setUpUsernameColumnCellValue();
+        setUpUsernameColumnCell();
+    }
+
+    private void setUpUsernameColumnCellValue() {
         usernameColumn.setCellValueFactory(cellData -> {
-            // Get the Player object from the cell data
             Player player = cellData.getValue();
-        
-            // Return the player's username as a SimpleStringProperty
             return new SimpleStringProperty(player.getUsername());
         });
+    }
 
+    private void setUpUsernameColumnCell() {
         usernameColumn.setCellFactory(column -> new TableCell<Player, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item);
-                    setStyle("-fx-alignment: CENTER;");
-                }
+                ultilityFunction.updateStringCell(item, empty, this);
             }
         });
     }
 
     public void setUpWinsColumn() {
+        setUpWinsColumnCellValue();
+        setUpWinsColumnCell();
+    }
+
+    private void setUpWinsColumnCellValue() {
         winsColumn.setCellValueFactory(cellData -> {
-            // Get the Player object from the cell data
             Player player = cellData.getValue();
-        
-            // Return the player's wins as a SimpleIntegerProperty
             return new SimpleIntegerProperty(player.getWins()).asObject();
         });
+    }
 
+    private void setUpWinsColumnCell() {
         winsColumn.setCellFactory(column -> new TableCell<Player, Integer>() {
             @Override
             protected void updateItem(Integer item, boolean empty) {
                 super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.toString());
-                    setStyle("-fx-alignment: CENTER;");
-                }
+                ultilityFunction.updateIntegerCell(item, empty, this);
             }
         });
     }
 
     public void setUpWinPercentColumn() {
+        setUpWinPercentColumnCellValue();
+        setUpWinPercentColumnCell();
+    }
+
+    private void setUpWinPercentColumnCellValue() {
         winPercentageColumn.setCellValueFactory(cellData -> {
-            // Get the Player object from the cell data
             Player player = cellData.getValue();
-        
-            // Return the player's win percentage as a SimpleDoubleProperty
             return new SimpleDoubleProperty(player.getWinPercentage()).asObject();
         });
+    }
 
+    private void setUpWinPercentColumnCell() {
         winPercentageColumn.setCellFactory(column -> new TableCell<Player, Double>() {
             @Override
             protected void updateItem(Double item, boolean empty) {
                 super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f%%", item));
-                    setStyle("-fx-alignment: CENTER;");
-                }
+                ultilityFunction.updateDoubleCell(item, empty, this);
             }
         });
     }
 
     public void setUpFavouriteColumn() {
+        setUpFavouriteColumnCellValue();
+        setUpFavouriteColumnCell();
+    }
+
+    private void setUpFavouriteColumnCellValue() {
         favouriteColumn.setCellValueFactory(cellData -> {
-            // Get the Player object from the cell data
             Player player = cellData.getValue(); 
-
-            // Check if the player is a favorite for the user
             boolean isPlayerFavourite = ultilityFunction.isPlayerFavourite(sampleUser, player.getUsername());
-
-            // Return the result as a SimpleBooleanProperty
             return new SimpleBooleanProperty(isPlayerFavourite);
         });
+    }
 
+    private void setUpFavouriteColumnCell() {
         favouriteColumn.setCellFactory(column -> new TableCell<Player, Boolean>() {
             @Override
             protected void updateItem(Boolean item, boolean empty) {
                 super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    Player currentPlayer = getTableView().getItems().get(getIndex());
-                    if (ultilityFunction.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
-                        setText("★");
-                        setStyle("-fx-alignment: CENTER;");
-                    } else {
-                        setText(null);
-                    }
-                }
+                ultilityFunction.updateFavouriteCell(item, empty, this, 
+                sampleUser, ultilityFunction);
             }
         });
     }
@@ -261,23 +248,23 @@ public class LeaderBoardController {
 
     private void showPlayerRecord(Player player) {
         playerRecord = new PlayerRecord(ultilityFunction); 
-
-        playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleUser, ultilityFunction);
+        playerRecordController = new PlayerRecordController(playerRecord, sampleUser, ultilityFunction);
+        playerRecordGUI = new PlayerRecordGUI(playerRecordController);
 
         // Update the record with the clicked player's information
         playerRecord.updatePlayerRecord(player, player.getWins(), player.getLosses());
- 
+
         Stage playerRecordStage = new Stage();
         try {
             playerRecordGUI.start(playerRecordStage);
-            playerRecordGUI.show(playerRecordStage);
+            playerRecordController.show(playerRecordStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void startAutoUpdate() {
-        Timeline autoUpdateTimeline = new Timeline(new KeyFrame(Duration.millis(750), 
+        Timeline autoUpdateTimeline = new Timeline(new KeyFrame(Duration.seconds(1), 
         event -> updateLeaderboardTable()));
         autoUpdateTimeline.setCycleCount(Timeline.INDEFINITE);
         autoUpdateTimeline.play();

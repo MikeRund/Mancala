@@ -19,15 +19,15 @@ public class AddPlayerGUI extends Application {
 
     private LeaderBoard leaderBoard;
     private PlayerRecord playerRecord;
-    private PlayerRecordGUI playerRecordGUI;
     private LeaderBoardController leaderBoardController;
+    private PlayerRecordController playerRecordController;
 
     public AddPlayerGUI(LeaderBoardController leaderBoardController, LeaderBoard leaderBoard, 
-    User sampleUser, PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
+    User sampleUser, PlayerRecord playerRecord, PlayerRecordController playerRecordController) {
         this.leaderBoardController = leaderBoardController;
         this.leaderBoard = leaderBoard;
         this.playerRecord = playerRecord;
-        this.playerRecordGUI = playerRecordGUI;
+        this.playerRecordController = playerRecordController;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AddPlayerGUI extends Application {
             leaderBoard.updateLeaderBoard(newPlayer, wins, losses);
             playerRecord.updatePlayerRecord(newPlayer, wins, losses);
             leaderBoardController.updateLeaderboardTable(); 
-            playerRecordGUI.updatePlayerRecordData();       
+            playerRecordController.updatePlayerRecordData();       
         });
                 
         root.getChildren().addAll(gridPane, addButton);

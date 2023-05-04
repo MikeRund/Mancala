@@ -44,20 +44,20 @@ public class LeaderBoardMain extends Application {
         utility.markFavouriteUser(sampleAlice, favUser2);
         utility.markFavouriteUser(sampleAlice, favUser3);
 
-        // Create an instance of playerRecordGUI
-        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecord, sampleAlice, utility);
+        PlayerRecordController playerRecordController = new PlayerRecordController(playerRecord, 
+        sampleAlice, ultilityFunction);
+
+        PlayerRecordGUI playerRecordGUI = new PlayerRecordGUI(playerRecordController);
         playerRecordGUI.start(primaryStage);
 
         LeaderBoardController leaderBoardController = new LeaderBoardController(leaderBoard, sampleAlice, 
-        playerRecord, playerRecordGUI, ultilityFunction);
+        playerRecord, playerRecordGUI, ultilityFunction, playerRecordController);
 
-        // Create an instance of LeaderboardGUI and launch the application
         LeaderBoardGUI leaderBoardGUI = new LeaderBoardGUI(leaderBoardController);
         leaderBoardGUI.start(primaryStage);
 
-        // Create an instance of AddPlayerGUI and launch the application
-        AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderBoardController, leaderBoard, 
-        sampleAlice, playerRecord, playerRecordGUI);
+        AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderBoardController, leaderBoard, sampleAlice, 
+        playerRecord, playerRecordController);
 
         addPlayerGUI.start(new Stage());
     }

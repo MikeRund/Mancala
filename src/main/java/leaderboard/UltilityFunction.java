@@ -2,6 +2,8 @@ package leaderboard;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.TableCell;
+
 /**
 * The UltilityFunction class contains methods
 * that various classes need to access.
@@ -57,5 +59,48 @@ public class UltilityFunction {
         player.setWins(wins);
         player.setLosses(losses);
         player.setTotalGames(wins + losses);   
+    }
+
+    public void updateIntegerCell(Integer item, boolean empty, TableCell<Player, Integer> cell) {
+        if (empty || item == null) {
+            cell.setText(null);
+        } else {
+            cell.setText(item.toString());
+            cell.setStyle("-fx-alignment: CENTER;");
+        }
+    }
+
+    public void updateStringCell(String item, boolean empty, TableCell<Player, String> cell) {
+        if (empty || item == null) {
+            cell.setText(null);
+        } else {
+            cell.setText(item.toString());
+            cell.setStyle("-fx-alignment: CENTER;");
+        }
+    }
+
+    public void updateDoubleCell(Double item, boolean empty, TableCell<Player, Double> cell) {
+        if (empty || item == null) {
+            cell.setText(null);
+        } else {
+            String formattedValue = String.format("%.2f", item);
+            cell.setText(formattedValue);
+            cell.setStyle("-fx-alignment: CENTER;");
+        }
+    }
+
+    public void updateFavouriteCell(Boolean item, boolean empty, TableCell<Player, Boolean> cell, 
+    User sampleUser, UltilityFunction ultilityFunction) {
+        if (empty || item == null) {
+            cell.setText(null);
+        } else {
+            Player currentPlayer = cell.getTableView().getItems().get(cell.getIndex());
+            if (ultilityFunction.isPlayerFavourite(sampleUser, currentPlayer.getUsername())) {
+                cell.setText("★");
+                cell.setStyle("-fx-alignment: CENTER;");
+            } else {
+                cell.setText(null);
+            }
+        }
     }
 }
