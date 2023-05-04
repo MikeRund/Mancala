@@ -59,7 +59,7 @@ public class PlayerRecordGUI {
         playerRecordController.setUpLossesColumn();
         playerRecordController.setUpFavouriteColumn();
 
-        // Create a scene and set it on the stage
+        // Create a scene 
         Scene scene = new Scene(root, 300, 140);
         stage.setScene(scene);
         stage.setTitle("Player Record");
