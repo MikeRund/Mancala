@@ -1,11 +1,8 @@
 package leaderboard;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
@@ -14,24 +11,6 @@ import javafx.stage.Stage;
  * and see their favourite players. 
  */
 public class LeaderBoardGUI extends Application {
-
-    @FXML
-    public TableView<Player> leaderboardTable;
-
-    @FXML
-    private TableColumn<Player, Integer> rankColumn;
-
-    @FXML
-    private TableColumn<Player, String> usernameColumn;
-
-    @FXML
-    private TableColumn<Player, Integer> winsColumn;
-
-    @FXML
-    private TableColumn<Player, Double> winPercentageColumn;
-
-    @FXML
-    private TableColumn<Player, Boolean> favouriteColumn;
 
     private LeaderBoardController leaderBoardController;
 

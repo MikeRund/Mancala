@@ -17,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 /**
-* The PlayerRecordGUI class manages the functions to setup the player record. 
+* The PlayerRecordController class manages the functions to setup the player record. 
 */
 public class PlayerRecordController {
 

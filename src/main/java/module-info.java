@@ -12,6 +12,9 @@ module leaderboard {
 
     exports gameboard to javafx.graphics;
     opens gameboard to javafx.graphics, javafx.fxml;
+
+    exports mainmenu to javafx.graphics;
+    opens mainmenu to javafx.graphics, javafx.fxml;
 }
     
 

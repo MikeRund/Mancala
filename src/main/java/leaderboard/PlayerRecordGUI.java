@@ -2,12 +2,8 @@ package leaderboard;
 
 import java.io.IOException;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,24 +13,6 @@ import javafx.stage.Stage;
 * and mark and unmark favourite players.
 */
 public class PlayerRecordGUI {
-
-    @FXML
-    public TableView<Player> playerRecordTable;
-
-    @FXML
-    private TableColumn<Player, String> usernameColumn;
-
-    @FXML
-    private TableColumn<Player, Integer> winsColumn;
-
-    @FXML
-    private TableColumn<Player, Integer> lossesColumn;
-
-    @FXML
-    private TableColumn<Player, Boolean> favouriteColumn;
-
-    @FXML
-    private Button markUnmarkFavouriteButton;
     
     private PlayerRecordController playerRecordController;
 
