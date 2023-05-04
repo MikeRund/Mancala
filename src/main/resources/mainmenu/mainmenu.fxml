@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainmenu.MainMenuController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <Label style="-fx-font-size: 24px;                     -fx-font-weight: bold;                     -fx-text-fill: white;                     -fx-background-color: #8B4513;                     -fx-font-weight: bold;                     -fx-padding: 5px;                     -fx-pref-width: 200px;                     -fx-pref-height: 50px;                     -fx-alignment: center;" text="Main Menu" />
+    <HBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
+        <Button fx:id="loginButton" onAction="#handleLoginButton" style="-fx-background-color: #8B4513;                         -fx-text-fill: white;                         -fx-font-size: 14px;                         -fx-font-weight: bold;                         -fx-border-radius: 20px;                         -fx-padding: 8px 20px;                         -fx-pref-width: 150px;" text="Login" />
+        <Button fx:id="gameButton" onAction="#handleGameButton" style="-fx-background-color: #8B4513;                         -fx-text-fill: white;                         -fx-font-size: 14px;                         -fx-font-weight: bold;                         -fx-border-radius: 20px;                         -fx-padding: 8px 20px;                         -fx-pref-width: 150px;" text="Start Game" />
+        <Button fx:id="leaderBoardButton" onAction="#handleLeaderBoardMainButton" style="-fx-background-color: #8B4513;                     -fx-text-fill: white;                     -fx-font-size: 14px;                     -fx-font-weight: bold;                     -fx-border-radius: 20px;                     -fx-padding: 8px 20px;                     -fx-pref-width: 150px;" text="Leaderboard" />
+    </HBox>
+</VBox>
