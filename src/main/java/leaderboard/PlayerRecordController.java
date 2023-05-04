@@ -60,7 +60,6 @@ public class PlayerRecordController {
         playerRecordTable.getSelectionModel().selectFirst();
 
         setUpTableStyle();
-        setUpAlternateRowColor();
 
         playerRecordTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
@@ -71,6 +70,8 @@ public class PlayerRecordController {
             "-fx-focus-color: transparent;" +
             "-fx-faint-focus-color: transparent;" 
         );
+
+        setUpAlternateRowColor();
     }
 
     private void setUpAlternateRowColor() {
