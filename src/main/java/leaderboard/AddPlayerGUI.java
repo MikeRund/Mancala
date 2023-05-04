@@ -10,16 +10,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+
+/**
+ * Only for testing
+ */
 public class AddPlayerGUI extends Application {
 
-    private LeaderboardGUI leaderboardGUI;
     private LeaderBoard leaderBoard;
     private PlayerRecord playerRecord;
     private PlayerRecordGUI playerRecordGUI;
+    private LeaderBoardController leaderBoardController;
 
-    public AddPlayerGUI(LeaderboardGUI leaderboardGUI, LeaderBoard leaderBoard, 
+    public AddPlayerGUI(LeaderBoardController leaderBoardController, LeaderBoard leaderBoard, 
     User sampleUser, PlayerRecord playerRecord, PlayerRecordGUI playerRecordGUI) {
-        this.leaderboardGUI = leaderboardGUI;
+        this.leaderBoardController = leaderBoardController;
         this.leaderBoard = leaderBoard;
         this.playerRecord = playerRecord;
         this.playerRecordGUI = playerRecordGUI;
@@ -58,7 +63,7 @@ public class AddPlayerGUI extends Application {
             Player newPlayer = new Player(username);
             leaderBoard.updateLeaderBoard(newPlayer, wins, losses);
             playerRecord.updatePlayerRecord(newPlayer, wins, losses);
-            leaderboardGUI.updateLeaderboardTable(); 
+            leaderBoardController.updateLeaderboardTable(); 
             playerRecordGUI.updatePlayerRecordData();       
         });
                 
