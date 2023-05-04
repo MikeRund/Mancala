@@ -1,5 +1,6 @@
 package leaderboard;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -57,6 +58,18 @@ public class LeaderBoard {
     
     public void addNewPlayerToLeaderBoard(Player newPlayer) {
         leaderBoard.add(newPlayer);
+    }
+
+    public void addALLPlayersLeaderBoard() throws SQLException {
+        ArrayList<Player> players = null;
+        try {
+            players = Player.loadAllPlayers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < players.size(); i++) {
+            addNewPlayerToLeaderBoard(players.get(i));
+        }
     }
             
     public void sortLeaderBoardWinPercent() {

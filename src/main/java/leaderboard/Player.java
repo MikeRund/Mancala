@@ -3,6 +3,7 @@ package leaderboard;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
 * The Player class represents a player in the system, with a username. 
@@ -72,6 +73,58 @@ public class Player {
                 }
             }
         }
+    }
+
+    public static ArrayList<Player> loadAllPlayers() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<Player> players = new ArrayList<>();
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx-video", "root", "rootpassword");
+            preparedStatement = connection.prepareStatement("SELECT * FROM users");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String retrievedUsername = resultSet.getString("username");
+                int retrievedGames = resultSet.getInt("games");
+                int retrievedWins = resultSet.getInt("wins");
+                int retrievedLosses = resultSet.getInt("losses");
+
+                Player player = new Player(retrievedUsername);
+                player.setTotalGames(retrievedGames);
+                player.setWins(retrievedWins);
+                player.setLosses(retrievedLosses);
+
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return  players;
     }
 
 //    public Player(String username) {

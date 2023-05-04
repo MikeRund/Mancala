@@ -1,5 +1,6 @@
 package leaderboard;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -71,6 +72,18 @@ public class PlayerRecord {
 
     public void addNewPlayerToPlayerRecord(Player newPlayer) {
         playerRecord.add(newPlayer);
+    }
+
+    public void addALlPlayerRecords() {
+        ArrayList<Player> players = null;
+        try {
+            players = Player.loadAllPlayers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < players.size(); i++) {
+            addNewPlayerToPlayerRecord(players.get(i));
+        }
     }
 
     public ObservableList<Player> getPlayers() {
