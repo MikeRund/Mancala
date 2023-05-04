@@ -184,7 +184,6 @@ public class LeaderBoardController {
     }
 
     public void setUpTable() {
-        // Set the table column resize policy
         leaderboardTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         setUpTableStyle();
         leaderboardTable.setItems(observablePlayerList);
