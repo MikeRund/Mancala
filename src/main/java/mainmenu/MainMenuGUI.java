@@ -34,7 +34,7 @@ public class MainMenuGUI extends Application {
         root.setStyle("-fx-background-image: url(" + backgroundImageUrl + "); -fx-background-size: cover;");
 
         // Set scene
-        Scene scene = new Scene(root, 500, 125);
+        Scene scene = new Scene(root, 1536, 780);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
