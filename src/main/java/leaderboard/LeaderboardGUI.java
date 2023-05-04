@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * It allows users to view the leaderboard, sort it by wins or win percentage,
  * and see their favourite players. 
  */
-public class LeaderboardGUI extends Application {
+public class LeaderBoardGUI extends Application {
 
     @FXML
     public TableView<Player> leaderboardTable;
@@ -35,7 +35,7 @@ public class LeaderboardGUI extends Application {
 
     private LeaderBoardController leaderBoardController;
 
-    public LeaderboardGUI(LeaderBoardController leaderBoardController) {
+    public LeaderBoardGUI(LeaderBoardController leaderBoardController) {
         this.leaderBoardController = leaderBoardController;
     }
     

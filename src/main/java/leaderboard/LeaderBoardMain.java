@@ -12,8 +12,7 @@ public class LeaderBoardMain extends Application {
         Player cat = new Player("Cat");
         Player dog = new Player("Dog");
 
-        
-
+    
         UltilityFunction ultilityFunction = new UltilityFunction();
 
         // Create a leaderboard
@@ -53,13 +52,13 @@ public class LeaderBoardMain extends Application {
         playerRecord, playerRecordGUI, ultilityFunction);
 
         // Create an instance of LeaderboardGUI and launch the application
-        LeaderboardGUI leaderboardGUI = new LeaderboardGUI(leaderBoardController);
-        leaderboardGUI.start(primaryStage);
+        LeaderBoardGUI leaderBoardGUI = new LeaderBoardGUI(leaderBoardController);
+        leaderBoardGUI.start(primaryStage);
 
         // Create an instance of AddPlayerGUI and launch the application
         AddPlayerGUI addPlayerGUI = new AddPlayerGUI(leaderBoardController, leaderBoard, 
         sampleAlice, playerRecord, playerRecordGUI);
-        
+
         addPlayerGUI.start(new Stage());
     }
 
