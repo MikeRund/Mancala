@@ -9,7 +9,7 @@ import logIn.LogInMain;
 
 
 /**
-* The MainMenuController class manages the functions to setup the player record. 
+* The MainMenuController class manages the functions to setup the main menu. 
 */
 public class MainMenuController {
     
