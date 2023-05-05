@@ -1,5 +1,7 @@
 package gameboard;
 
+import leaderboard.Player;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,6 +9,7 @@ public class Game {
     private Board board;
     private int player1;
     private int player2;
+    private Player player;
     public int currentPlayer;
     public int lastHoleIndex;
 
@@ -41,6 +44,15 @@ public class Game {
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 
     public int nextHole(int holeIndex) {
 

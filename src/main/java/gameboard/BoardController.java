@@ -13,11 +13,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import leaderboard.Player;
+import logIn.DBUtils;
+import mainmenu.UserData;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -228,57 +232,25 @@ public class BoardController {
         }
         int currentPlayer = game.getCurrentPlayer();
 
-//        hole1.setText(Integer.toString(holes[0].getPieces()));
-//        image1.setImage(updateStoneImage(holes[0].getPieces()));
-//        this.image1 = new ImageView(updateStoneImage(holes[0].getPieces()));
-
-
-//        hole2.setText(Integer.toString(holes[1].getPieces()));
-//        image2.setImage(updateStoneImage(holes[1].getPieces()));
-//
-//        hole3.setText(Integer.toString(holes[2].getPieces()));
-//        image3.setImage(updateStoneImage(holes[2].getPieces()));
-//
-//        hole4.setText(Integer.toString(holes[3].getPieces()));
-//        image4.setImage(updateStoneImage(holes[3].getPieces()));
-//
-//        hole5.setText(Integer.toString(holes[4].getPieces()));
-//        image5.setImage(updateStoneImage(holes[4].getPieces()));
-//
-//        hole6.setText(Integer.toString(holes[5].getPieces()));
-//        image6.setImage(updateStoneImage(holes[5].getPieces()));
-
         store1.setText(Integer.toString(holes[6].getPieces()));
         store1Image.setImage(updateStoneImage(holes[6].getPieces()));
-
-//        hole7.setText(Integer.toString(holes[7].getPieces()));
-//        image7.setImage(updateStoneImage(holes[7].getPieces()));
-//
-//        hole8.setText(Integer.toString(holes[8].getPieces()));
-//        image8.setImage(updateStoneImage(holes[8].getPieces()));
-//
-//        hole9.setText(Integer.toString(holes[9].getPieces()));
-//        image9.setImage(updateStoneImage(holes[9].getPieces()));
-//
-//        hole10.setText(Integer.toString(holes[10].getPieces()));
-//        image10.setImage(updateStoneImage(holes[10].getPieces()));
-//
-//        hole11.setText(Integer.toString(holes[11].getPieces()));
-//        image11.setImage(updateStoneImage(holes[11].getPieces()));
-//
-//        hole12.setText(Integer.toString(holes[12].getPieces()));
-//        image12.setImage(updateStoneImage(holes[12].getPieces()));
 
         store2.setText(Integer.toString(holes[13].getPieces()));
         store2Image.setImage(updateStoneImage(holes[13].getPieces()));
         playerTurnLabel.setText("It's Player " + currentPlayer + "'s turn");
     }
 
-    public void startButtonClicked() {
+    public void startButtonClicked() throws SQLException {
         goAgainLabel.setText(null);
         startButton.setDisable(true);
         System.out.println("Start button clicked!");
+
         Game game = new Game();
+        String username = UserData.getInstance().getUsername();
+        setGamePlayer(username, game);
+        System.out.println("Game has player with name: " + game.getPlayer().getUsername());
+        DBUtils.updatePlayerStats(1,0);
+
         game.setPlayer1(1);
         game.setPlayer2(2);
         game.currentPlayer = game.generateStartingPlayer();
@@ -286,7 +258,17 @@ public class BoardController {
         playerTurnLabel.setText("It's Player " + currentPlayer +"'s turn");
         updateHoleUI(game);
         System.out.println("Game initialized!");
+
         startGameUI(game);
+    }
+
+    public void setGamePlayer(String username, Game game) throws SQLException {
+        try{
+            Player player = new Player(username);
+            game.setPlayer(player);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void startGameUI(Game game) {
@@ -370,6 +352,7 @@ public class BoardController {
             }
         }
     }
+
 
     public void disableEmptyHoles(Game game){
         Hole[] holes = game.getBoard().getAllHoles();

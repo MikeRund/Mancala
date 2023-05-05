@@ -39,6 +39,7 @@ public class LoggedInController implements Initializable {
 
         UserData.getInstance().setUsername(username);
         UserData.getInstance().setLoggedIn(true);
+        DBUtils.updateUserData(username);
         username = UserData.getInstance().getUsername();
         boolean loggedIn = UserData.getInstance().getLoggedIn();
         UserData.getInstance().setLoggedInProperty(true);

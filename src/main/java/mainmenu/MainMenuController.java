@@ -46,6 +46,7 @@ public class MainMenuController {
                 System.out.println("Got the username at menu: " + username);
                 boardGUI.setUsername(username);
                 leaderBoardMain.setUsername(username);
+
             }
         });
     }

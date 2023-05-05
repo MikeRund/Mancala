@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import leaderboard.User;
+import mainmenu.UserData;
 
 import java.sql.*;
 
@@ -155,6 +156,101 @@ public class DBUtils {
             }
         }
     }
+
+    public static void updateUserData(String username) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx-video", "root", "rootpassword");
+            preparedStatement = connection.prepareStatement("SELECT wins, losses, games FROM users WHERE username = ?");
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+
+            if (!resultSet.isBeforeFirst()) {
+                System.out.println("User not found in database.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("User not found in database");
+                alert.show();
+            } else {
+                while (resultSet.next()) {
+                    int wins = resultSet.getInt("wins");
+                    int losses = resultSet.getInt("losses");
+                    int games = resultSet.getInt("games");
+
+                    UserData.getInstance().setWins(wins);
+                    UserData.getInstance().setLosses(losses);
+                    UserData.getInstance().setGames(games);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    public static void updatePlayerStats(int wins, int losses) {
+        int games = wins + losses;
+        UserData userData = UserData.getInstance();
+        if (userData.getLoggedIn()) {
+            String username = userData.getUsername();
+
+            // Create a connection to your database
+            Connection connection = null;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx-video", "root", "rootpassword");
+
+                // Update the wins and losses for the user in the database
+                PreparedStatement statement = connection.prepareStatement("UPDATE users SET wins = ?, losses = ?, games = ? WHERE username = ?");
+                statement.setInt(1, userData.getWins() + wins);
+                statement.setInt(2, userData.getLosses() + losses);
+                statement.setInt(3, userData.getGames() + games);
+                statement.setString(4, username);
+                int rowsUpdated = statement.executeUpdate();
+                if (rowsUpdated == 0) {
+                    System.out.println("No rows were updated. The user " + username + " may not exist in the database.");
+                }
+
+                // Update the UserData instance with the new wins and losses
+                userData.setWins(userData.getWins() + wins);
+                userData.setLosses(userData.getLosses() + losses);
+                userData.setGames(userData.getGames() + wins + losses);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 
 }
