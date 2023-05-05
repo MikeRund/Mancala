@@ -21,9 +21,7 @@ public class Game {
     public int lastHoleIndex;
 
     /**
-     * Returns the game's Board.
-     *
-     * @return the game's Board
+     * Game constructor that initializes a board
      */
     public Game() {
         this.board = new Board();

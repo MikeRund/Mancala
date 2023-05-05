@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import leaderboard.User;
 import mainmenu.UserData;
 
 import java.sql.*;

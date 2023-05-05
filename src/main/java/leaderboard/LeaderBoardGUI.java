@@ -9,8 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
-
 /**
  * The LeaderboardGUI class displays the leaderboard. 
  * It allows users to view the leaderboard, sort it by wins or win percentage,

@@ -8,10 +8,8 @@
 
 package gameboard;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,20 +17,11 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import leaderboard.Player;
 import logIn.DBUtils;
 import mainmenu.UserData;
-
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -570,11 +559,7 @@ public class BoardController {
         if(!game.isGameOver()) {
             if (player1 == currentPlayer && holeIndex == 6) {
                 return true;
-            } else if (player2 == currentPlayer && holeIndex == 13) {
-                return true;
-            } else {
-                return false;
-            }
+            } else return player2 == currentPlayer && holeIndex == 13;
         }
         return false;
     }
@@ -589,9 +574,6 @@ public class BoardController {
 
         if(holeIndex == 6 || holeIndex == 13){
             return false;
-        } else if(game.getBoard().getAllHoles()[holeIndex].getPieces() != 1){
-            return true;
-        }
-        return false;
+        } else return game.getBoard().getAllHoles()[holeIndex].getPieces() != 1;
     }
 }

@@ -7,7 +7,6 @@ package leaderboard;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 
 public class LeaderBoardMain extends Application {
 

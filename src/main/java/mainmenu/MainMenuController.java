@@ -1,8 +1,6 @@
 package mainmenu;
 
 import gameboard.BoardGUI;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;

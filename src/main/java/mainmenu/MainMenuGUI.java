@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import leaderboard.LeaderBoardMain;
-import leaderboard.User;
 import logIn.LogInGUI;
 
 /**
