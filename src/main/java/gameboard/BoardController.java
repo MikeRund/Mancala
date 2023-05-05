@@ -302,6 +302,7 @@ public class BoardController {
 
             Platform.runLater(game::getWinner);
             Platform.runLater(() -> {
+                updateWinnerScores(game.getWinner());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Player " + game.getWinner() + " wins!" );
                 alert.showAndWait();
@@ -310,6 +311,14 @@ public class BoardController {
             startButton.setDisable(false);
         });
         gameThread.start();
+    }
+
+    public void updateWinnerScores(int playerNum){
+        if(playerNum == 1) {
+            DBUtils.updatePlayerStats(1, 0);
+        } else {
+            DBUtils.updatePlayerStats(0, 1);
+        }
     }
 
     public void getHoleIndex() {
