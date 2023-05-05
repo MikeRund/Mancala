@@ -1,3 +1,8 @@
+/**
+ * This class provides utility methods for working with a database.
+ *
+ * @author Mike Rundle
+ */
 package logIn;
 
 import javafx.event.ActionEvent;
@@ -16,6 +21,14 @@ import java.io.IOException;
 
 public class DBUtils {
 
+    /**
+     * Changes the scene to the given FXML file and sets the window title.
+     *
+     * @param event     the event that triggered the scene change
+     * @param fxmlFile  the FXML file to load
+     * @param title     the window title to set
+     * @param username  the username to pass to the LoggedInController (optional)
+     */
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username) {
         Parent root = null;
 
@@ -41,6 +54,13 @@ public class DBUtils {
         stage.show();
     }
 
+    /**
+     * Signs up a user with the given username and password.
+     *
+     * @param event     the event that triggered the signup
+     * @param username  the desired username
+     * @param password  the desired password
+     */
     public static void signUpUser(ActionEvent event, String username, String password) {
         Connection connection = null;
         PreparedStatement psInsert = null;
@@ -101,6 +121,15 @@ public class DBUtils {
         }
 
     }
+
+
+    /**
+    * Logs in a user with the provided credentials.
+    *
+    * @param event The ActionEvent that triggered the login.
+    * @param username The username of the user.
+    * @param password The password of the user.
+     */
     public static void logInUser(ActionEvent event, String username, String password) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -157,6 +186,11 @@ public class DBUtils {
         }
     }
 
+    /**
+    * Updates the user data for the given username.
+    *
+    * @param username The username of the user.
+     */
     public static void updateUserData(String username) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -210,7 +244,13 @@ public class DBUtils {
         }
     }
 
+    /**
 
+    * Updates the user's statistics in the database and the UserData instance with the provided wins and losses.
+    *
+    * @param wins The number of wins to be added to the user's statistics.
+    * @param losses The number of losses to be added to the user's statistics.
+     */
     public static void updatePlayerStats(int wins, int losses) {
         int games = wins + losses;
         UserData userData = UserData.getInstance();

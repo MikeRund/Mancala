@@ -16,14 +16,22 @@ import logIn.LogInGUI;
  */
 public class MainMenuGUI extends Application {
     private String mainUsername;
-    private String sndUsername;
+//    private String sndUsername;
     private boolean mainUserLoggedIn = false;
-    private boolean sndUserLoggedIn = false;
+//    private boolean sndUserLoggedIn = false;
 
+    /**
+     * Gets the username of the main user.
+     * @return The username of the main user.
+     */
     public String getMainUser() {
         return mainUsername;
     }
 
+    /**
+     * Sets the username of the main user.
+     * @param mainUsername The username of the main user.
+     */
     public void setMainUser(String mainUsername) {
         this.mainUsername = mainUsername;
     }
@@ -36,22 +44,36 @@ public class MainMenuGUI extends Application {
 //        this.sndUser = sndUser;
 //    }
 
+    /**
+     * Checks if the main user is logged in.
+     * @return True if the main user is logged in, false otherwise.
+     */
     public boolean isMainUserLoggedIn() {
         return mainUserLoggedIn;
     }
 
+    /**
+     * Sets the login status of the main user.
+     * @param mainUserLoggedIn The login status of the main user.
+     */
     public void setMainUserLoggedIn(boolean mainUserLoggedIn) {
         this.mainUserLoggedIn = mainUserLoggedIn;
     }
 
-    public boolean isSndUserLoggedIn() {
-        return sndUserLoggedIn;
-    }
+//    public boolean isSndUserLoggedIn() {
+//        return sndUserLoggedIn;
+//    }
+//
+//    public void setSndUserLoggedIn(boolean sndUserLoggedIn) {
+//        this.sndUserLoggedIn = sndUserLoggedIn;
+//    }
 
-    public void setSndUserLoggedIn(boolean sndUserLoggedIn) {
-        this.sndUserLoggedIn = sndUserLoggedIn;
-    }
-
+    /**
+     * The start method sets up the main menu window and loads the FXML file.
+     *
+     * @param primaryStage the primary stage for this application, onto which the application scene can be set.
+     * @throws Exception if an error occurs while setting up the main menu window.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Set up the window

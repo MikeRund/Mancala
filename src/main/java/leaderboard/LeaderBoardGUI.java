@@ -38,11 +38,20 @@ public class LeaderBoardGUI extends Application {
 
     private LeaderBoardController leaderBoardController;
 
-
+    /**
+     * Constructs a new LeaderBoardGUI object with the specified LeaderBoardController.
+     *
+     * @param leaderBoardController The LeaderBoardController for this LeaderBoardGUI.
+     */
     public LeaderBoardGUI(LeaderBoardController leaderBoardController) {
         this.leaderBoardController = leaderBoardController;
     }
 
+    /**
+     * Launches a new leaderboard window with the specified primaryStage.
+     *
+     * @param primaryStage The primary stage for this LeaderBoardGUI.
+     */
     public static void launchLeaderboard(Stage primaryStage) {
         UltilityFunction ultilityFunction = new UltilityFunction();
 
@@ -72,7 +81,13 @@ public class LeaderBoardGUI extends Application {
         }
     }
 
-
+    /**
+     * Called by the launch method to start the application.
+     * Sets up the window, loads the FXML file, and sets the controller.
+     *
+     * @param primaryStage The primary stage for this LeaderBoardGUI.
+     * @throws Exception If an error occurs during the startup process.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Set up the window

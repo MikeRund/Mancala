@@ -17,6 +17,13 @@ public class Player {
     private int losses;
     private int rank;
 
+    /**
+     * Constructs a new player with the given username and retrieves the player's information from the database.
+     * If the user is not found in the database, it sets the total games, wins, and losses to 0 and displays an alert.
+     *
+     * @param username the username of the player to be constructed
+     * @throws SQLException if an error occurs while accessing the database
+     */
     public Player(String username) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -75,6 +82,12 @@ public class Player {
         }
     }
 
+    /**
+     * Returns an ArrayList of all players in the database.
+     *
+     * @return an ArrayList of all players in the database
+     * @throws SQLException if an error occurs while accessing the database
+     */
     public static ArrayList<Player> loadAllPlayers() throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -134,6 +147,10 @@ public class Player {
 //        this.losses = 0;
 //    }
 
+    /**
+     * Creates a new Player object with the same statistics as the given Player.
+     * @param player The Player to copy statistics from.
+     */
     public Player(Player player) {
         this.username = player.username;
         this.totalGames = player.totalGames;
@@ -141,10 +158,18 @@ public class Player {
         this.losses = player.losses;
     }
 
+    /**
+     * Returns the username of the player.
+     * @return The username of the player.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Calculates and returns the win percentage of the player.
+     * @return The win percentage of the player.
+     */
     public double getWinPercentage() {
         if (totalGames == 0) {
             return 0;
@@ -152,34 +177,62 @@ public class Player {
         return ((double) wins / totalGames) * 100;
     }
 
+    /**
+     * Sets the number of wins for the player.
+     * @param wins The new number of wins for the player.
+     */
     public void setWins(int wins) {
         this.wins = wins;
     }
 
+    /**
+     * Returns the number of wins for the player.
+     * @return The number of wins for the player.
+     */
     public int getWins() {
         return wins;
     }
 
+    /**
+     * Sets the number of losses for the player.
+     * @param losses The new number of losses for the player.
+     */
     public void setLosses(int losses) {
         this.losses = losses;
     }
 
+    /**
+     * Returns the number of losses for the player.
+     * @return The number of losses for the player.
+     */
     public int getLosses(){
         return losses;
     }
 
+    /**
+     * Sets the total number of games played by the player.
+     * @param totalGames The new total number of games played by the player.
+     */
     public void setTotalGames(int totalGames) {
         this.totalGames = totalGames;
     }
 
-    public int getTotalGames() {
-        return totalGames;
-    }
+//    public int getTotalGames() {
+//        return totalGames;
+//    }
 
+    /**
+     * Returns the rank of the player.
+     * @return The rank of the player.
+     */
     public int getRank() {
         return rank;
     }
-    
+
+    /**
+     * Sets the rank of the player.
+     * @param rank The new rank of the player.
+     */
     public void setRank(int rank) {
         this.rank = rank;
     }

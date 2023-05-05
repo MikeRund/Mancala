@@ -45,12 +45,22 @@ public class PlayerRecordController {
 
     private ObservableList<Player> observablePlayerList;
 
+    /**
+     * Constructor for the PlayerRecordController class.
+     *
+     * @param playerRecord The PlayerRecord object containing player data.
+     * @param sampleUser The User object representing the current user.
+     * @param ultilityFunction The UtilityFunction object containing utility functions.
+     */
     public PlayerRecordController(PlayerRecord playerRecord, User sampleUser, UltilityFunction ultilityFunction) {
         this.playerRecord = playerRecord;
         this.sampleUser = sampleUser;
         this.ultilityFunction = ultilityFunction;
     }
 
+    /**
+     * Sets up the player record table with data.
+     */
     public void setUpPlayerRecordTable() {
         // Load the players into the table
         observablePlayerList = FXCollections.observableArrayList(playerRecord.getPlayers());
@@ -158,31 +168,58 @@ public class PlayerRecordController {
         });
     }
 
+    /**
+     * Sets up the username column in the player record table.
+     * Calls {@link #setUpUsernameColumnCell()} and {@link #setUpUsernameColumnCellValue()}.
+     */
     public void setUpUsernameColumn() {
         setUpUsernameColumnCell();
         setUpUsernameColumnCellValue();
     }
 
+    /**
+     * Sets up the wins column in the player record table.
+     * Calls {@link #setUpWinsColumnCell()} and {@link #setUpWinsColumnCellValue()}.
+     */
     public void setUpWinsColumn() {
         setUpWinsColumnCell();
         setUpWinsColumnCellValue();
     }
 
+    /**
+     * Sets up the losses column in the player record table.
+     * Calls {@link #setUpLossesColumnCell()} and {@link #setUpLossesColumnCellValue()}.
+     */
     public void setUpLossesColumn() {
         setUpLossesColumnCell();
         setUpLossesColumnCellValue();
     }
 
+    /**
+     * Sets up the favourite column in the player record table.
+     * Calls {@link #setUpFavouriteColumnCell()} and {@link #setUpFavouriteColumnCellValue()}.
+     */
     public void setUpFavouriteColumn() {
         setUpFavouriteColumnCell();
         setUpFavouriteColumnCellValue();
     }
 
+    /**
+     * Clears the player record table and updates it with the latest player records.
+     * Uses {@link PlayerRecord#getPlayerRecord()} to retrieve the latest player records.
+     */
     public void updatePlayerRecordData() {
         playerRecordTable.getItems().clear();
         playerRecordTable.getItems().addAll(playerRecord.getPlayerRecord());
     }
-    
+
+    /**
+     * Handles marking/unmarking a player as a favourite for the logged in user.
+     * Gets the selected player from the player record table and checks if the player is already marked as a favourite.
+     * Calls {@link UtilityFunction#markFavouriteUser(User, User)} if the player is not a favourite,
+     * or {@link UtilityFunction#unmarkFavouriteUser(User, User)} if the player is already a favourite.
+     * Refreshes the player record table after updating the favourite status.
+     */
     @FXML
     private void handleMarkUnmarkFavourite() {
         Player selectedPlayer = playerRecordTable.getSelectionModel().getSelectedItem();
@@ -198,7 +235,14 @@ public class PlayerRecordController {
             playerRecordTable.refresh();
         }
     }
-    
+
+    /**
+     * Shows the player record table in the specified stage.
+     * Calls {@link Stage#show()} to show the stage.
+     *
+     * @param stage the stage to show the player record table in
+     * @throws IOException if an I/O error occurs
+     */
     public void show(Stage stage) throws IOException {
         stage.show();
     }   

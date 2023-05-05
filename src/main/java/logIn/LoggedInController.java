@@ -1,3 +1,7 @@
+/**
+ * This class is the controller for the LoggedIn view, which is displayed after a user successfully logs in.
+ * It handles the events for the button that allows the user to continue to the game board.
+ */
 package logIn;
 
 import gameboard.BoardGUI;
@@ -20,6 +24,14 @@ public class LoggedInController implements Initializable {
     private Label label_welcome;
     @FXML
     private Label label_msg;
+
+    /**
+     * Initializes the controller class.
+     * Sets the action event for the continue button.
+     *
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -27,13 +39,15 @@ public class LoggedInController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 ((Stage) button_continue.getScene().getWindow()).close();
-
-                //DBUtils.changeScene(event, "log-in.fxml", "Log in", null);
-                //DBUtils.changeScene(event, "../gameboard/BoardFX.fxml", "Log in", null);
             }
         });
-
     }
+
+    /**
+     * Sets the user information and updates the UserData instance.
+     *
+     * @param username The username of the user.
+     */
     public void setUserInformation(String username) {
         label_welcome.setText("Welcome " + username + "!");
 

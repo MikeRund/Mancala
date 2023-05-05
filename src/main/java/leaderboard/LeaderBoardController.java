@@ -59,6 +59,15 @@ public class LeaderBoardController {
 
     ObservableList<Player> observablePlayerList;
 
+    /**
+     * Constructor for the LeaderBoardController class.
+     * @param leaderBoard the LeaderBoard object containing the players' information
+     * @param sampleUser the User object representing the current user
+     * @param playerRecord the PlayerRecord object containing the players' record
+     * @param playerRecordGUI the PlayerRecordGUI object for displaying the players' record
+     * @param ultilityFunction the UltilityFunction object containing utility functions for the GUI
+     * @param playerRecordController the PlayerRecordController object for handling the PlayerRecord GUI
+     */
     public LeaderBoardController(LeaderBoard leaderBoard, User sampleUser, PlayerRecord playerRecord, 
     PlayerRecordGUI playerRecordGUI, UltilityFunction ultilityFunction, 
     PlayerRecordController playerRecordController) {
@@ -70,7 +79,10 @@ public class LeaderBoardController {
         this.playerRecordController = playerRecordController;
         observablePlayerList = FXCollections.observableArrayList(leaderBoard.getLeaderBoard());
     }
-    
+
+    /**
+     * Sets up the rank column of the leaderboard table view.
+     */
     public void setUpRankColumn() {
         setUpRankColumnCellValue();
         setUpRankColumnCell();
@@ -93,6 +105,9 @@ public class LeaderBoardController {
         });
     }
 
+    /**
+     * Sets up the username column of the leaderboard table view.
+     */
     public void setUpUsernameColumn() {
         setUpUsernameColumnCellValue();
         setUpUsernameColumnCell();
@@ -115,6 +130,11 @@ public class LeaderBoardController {
         });
     }
 
+    /**
+     * Sets up the wins column in the leader board table.
+     * It sets the cell value to be the number of wins of the player, and
+     * sets the cell factory to update the cell with the win count.
+     */
     public void setUpWinsColumn() {
         setUpWinsColumnCellValue();
         setUpWinsColumnCell();
@@ -137,6 +157,9 @@ public class LeaderBoardController {
         });
     }
 
+    /**
+     * Set up the win percentage column in the leaderboard table.
+     */
     public void setUpWinPercentColumn() {
         setUpWinPercentColumnCellValue();
         setUpWinPercentColumnCell();
@@ -159,6 +182,9 @@ public class LeaderBoardController {
         });
     }
 
+    /**
+     * Set up the favourite column in the leaderboard table.
+     */
     public void setUpFavouriteColumn() {
         setUpFavouriteColumnCellValue();
         setUpFavouriteColumnCell();
@@ -182,13 +208,18 @@ public class LeaderBoardController {
             }
         });
     }
-
+    /**
+     * Set up the leaderboard table.
+     */
     public void setUpTable() {
         leaderboardTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         setUpTableStyle();
         leaderboardTable.setItems(observablePlayerList);
     }
 
+    /**
+     * Set up the style for the leaderboard table.
+     */
     public void setUpTableStyle() {
         // Set color for the table
         leaderboardTable.setStyle(
@@ -198,7 +229,10 @@ public class LeaderBoardController {
         );
         setUpAlternateRowColor();
     }
-    
+
+    /**
+     * Set up alternate row colors for the leaderboard table.
+     */
     public void setUpAlternateRowColor() {
         leaderboardTable.setRowFactory(tv -> {
             TableRow<Player> row = new TableRow<>();
@@ -214,15 +248,19 @@ public class LeaderBoardController {
         });
     }
 
-    // Sort leaderboard by wins button 
+    /**
+     * Handle the click event on the Sort by Wins button to sort the leaderboard by wins.
+     */
     @FXML
     public void handleSortByWinsButton() {
         leaderBoard.sortLeaderBoardWins();
         observablePlayerList.setAll(leaderBoard.getLeaderBoard());
         leaderboardTable.setItems(observablePlayerList);
     }
-    
-    // Sort leaderboard by win percentage button 
+
+    /**
+     * Handle the click event on the Sort by Win Percentage button to sort the leaderboard by win percentage.
+     */
     @FXML
     public void handleSortByWinPercentageButton() {
         leaderBoard.sortLeaderBoardWinPercent();
@@ -230,12 +268,19 @@ public class LeaderBoardController {
         leaderboardTable.setItems(observablePlayerList);
     }
 
-    // Update the leaderboard with new player data
+    /**
+     * Update the leaderboard table with new player data.
+     */
     public void updateLeaderboardTable() {
         leaderboardTable.getItems().clear();
         leaderboardTable.getItems().addAll(leaderBoard.getLeaderBoard());
     }
 
+    /**
+     * Handle the click event on a player row to show the player record.
+     *
+     * @param row the row of the player that was clicked
+     */
     private void handleClickEventOnPlayerRow(TableRow<Player> row) {
         row.setOnMouseClicked(event -> {
             if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
@@ -245,6 +290,11 @@ public class LeaderBoardController {
         });
     }
 
+    /**
+     * Show the player record for the given player.
+     *
+     * @param player the player whose record will be shown
+     */
     private void showPlayerRecord(Player player) {
         playerRecord = new PlayerRecord(ultilityFunction); 
         playerRecordController = new PlayerRecordController(playerRecord, sampleUser, ultilityFunction);
@@ -262,6 +312,9 @@ public class LeaderBoardController {
         }
     }
 
+    /**
+     * Start auto-updating the leaderboard table.
+     */
     public void startAutoUpdate() {
         Timeline autoUpdateTimeline = new Timeline(new KeyFrame(Duration.seconds(1), 
         event -> updateLeaderboardTable()));

@@ -1,3 +1,6 @@
+/**
+ * Controller class for sign up screen.
+ */
 package logIn;
 
 import javafx.event.ActionEvent;
@@ -24,6 +27,13 @@ public class SignUpController implements Initializable {
 
     @FXML
     private TextField textfield_password;
+
+    /**
+     * Initializes the sign up screen.
+     *
+     * @param url URL of the FXML file for the screen.
+     * @param resourceBundle Resources used by the screen.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

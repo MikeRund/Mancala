@@ -38,10 +38,19 @@ public class PlayerRecordGUI {
     
     private PlayerRecordController playerRecordController;
 
+    /**
+     * Constructor for the PlayerRecordGUI class
+     * @param playerRecordController the controller for the player record
+     */
     public PlayerRecordGUI(PlayerRecordController playerRecordController) {
         this.playerRecordController = playerRecordController;
     }
 
+    /**
+     * Method to start the player record GUI
+     * @param stage the stage on which the GUI will be displayed
+     * @throws IOException if there is an error loading the FXML file
+     */
     public void start(Stage stage) throws IOException {
 
         // Load the FXML file and set the controller

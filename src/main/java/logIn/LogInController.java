@@ -1,3 +1,8 @@
+/**
+ * The LogInController class is the controller for the login screen of the application.
+ * It handles the user's login credentials and provides functionality for the login and signup buttons.
+ * It implements the Initializable interface to initialize the FXML elements of the scene.
+ */
 package logIn;
 
 import javafx.event.ActionEvent;
@@ -24,6 +29,13 @@ public class LogInController implements Initializable{
     @FXML
     private TextField textfield_password;
 
+    /**
+     * Initializes the FXML elements of the login screen.
+     * Sets up event handlers for the login and signup buttons.
+     *
+     * @param url the location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle the resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         button_login.setOnAction(new EventHandler<ActionEvent>() {

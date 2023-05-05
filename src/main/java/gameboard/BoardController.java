@@ -1,3 +1,11 @@
+/**
+
+ * The BoardController class is responsible for managing the user interface of the Mancala game. It implements the
+ * Initializable interface to be able to initialize JavaFX components when the user interface is loaded.
+ * The class contains methods for updating the game board UI, updating the stone images, and handling button clicks.
+ * @author [Mike Rundle]
+ */
+
 package gameboard;
 
 import javafx.animation.PauseTransition;
@@ -99,38 +107,64 @@ public class BoardController {
     private int holeIndex;
     private CountDownLatch latch;
 
-
+    /**
+     * Handles the button click event for hole 1.
+     */
     public void button1Clicked() {
         System.out.println("Button 1 clicked");
         holeIndex = 0;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 2.
+     */
     public void button2Clicked() {
         System.out.println("Button 2 clicked");
         holeIndex = 1;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 3.
+     */
     public void button3Clicked() {
         System.out.println("Button 3 clicked");
         holeIndex = 2;
         latch.countDown();
 
     }
+
+    /**
+     * Handles the button click event for hole 4.
+     */
     public void button4Clicked() {
         System.out.println("Button 4 clicked");
         holeIndex = 3;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 5.
+     */
     public void button5Clicked() {
         System.out.println("Button 5 clicked");
         holeIndex = 4;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 6.
+     */
     public void button6Clicked() {
         System.out.println("Button 6 clicked");
         holeIndex = 5;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for store 1.
+     */
     public void store1Clicked() {
         System.out.println("Store 1 clicked");
     }
@@ -139,35 +173,65 @@ public class BoardController {
         holeIndex = 7;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 8.
+     */
     public void button8Clicked() {
         System.out.println("Button 8 clicked");
         holeIndex = 8;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 9.
+     */
     public void button9Clicked() {
         System.out.println("Button 9 clicked");
         holeIndex = 9;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 10.
+     */
     public void button10Clicked() {
         System.out.println("Button 10 clicked");
         holeIndex = 10;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 11.
+     */
     public void button11Clicked() {
         System.out.println("Button 11 clicked");
         holeIndex = 11;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for hole 12.
+     */
     public void button12Clicked() {
         System.out.println("Button 12 clicked");
         holeIndex = 12;
         latch.countDown();
     }
+
+    /**
+     * Handles the button click event for store 2.
+     */
     public void store2Clicked() {
         System.out.println("Store 2 clicked");
     }
 
+    /**
+     * Returns an Image object with the specified number of stones.
+     *
+     * @param pieces the number of stones to display in the image
+     * @return the Image object with the specified number of stones
+     */
     public Image updateStoneImage(int pieces) {
         System.out.println("Before switch");
         System.out.println(System.getProperty("user.dir"));
@@ -193,18 +257,11 @@ public class BoardController {
             default:
                 imageName = "./src/main/resources/images/6Stones.png";
                 break;
-//            default:
-//                return null;
         }
-        //System.out.println("Image name: " + imageName);
+
         try {
             FileInputStream inputStream = new FileInputStream(imageName);
-//            Image stoneImage = new Image((getClass().getResourceAsStream(imageName)));
             Image stoneImage = new Image(inputStream);
-//            if(pieces == 1) {
-//                double scaleFactor = 0.5;
-//                stoneImage = new Image(inputStream, 15, 15, false, false);
-//            }
             return stoneImage;
 
         } catch (Exception e){
@@ -212,6 +269,11 @@ public class BoardController {
         } return null;
     }
 
+    /**
+     * Updates the UI of the holes and stores on the game board with the current state of the game.
+     *
+     * @param game the current game
+     */
     public void updateHoleUI(Game game)  {
 
         Hole[] holes = game.getBoard().getAllHoles();
@@ -240,6 +302,11 @@ public class BoardController {
         playerTurnLabel.setText("It is " + currentPlayerLabel(game, game.currentPlayer) + "'s turn");
     }
 
+    /**
+     * Initializes a new game with a player and starts the game UI.
+     *
+     * @throws SQLException if there is an error with the database
+     */
     public void startButtonClicked() throws SQLException {
         goAgainLabel.setText(null);
         startButton.setDisable(true);
@@ -249,7 +316,6 @@ public class BoardController {
         String username = UserData.getInstance().getUsername();
         setGamePlayer(username, game);
         System.out.println("Game has player with name: " + game.getPlayer().getUsername());
-        //DBUtils.updatePlayerStats(1,0);
 
         game.setPlayer1(1);
         game.setPlayer2(2);
@@ -262,6 +328,13 @@ public class BoardController {
         startGameUI(game);
     }
 
+    /**
+     * Returns a label string indicating the current player.
+     *
+     * @param game the current game
+     * @param currentPlayer the current player
+     * @return a label string indicating the current player
+     */
     public String currentPlayerLabel(Game game, int currentPlayer) {
         if(currentPlayer == 1) {
             return game.getPlayer().getUsername();
@@ -270,6 +343,13 @@ public class BoardController {
         }
     }
 
+    /**
+     * Sets the player of the current game to the player with the specified username.
+     *
+     * @param username the username of the player to set
+     * @param game the current game
+     * @throws SQLException if there is an error with the database
+     */
     public void setGamePlayer(String username, Game game) throws SQLException {
         try{
             Player player = new Player(username);
@@ -279,22 +359,17 @@ public class BoardController {
         }
     }
 
+    /**
+     * Starts the game UI and runs the game logic in a new thread.
+     *
+     * @param game the current game
+     */
     public void startGameUI(Game game) {
 
-//        game.setPlayer1(1);
-//        game.setPlayer2(2);
-//        game.currentPlayer = game.generateStartingPlayer();
         int currentPlayer = game.currentPlayer;
-        //Scanner in = new Scanner(System.in);
-
-        // Create a new thread to run the game logic
         Thread gameThread = new Thread(() -> {
             //Game logic
             while(!game.isGameOver()){
-                System.out.println("It is + " + currentPlayerLabel(game, currentPlayer) +"'s turn");
-                game.getBoard().displayBoardCommandLine();
-                System.out.println("\n" + "Now " + currentPlayerLabel(game, currentPlayer) + " chooses a hole");
-
                 makeMoveUI(game);
                 game.switchPlayer();
                 Platform.runLater(() -> updateHoleUI(game));
@@ -306,13 +381,16 @@ public class BoardController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Player " + game.getWinner() + " wins!" );
                 alert.showAndWait();
-                //alertClosed.set(true);
             });
             startButton.setDisable(false);
         });
         gameThread.start();
     }
 
+    /**
+     * Updates the scores of the winner after a game has ended.
+     * @param playerNum the number of the winning player
+     */
     public void updateWinnerScores(int playerNum){
         if(playerNum == 1) {
             DBUtils.updatePlayerStats(1, 0);
@@ -321,6 +399,9 @@ public class BoardController {
         }
     }
 
+    /**
+     * Blocks the current thread until the latch count reaches zero.
+     */
     public void getHoleIndex() {
         //Uses a countdown latch with a 1 count to act as a simple on/off latch
         latch = new CountDownLatch(1);
@@ -331,13 +412,19 @@ public class BoardController {
         }
     }
 
+    /**
+     * Disables a button in the JavaFX application thread.
+     * @param button the Button to be disabled
+     * @param disable the boolean value that determines whether or not the Button should be disabled
+     */
     public void disableButton(Button button, boolean disable) {
         Platform.runLater(() -> button.setDisable(disable));
     }
 
-    //Method to ensure:
-    //Player 1 chooses from holes 1 - 6
-    //Player 2 chooses from holes 7 - 12
+    /**
+     * Disables the Buttons of the player who is not currently making a move.
+     * @param game the current Game being played
+     */
     public void disableOpponentsButtons(Game game) {
         int currentPLayer = game.getCurrentPlayer();
         if(currentPLayer == 1) {
@@ -371,33 +458,37 @@ public class BoardController {
     }
 
 
-    public void disableEmptyHoles(Game game){
-        Hole[] holes = game.getBoard().getAllHoles();
-
-        for(int i = 1; i <= 6; i++){
-            Hole hole = holes[i];
-            Button button = (Button)root.lookup("#hole" + i);
-
-            if(hole.getPieces() == 0){
-                button.setDisable(true);
-            } else {
-                button.setDisable(false);
-            } 
-        }
-
-        for(int i = 7; i <= 12; i++){
-            Hole hole = holes[i];
-            int holeIndex = i + 1;
-            Button button = (Button)root.lookup("#hole" + i);
-
-            if(hole.getPieces() == 0){
-                button.setDisable(true);
-            } else {
-                button.setDisable(false);
-            }
-        }
-    }
-
+//    public void disableEmptyHoles(Game game){
+//        Hole[] holes = game.getBoard().getAllHoles();
+//
+//        for(int i = 1; i <= 6; i++){
+//            Hole hole = holes[i];
+//            Button button = (Button)root.lookup("#hole" + i);
+//
+//            if(hole.getPieces() == 0){
+//                button.setDisable(true);
+//            } else {
+//                button.setDisable(false);
+//            }
+//        }
+//
+//        for(int i = 7; i <= 12; i++){
+//            Hole hole = holes[i];
+//            int holeIndex = i + 1;
+//            Button button = (Button)root.lookup("#hole" + i);
+//
+//            if(hole.getPieces() == 0){
+//                button.setDisable(true);
+//            } else {
+//                button.setDisable(false);
+//            }
+//        }
+//    }
+    /**
+     * Allows the current player to make a move on the game board using the UI.
+     *
+     * @param game the game object representing the current game state
+     */
     public void makeMoveUI(Game game) {
         AtomicBoolean chooseAgain = new AtomicBoolean();
         AtomicBoolean pickAndGo = new AtomicBoolean();
@@ -408,7 +499,6 @@ public class BoardController {
             while (!moveFinished.get()) {
 
                 //Update board and GUI with move
-                disableEmptyHoles(game);
                 disableOpponentsButtons(game);
                 getHoleIndex();
                 game.makeMove(holeIndex);
@@ -429,8 +519,6 @@ public class BoardController {
                         getHoleIndex();
                         game.makeMove(holeIndex);
 
-                        game.getBoard().displayBoardCommandLine();
-                        System.out.println("Now last hole is " + game.lastHoleIndex);
                         Platform.runLater(() -> updateHoleUI(game));
                         Platform.runLater(() -> goAgainLabel.setText(null));
                         chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
@@ -457,8 +545,7 @@ public class BoardController {
 
                         game.makeMove(game.lastHoleIndex);
                         Platform.runLater(() -> updateHoleUI(game));
-                        game.getBoard().displayBoardCommandLine();
-                        System.out.println("Now the last hole is " + game.lastHoleIndex);
+
                         pickAndGo.set(checkPickAndGo(game, game.lastHoleIndex));
                         chooseAgain.set(checkChooseAgain(game, game.lastHoleIndex));
                     }
@@ -466,11 +553,15 @@ public class BoardController {
                 }
                 moveFinished.set(true);
             }
-//        });
-//        moveThread.start();
-
     }
 
+    /**
+     * Checks if the current player gets to choose again after their move.
+     *
+     * @param game      the game object representing the current game state
+     * @param holeIndex the index of the hole where the last piece was dropped
+     * @return true if the current player gets to choose again, false otherwise
+     */
     public boolean checkChooseAgain(Game game, int holeIndex) {
         int player1 = game.getPlayer1();
         int player2 = game.getPlayer2();
@@ -488,6 +579,12 @@ public class BoardController {
         return false;
     }
 
+    /**
+     * This method checks if the current move made by the player can result in the player picking up all the pieces in the hole and continuing the move from the next hole.
+     * @param game an instance of the Game class containing the current state of the game
+     * @param holeIndex the index of the hole that the player last moved a piece into
+     * @return true if the current move allows the player to pick up all the pieces in the hole and continue the move from the next hole, false otherwise
+     */
     public boolean checkPickAndGo(Game game, int holeIndex) {
 
         if(holeIndex == 6 || holeIndex == 13){
