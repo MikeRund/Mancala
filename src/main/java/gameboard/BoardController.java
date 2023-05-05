@@ -237,7 +237,7 @@ public class BoardController {
 
         store2.setText(Integer.toString(holes[13].getPieces()));
         store2Image.setImage(updateStoneImage(holes[13].getPieces()));
-        playerTurnLabel.setText("It's Player " + currentPlayer + "'s turn");
+        playerTurnLabel.setText("It is " + currentPlayerLabel(game, game.currentPlayer) + "'s turn");
     }
 
     public void startButtonClicked() throws SQLException {
@@ -249,17 +249,25 @@ public class BoardController {
         String username = UserData.getInstance().getUsername();
         setGamePlayer(username, game);
         System.out.println("Game has player with name: " + game.getPlayer().getUsername());
-        DBUtils.updatePlayerStats(1,0);
+        //DBUtils.updatePlayerStats(1,0);
 
         game.setPlayer1(1);
         game.setPlayer2(2);
         game.currentPlayer = game.generateStartingPlayer();
         int currentPlayer = game.currentPlayer;
-        playerTurnLabel.setText("It's Player " + currentPlayer +"'s turn");
+        playerTurnLabel.setText("It's Player " + currentPlayerLabel(game, currentPlayer) +"'s turn");
         updateHoleUI(game);
         System.out.println("Game initialized!");
 
         startGameUI(game);
+    }
+
+    public String currentPlayerLabel(Game game, int currentPlayer) {
+        if(currentPlayer == 1) {
+            return game.getPlayer().getUsername();
+        } else {
+            return "opponent";
+        }
     }
 
     public void setGamePlayer(String username, Game game) throws SQLException {
@@ -283,9 +291,9 @@ public class BoardController {
         Thread gameThread = new Thread(() -> {
             //Game logic
             while(!game.isGameOver()){
-                System.out.println("Player + " + currentPlayer +"'s turn");
+                System.out.println("It is + " + currentPlayerLabel(game, currentPlayer) +"'s turn");
                 game.getBoard().displayBoardCommandLine();
-                System.out.println("\n" + "PLayer " + game.currentPlayer + " choose a hole");
+                System.out.println("\n" + "Now " + currentPlayerLabel(game, currentPlayer) + " chooses a hole");
 
                 makeMoveUI(game);
                 game.switchPlayer();
@@ -386,7 +394,7 @@ public class BoardController {
         AtomicBoolean pickAndGo = new AtomicBoolean();
         AtomicBoolean moveFinished = new AtomicBoolean(false);
         AtomicBoolean alertClosed = new AtomicBoolean();
-        int currentplayer = game.getCurrentPlayer();
+        int currentPlayer = game.getCurrentPlayer();
 
             while (!moveFinished.get()) {
 
@@ -408,7 +416,7 @@ public class BoardController {
                         System.out.println("Last hole is " + game.lastHoleIndex);
                         System.out.println("Player chooses again!");
 
-                        Platform.runLater(() -> goAgainLabel.setText("Player " + currentplayer + " chooses again!"));
+                        Platform.runLater(() -> goAgainLabel.setText("Now " + currentPlayerLabel(game, currentPlayer) + " chooses again!"));
                         getHoleIndex();
                         game.makeMove(holeIndex);
 
