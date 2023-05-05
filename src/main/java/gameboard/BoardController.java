@@ -368,7 +368,7 @@ public class BoardController {
             Platform.runLater(() -> {
                 updateWinnerScores(game.getWinner());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Player " + game.getWinner() + " wins!" );
+                alert.setHeaderText("Player " + currentPlayerLabel(game, game.getWinner()) + " wins!" );
                 alert.showAndWait();
             });
             startButton.setDisable(false);
@@ -417,7 +417,7 @@ public class BoardController {
     public void disableOpponentsButtons(Game game) {
         int currentPLayer = game.getCurrentPlayer();
         if(currentPLayer == 1) {
-            for(int i = 1; i <= 6; i++){
+            for(int i = 0; i <=5; i++){
                 int holeIndex = i + 1;
                 Button button = (Button)root.lookup("#hole" + holeIndex);
                 if(button.isDisabled()){
@@ -447,32 +447,6 @@ public class BoardController {
     }
 
 
-//    public void disableEmptyHoles(Game game){
-//        Hole[] holes = game.getBoard().getAllHoles();
-//
-//        for(int i = 1; i <= 6; i++){
-//            Hole hole = holes[i];
-//            Button button = (Button)root.lookup("#hole" + i);
-//
-//            if(hole.getPieces() == 0){
-//                button.setDisable(true);
-//            } else {
-//                button.setDisable(false);
-//            }
-//        }
-//
-//        for(int i = 7; i <= 12; i++){
-//            Hole hole = holes[i];
-//            int holeIndex = i + 1;
-//            Button button = (Button)root.lookup("#hole" + i);
-//
-//            if(hole.getPieces() == 0){
-//                button.setDisable(true);
-//            } else {
-//                button.setDisable(false);
-//            }
-//        }
-//    }
     /**
      * Allows the current player to make a move on the game board using the UI.
      *

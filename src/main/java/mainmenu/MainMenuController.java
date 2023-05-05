@@ -83,7 +83,7 @@ public class MainMenuController {
      * Updates the login status of the main menu GUI based on the status of the UserData instance.
      * @param menu the main menu GUI
      */
-    public void updateLogInStatus(MainMenuGUI menu) {
+    public void updateLogInStatus(Main menu) {
         boolean loggedIn = UserData.getInstance().getLoggedIn();
         String username = UserData.getInstance().getUsername();
         if(loggedIn) {

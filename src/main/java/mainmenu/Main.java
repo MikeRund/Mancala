@@ -13,7 +13,7 @@ import logIn.LogInGUI;
  * The MainMenuGUI class displays the main menu.
  * It allows users to access the login, game, and leaderboard menu.
  */
-public class MainMenuGUI extends Application {
+public class Main extends Application {
     private String mainUsername;
 //    private String sndUsername;
     private boolean mainUserLoggedIn = false;
@@ -35,13 +35,6 @@ public class MainMenuGUI extends Application {
         this.mainUsername = mainUsername;
     }
 
-//    public String getOpponent() {
-//        return sndUser;
-//    }
-//
-//    public void setOpponent(User sndUser) {
-//        this.sndUser = sndUser;
-//    }
 
     /**
      * Checks if the main user is logged in.
@@ -77,7 +70,7 @@ public class MainMenuGUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Set up the window
         primaryStage.setTitle("Main Menu");
-        MainMenuGUI menu = new MainMenuGUI();
+        Main menu = new Main();
 
         // Load the FXML file and set the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
